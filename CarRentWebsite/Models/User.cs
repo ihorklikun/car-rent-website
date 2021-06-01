@@ -11,6 +11,7 @@ namespace CarRentWebsite.Models
         public User()
         {
             Rents = new HashSet<Rent>();
+            ConditionReports = new HashSet<ConditionReport>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -22,5 +23,6 @@ namespace CarRentWebsite.Models
         public Role Role { get; set; }
 
         public ICollection<Rent> Rents { get; set; }
+        public ICollection<ConditionReport>? ConditionReports { get; set; }
     }
 }
