@@ -8,6 +8,11 @@ namespace CarRentWebsite.Models
 {
     public class Car
     {
+        public Car()
+        {
+            PriceCoeficients = new HashSet<PriceCoeficient>();
+        }
+
         public int Id { get; set; }
 
         public string Brand { get; set; }
@@ -44,5 +49,8 @@ namespace CarRentWebsite.Models
         
         public int LocationId { get; set; }
         public Location Location { get; set; }
+
+        public ICollection<PriceCoeficient> PriceCoeficients { get; set; }
+
     }
 }
