@@ -12,6 +12,7 @@ namespace CarRentWebsite.Models
         public Car()
         {
             Rents = new HashSet<Rent>();
+            ConditionReports = new HashSet<ConditionReport>();
         }
 
         public int Id { get; set; }
@@ -53,5 +54,6 @@ namespace CarRentWebsite.Models
 
 
         public ICollection<Rent> Rents { get; set; }
+        public ICollection<ConditionReport> ConditionReports { get; set; }
     }
 }
