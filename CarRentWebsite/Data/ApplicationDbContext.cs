@@ -17,5 +17,6 @@ namespace CarRentWebsite.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+        public DbSet<CarRentWebsite.Models.Engine> Engine { get; set; }
     }
 }
