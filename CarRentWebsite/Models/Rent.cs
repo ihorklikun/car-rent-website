@@ -9,6 +9,10 @@ namespace CarRentWebsite.Models
 {
     public class Rent
     {
+        public Rent()
+        {
+            AdditionalOptions = new HashSet<RentAdditionalOption>();
+        }
         public int Id { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -22,6 +26,8 @@ namespace CarRentWebsite.Models
 
         public int ManagerId { get; set; }
         public User Manager { get; set; }
+
+        public ICollection<RentAdditionalOption> AdditionalOptions { get; set; }
 
     }
 
