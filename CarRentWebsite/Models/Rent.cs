@@ -27,6 +27,10 @@ namespace CarRentWebsite.Models
         public int ManagerId { get; set; }
         public User Manager { get; set; }
 
+        public int CarId { get; set; }
+        public Car Car { get; set; }
+
+
         public ICollection<RentAdditionalOption> AdditionalOptions { get; set; }
 
     }

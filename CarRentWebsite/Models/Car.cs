@@ -8,6 +8,12 @@ namespace CarRentWebsite.Models
 {
     public class Car
     {
+
+        public Car()
+        {
+            Rents = new HashSet<Rent>();
+        }
+
         public int Id { get; set; }
 
         public string Brand { get; set; }
@@ -44,5 +50,8 @@ namespace CarRentWebsite.Models
         
         public int LocationId { get; set; }
         public Location Location { get; set; }
+
+
+        public ICollection<Rent> Rents { get; set; }
     }
 }
