@@ -13,6 +13,7 @@ namespace CarRentWebsite.Models
         {
             Rents = new HashSet<Rent>();
             ConditionReports = new HashSet<ConditionReport>();
+            Reviews = new HashSet<Review>();
             PriceCoeficients = new HashSet<PriceCoeficient>();
         }
 
@@ -58,6 +59,7 @@ namespace CarRentWebsite.Models
 
         public ICollection<Rent> Rents { get; set; }
         public ICollection<ConditionReport> ConditionReports { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
         public ICollection<PriceCoeficient> PriceCoeficients { get; set; }
 
