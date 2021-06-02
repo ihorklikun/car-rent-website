@@ -4,15 +4,16 @@ using CarRentWebsite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetTopologySuite.Geometries;
 
 namespace CarRentWebsite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210601143116_Initial-Create")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +33,6 @@ namespace CarRentWebsite.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -47,9 +45,6 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("ManagerId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -74,9 +69,6 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ServiceWorkerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
@@ -89,14 +81,6 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique()
-                        .HasFilter("[CustomerId] IS NOT NULL");
-
-                    b.HasIndex("ManagerId")
-                        .IsUnique()
-                        .HasFilter("[ManagerId] IS NOT NULL");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -105,26 +89,7 @@ namespace CarRentWebsite.Data.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ServiceWorkerId")
-                        .IsUnique()
-                        .HasFilter("[ServiceWorkerId] IS NOT NULL");
-
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("CarRentWebsite.Models.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brand");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Car", b =>
@@ -134,13 +99,10 @@ namespace CarRentWebsite.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CarClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarStatusId")
                         .HasColumnType("int");
 
                     b.Property<int>("CarTypeId")
@@ -155,9 +117,6 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<int>("FuelId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
@@ -170,7 +129,10 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<int>("SeatsCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("TransmissionId")
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransmitionId")
                         .HasColumnType("int");
 
                     b.Property<int>("TrunkSize")
@@ -178,11 +140,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId");
-
                     b.HasIndex("CarClassId");
-
-                    b.HasIndex("CarStatusId");
 
                     b.HasIndex("CarTypeId");
 
@@ -192,9 +150,11 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("TransmissionId");
+                    b.HasIndex("StatusId");
 
-                    b.ToTable("Cars");
+                    b.HasIndex("TransmitionId");
+
+                    b.ToTable("Car");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.CarClass", b =>
@@ -209,7 +169,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarClasses");
+                    b.ToTable("CarClass");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.CarService", b =>
@@ -224,7 +184,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarServices");
+                    b.ToTable("CarService");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.CarServiceReport", b =>
@@ -243,33 +203,13 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<bool>("IsComplete")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ServiceWorkerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CarServiceId");
 
                     b.HasIndex("ConditionReportId");
 
-                    b.HasIndex("ServiceWorkerId");
-
-                    b.ToTable("CarServiceReports");
-                });
-
-            modelBuilder.Entity("CarRentWebsite.Models.CarStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CarStatuses");
+                    b.ToTable("CarServiceReport");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.CarType", b =>
@@ -284,7 +224,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarTypes");
+                    b.ToTable("CarType");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.City", b =>
@@ -299,7 +239,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("City");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.ConditionMark", b =>
@@ -314,7 +254,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ConditionMarks");
+                    b.ToTable("ConditionMark");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.ConditionReport", b =>
@@ -345,8 +285,11 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<bool>("IsCritical")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ManagerId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -354,9 +297,9 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasIndex("InteriorConditionId");
 
-                    b.HasIndex("ManagerId");
+                    b.HasIndex("UserId1");
 
-                    b.ToTable("ConditionReports");
+                    b.ToTable("ConditionReport");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Country", b =>
@@ -371,22 +314,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries");
-                });
-
-            modelBuilder.Entity("CarRentWebsite.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customer");
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Engine", b =>
@@ -413,7 +341,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Engines");
+                    b.ToTable("Engine");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Fuel", b =>
@@ -428,7 +356,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fuels");
+                    b.ToTable("Fuel");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
@@ -444,9 +372,6 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<Point>("Coordinate")
-                        .HasColumnType("geography");
-
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
@@ -459,35 +384,23 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Location");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.Manager", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.PriceCoeficient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ApplicationUserId")
+                    b.Property<int?>("CarId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Manager");
-                });
-
-            modelBuilder.Entity("CarRentWebsite.Models.PriceCoefficient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CarId")
+                    b.Property<int>("CatId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Coefficient")
+                    b.Property<double>("Coeficient")
                         .HasColumnType("float");
 
                     b.Property<int>("DaysCount")
@@ -497,7 +410,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("PriceCoeficients");
+                    b.ToTable("PriceCoeficient");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Rent", b =>
@@ -513,14 +426,8 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("ManagerId")
-                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -528,39 +435,21 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<int>("RentStatusId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("ManagerId");
-
                     b.HasIndex("RentStatusId");
 
-                    b.ToTable("Rents");
-                });
+                    b.HasIndex("UserId1");
 
-            modelBuilder.Entity("CarRentWebsite.Models.RentAddedOption", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("RentAdditionalOptionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RentAdditionalOptionId");
-
-                    b.HasIndex("RentId");
-
-                    b.ToTable("RentAddedOptions");
+                    b.ToTable("Rent");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.RentAdditionalOption", b =>
@@ -578,7 +467,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RentAdditionalOptions");
+                    b.ToTable("RentAdditionalOption");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.RentStatus", b =>
@@ -593,7 +482,7 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RentStatuses");
+                    b.ToTable("RentStatus");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Review", b =>
@@ -609,9 +498,6 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Mark")
                         .HasColumnType("int");
 
@@ -621,31 +507,22 @@ namespace CarRentWebsite.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("UserId1");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Review");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.ServiceWorker", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ServiceWorker");
-                });
-
-            modelBuilder.Entity("CarRentWebsite.Models.Transmission", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.Status", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -657,7 +534,22 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmitions");
+                    b.ToTable("Status");
+                });
+
+            modelBuilder.Entity("CarRentWebsite.Models.Transmition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transmition");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -913,44 +805,11 @@ namespace CarRentWebsite.Data.Migrations
                     b.ToTable("RentRentAdditionalOption");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("CarRentWebsite.Models.Customer", "Customer")
-                        .WithOne("ApplicationUser")
-                        .HasForeignKey("CarRentWebsite.Models.ApplicationUser", "CustomerId");
-
-                    b.HasOne("CarRentWebsite.Models.Manager", "Manager")
-                        .WithOne("ApplicationUser")
-                        .HasForeignKey("CarRentWebsite.Models.ApplicationUser", "ManagerId");
-
-                    b.HasOne("CarRentWebsite.Models.ServiceWorker", "ServiceWorker")
-                        .WithOne("ApplicationUser")
-                        .HasForeignKey("CarRentWebsite.Models.ApplicationUser", "ServiceWorkerId");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Manager");
-
-                    b.Navigation("ServiceWorker");
-                });
-
             modelBuilder.Entity("CarRentWebsite.Models.Car", b =>
                 {
-                    b.HasOne("CarRentWebsite.Models.Brand", "Brand")
-                        .WithMany("Cars")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarRentWebsite.Models.CarClass", "CarClass")
                         .WithMany("Cars")
                         .HasForeignKey("CarClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarRentWebsite.Models.CarStatus", "CarStatus")
-                        .WithMany("Cars")
-                        .HasForeignKey("CarStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -978,17 +837,19 @@ namespace CarRentWebsite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CarRentWebsite.Models.Transmission", "Transmission")
+                    b.HasOne("CarRentWebsite.Models.Status", "Status")
                         .WithMany("Cars")
-                        .HasForeignKey("TransmissionId")
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Brand");
+                    b.HasOne("CarRentWebsite.Models.Transmition", "Transmition")
+                        .WithMany("Cars")
+                        .HasForeignKey("TransmitionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CarClass");
-
-                    b.Navigation("CarStatus");
 
                     b.Navigation("CarType");
 
@@ -998,7 +859,9 @@ namespace CarRentWebsite.Data.Migrations
 
                     b.Navigation("Location");
 
-                    b.Navigation("Transmission");
+                    b.Navigation("Status");
+
+                    b.Navigation("Transmition");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.CarServiceReport", b =>
@@ -1015,17 +878,9 @@ namespace CarRentWebsite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CarRentWebsite.Models.ServiceWorker", "ServiceWorker")
-                        .WithMany("CarServiceReports")
-                        .HasForeignKey("ServiceWorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("CarService");
 
                     b.Navigation("ConditionReport");
-
-                    b.Navigation("ServiceWorker");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.ConditionReport", b =>
@@ -1037,22 +892,20 @@ namespace CarRentWebsite.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CarRentWebsite.Models.ConditionMark", "InteriorCondition")
-                        .WithMany("LpcConditionReports")
+                        .WithMany("ConditionReports")
                         .HasForeignKey("InteriorConditionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CarRentWebsite.Models.Manager", "Manager")
+                    b.HasOne("CarRentWebsite.Models.ApplicationUser", "User")
                         .WithMany("ConditionReports")
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Car");
 
                     b.Navigation("InteriorCondition");
 
-                    b.Navigation("Manager");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
@@ -1074,13 +927,11 @@ namespace CarRentWebsite.Data.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.PriceCoefficient", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.PriceCoeficient", b =>
                 {
                     b.HasOne("CarRentWebsite.Models.Car", "Car")
-                        .WithMany("PriceCoefficients")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("PriceCoeficients")
+                        .HasForeignKey("CarId");
 
                     b.Navigation("Car");
                 });
@@ -1093,50 +944,21 @@ namespace CarRentWebsite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CarRentWebsite.Models.Customer", "Customer")
-                        .WithMany("Rents")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarRentWebsite.Models.Manager", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarRentWebsite.Models.RentStatus", "RentStatus")
                         .WithMany("Rents")
                         .HasForeignKey("RentStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CarRentWebsite.Models.ApplicationUser", "User")
+                        .WithMany("Rents")
+                        .HasForeignKey("UserId1");
+
                     b.Navigation("Car");
 
-                    b.Navigation("Customer");
-
-                    b.Navigation("Manager");
-
                     b.Navigation("RentStatus");
-                });
 
-            modelBuilder.Entity("CarRentWebsite.Models.RentAddedOption", b =>
-                {
-                    b.HasOne("CarRentWebsite.Models.RentAdditionalOption", "RentAdditionalOption")
-                        .WithMany()
-                        .HasForeignKey("RentAdditionalOptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarRentWebsite.Models.Rent", "Rent")
-                        .WithMany()
-                        .HasForeignKey("RentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Rent");
-
-                    b.Navigation("RentAdditionalOption");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Review", b =>
@@ -1147,15 +969,13 @@ namespace CarRentWebsite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CarRentWebsite.Models.Customer", "Customer")
+                    b.HasOne("CarRentWebsite.Models.ApplicationUser", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Car");
 
-                    b.Navigation("Customer");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1224,16 +1044,20 @@ namespace CarRentWebsite.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.Brand", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("ConditionReports");
+
+                    b.Navigation("Rents");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Car", b =>
                 {
                     b.Navigation("ConditionReports");
 
-                    b.Navigation("PriceCoefficients");
+                    b.Navigation("PriceCoeficients");
 
                     b.Navigation("Rents");
 
@@ -1250,11 +1074,6 @@ namespace CarRentWebsite.Data.Migrations
                     b.Navigation("CarServiceReports");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.CarStatus", b =>
-                {
-                    b.Navigation("Cars");
-                });
-
             modelBuilder.Entity("CarRentWebsite.Models.CarType", b =>
                 {
                     b.Navigation("Cars");
@@ -1267,7 +1086,7 @@ namespace CarRentWebsite.Data.Migrations
 
             modelBuilder.Entity("CarRentWebsite.Models.ConditionMark", b =>
                 {
-                    b.Navigation("LpcConditionReports");
+                    b.Navigation("ConditionReports");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.ConditionReport", b =>
@@ -1280,15 +1099,6 @@ namespace CarRentWebsite.Data.Migrations
                     b.Navigation("Locations");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.Customer", b =>
-                {
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Rents");
-
-                    b.Navigation("Reviews");
-                });
-
             modelBuilder.Entity("CarRentWebsite.Models.Engine", b =>
                 {
                     b.Navigation("Cars");
@@ -1299,26 +1109,17 @@ namespace CarRentWebsite.Data.Migrations
                     b.Navigation("Cars");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.Manager", b =>
-                {
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("ConditionReports");
-                });
-
             modelBuilder.Entity("CarRentWebsite.Models.RentStatus", b =>
                 {
                     b.Navigation("Rents");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.ServiceWorker", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.Status", b =>
                 {
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("CarServiceReports");
+                    b.Navigation("Cars");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.Transmission", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.Transmition", b =>
                 {
                     b.Navigation("Cars");
                 });
