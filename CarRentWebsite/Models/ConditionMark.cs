@@ -9,13 +9,14 @@ namespace CarRentWebsite.Models
     {
         public ConditionMark()
         {
-            ConditionReports = new HashSet<ConditionReport>();
+            LpcConditionReports = new HashSet<ConditionReport>();
+            //InteriorConditionReports = new HashSet<ConditionReport>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<ConditionReport> ConditionReports { get; set; }
-
+        public ICollection<ConditionReport> LpcConditionReports { get; set; }
+        //public virtual ICollection<ConditionReport> InteriorConditionReports { get; set; }
     }
 }

@@ -7,6 +7,8 @@ namespace CarRentWebsite.Models
 {
     public class RentAddedOption
     {
+        public int Id { get; set; }
+
         public int RentId { get; set; }
         public Rent Rent { get; set; }
 

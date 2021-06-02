@@ -20,12 +20,12 @@ namespace CarRentWebsite.Models
 
         public int RentStatusId { get; set; }
         public RentStatus RentStatus { get; set; }
-        
-        public int UserId { get; set; }
-        public ApplicationUser User { get; set; }
 
-        //public int ManagerId { get; set; }
-        //public ApplicationUser Manager { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
+
+        public int ManagerId { get; set; }
+        public Manager Manager { get; set; }
 
         public int CarId { get; set; }
         public Car Car { get; set; }

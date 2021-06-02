@@ -2,9 +2,9 @@
 
 namespace CarRentWebsite.Models
 {
-    public class Transmition
+    public class Brand
     {
-        public Transmition()
+        public Brand()
         {
             Cars = new HashSet<Car>();
         }

@@ -2,9 +2,9 @@
 
 namespace CarRentWebsite.Models
 {
-    public class Status
+    public class CarStatus
     {
-        public Status()
+        public CarStatus()
         {
             Cars = new HashSet<Car>();
         }

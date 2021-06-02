@@ -1,10 +1,12 @@
-﻿namespace CarRentWebsite.Models
+﻿using NetTopologySuite.Geometries;
+
+namespace CarRentWebsite.Models
 {
     public class Location
     {
         public int Id { get; set; }
         
-        //public Point Coordinate { get; set; }
+        public Point Coordinate { get; set; }
         
         public int CountryId { get; set; }
 
