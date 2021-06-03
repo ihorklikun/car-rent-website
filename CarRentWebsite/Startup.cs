@@ -37,7 +37,7 @@ namespace CarRentWebsite
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
+            
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 

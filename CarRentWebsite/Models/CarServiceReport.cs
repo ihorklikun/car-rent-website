@@ -16,7 +16,7 @@ namespace CarRentWebsite.Models
         public int CarServiceId { get; set; }
         public CarService CarService { get; set; }
 
-        public int ServiceWorkerId { get; set; }
+        //public int ServiceWorkerId { get; set; }
         public ServiceWorker ServiceWorker { get; set; }
     }
 }
