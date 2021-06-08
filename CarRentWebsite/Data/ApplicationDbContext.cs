@@ -17,6 +17,20 @@ namespace CarRentWebsite.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<>()
+        }
+
+
+        public DbSet<CarRentWebsite.Models.Users.Customer> Customers { get; set; }
+        public DbSet<CarRentWebsite.Models.Users.Manager> Managers { get; set; }
+        public DbSet<CarRentWebsite.Models.Users.ServiceWorker> ServiceWorkers { get; set; }
+
+
         public DbSet<CarRentWebsite.Models.Engine> Engines { get; set; }
         public DbSet<CarRentWebsite.Models.Car> Cars { get; set; }
         public DbSet<CarRentWebsite.Models.CarClass> CarClasses { get; set; }
@@ -28,14 +42,14 @@ namespace CarRentWebsite.Data
         public DbSet<CarRentWebsite.Models.ConditionMark> ConditionMarks { get; set; }
         public DbSet<CarRentWebsite.Models.ConditionReport> ConditionReports { get; set; }
         public DbSet<CarRentWebsite.Models.Fuel> Fuels { get; set; }
-        public DbSet<CarRentWebsite.Models.Transmission> Transmitions { get; set; }
+        public DbSet<CarRentWebsite.Models.Transmission> Transmissions { get; set; }
         public DbSet<CarRentWebsite.Models.CarStatus> CarStatuses { get; set; }
         public DbSet<CarRentWebsite.Models.Review> Reviews { get; set; }
         public DbSet<CarRentWebsite.Models.Rent> Rents { get; set; }
         public DbSet<CarRentWebsite.Models.RentAddedOption> RentAddedOptions { get; set; }
         public DbSet<CarRentWebsite.Models.RentAdditionalOption> RentAdditionalOptions { get; set; }
         public DbSet<CarRentWebsite.Models.RentStatus> RentStatuses { get; set; }
-        public DbSet<CarRentWebsite.Models.PriceCoefficient> PriceCoeficients { get; set; }
+        public DbSet<CarRentWebsite.Models.PriceCoefficient> PriceCoefficients { get; set; }
         public DbSet<CarRentWebsite.Models.Location> Locations { get; set; }
     }
 }

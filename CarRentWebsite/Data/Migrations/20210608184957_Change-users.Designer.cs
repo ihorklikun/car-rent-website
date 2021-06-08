@@ -4,15 +4,17 @@ using CarRentWebsite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
 namespace CarRentWebsite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210608184957_Change-users")]
+    partial class Changeusers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -857,9 +859,6 @@ namespace CarRentWebsite.Data.Migrations
                 {
                     b.HasBaseType("CarRentWebsite.Models.ApplicationUser");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
                     b.HasDiscriminator().HasValue("Customer");
                 });
 
@@ -867,18 +866,12 @@ namespace CarRentWebsite.Data.Migrations
                 {
                     b.HasBaseType("CarRentWebsite.Models.ApplicationUser");
 
-                    b.Property<string>("ManagerInfo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasDiscriminator().HasValue("Manager");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Users.ServiceWorker", b =>
                 {
                     b.HasBaseType("CarRentWebsite.Models.ApplicationUser");
-
-                    b.Property<string>("WorkerInfo")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ServiceWorker");
                 });

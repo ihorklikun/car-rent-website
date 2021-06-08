@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarRentWebsite.Models.Users;
 
 namespace CarRentWebsite.Models
 {
@@ -15,8 +16,7 @@ namespace CarRentWebsite.Models
 
         public int CarServiceId { get; set; }
         public CarService CarService { get; set; }
-
-        public int ServiceWorkerId { get; set; }
+        
         public ServiceWorker ServiceWorker { get; set; }
     }
 }

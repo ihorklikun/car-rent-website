@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using CarRentWebsite.Models.Users;
 
 namespace CarRentWebsite.Models
 {
@@ -21,10 +22,8 @@ namespace CarRentWebsite.Models
         public int RentStatusId { get; set; }
         public RentStatus RentStatus { get; set; }
 
-        public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public int ManagerId { get; set; }
         public Manager Manager { get; set; }
 
         public int CarId { get; set; }

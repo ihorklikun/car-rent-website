@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace CarRentWebsite.Models
+namespace CarRentWebsite.Models.Users
 {
-    public class Customer
+    public class Customer: ApplicationUser
     {
-        public int Id { get; set; }
-
-        public int ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-
+       
+        public int Age { get; set; }
         public ICollection<Rent> Rents { get; set; }
         public ICollection<Review> Reviews { get; set; }
     }
