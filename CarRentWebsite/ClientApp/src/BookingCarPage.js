@@ -76,8 +76,8 @@ function BookingCarPage() {
                 <select
                   className='dataText'
                   name='placeFrom'
-                  value={adressId}
-                  onChange={(e) => setAdressId(Number(e.target.value))}
+                  value={startAdressId}
+                  onChange={(e) => setStartAdress(Number(e.target.value))}
                 >
                   {adressList.map((adress) => (
                     <option key={adress.id} value={adress.id}>
@@ -115,8 +115,8 @@ function BookingCarPage() {
                 <select
                   className='dataText'
                   name='placeTo'
-                  value={adressId}
-                  onChange={(e) => setAdressId(Number(e.target.value))}
+                  value={endAdressId}
+                  onChange={(e) => setEndAdress(Number(e.target.value))}
                 >
                   {adressList.map((adress) => (
                     <option key={adress.id} value={adress.id}>
@@ -202,52 +202,6 @@ function BookingCarPage() {
         </Row>
       </Container>
     )
-}
-
-function PlaceLine() {
-  const [startAdressId, setStartAdress] = useState(1)
-  const [endAdressId, setEndAdress] = useState(1)
-
-  return (
-    <Row>
-      <Col sm={5}>
-        <select
-          className='dataText'
-          name='placeFrom'
-          value={adressId}
-          onChange={(e) => setAdressId(Number(e.target.value))}
-        >
-          {adressList.map((adress) => (
-            <option key={adress.id} value={adress.id}>
-              {adress.name}
-            </option>
-          ))}
-        </select>
-      </Col>
-      <Col sm={4}>
-        <input
-          className='dataText text-left'
-          type='date'
-          id='startDate'
-          name='startDate'
-          value='2020-07-22'
-          min='2020-01-01'
-          max='2100-12-31'
-        />
-      </Col>
-      <Col sm={3}>
-        <input
-          className='dataText text-left'
-          type='time'
-          id='startTime'
-          name='startTime'
-          min='09:00'
-          max='18:00'
-          required
-        />
-      </Col>
-    </Row>
-  )
 }
 
 function GoToUserPage() {}
