@@ -9,14 +9,14 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 
 import './custom.css'
-
+import CarsListPage from './Pages/CarsListPage';
 export default class App extends Component {
   static displayName = App.name;
 
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' component={CarsListPage} />
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
