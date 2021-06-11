@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
-import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
-import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
-import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { 
+  BrowserRouter as Router, 
+  Switch, 
+  Route
+} from 'react-router-dom';
 
-import './custom.css'
+import NaviBar from './Components/Navibar'
+import Footer from './Components/Footer'
+import Home from './Pages/HomePage/Home';
+import About from './Pages/AboutUsPage/About';
 
-export default class App extends Component {
-  static displayName = App.name;
-
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <AuthorizeRoute path='/fetch-data' component={FetchData} />
-        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-      </Layout>
-    );
-  }
-}
+function App() {
+  return (
+    <>
+    <Router>
+    <NaviBar/>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/about" component={About} />
+      {/* <Route exact path="/rules" component={Rules} /> */}
+    </Switch>
+    </Router>
+    <Footer/>
+    </>
+  );
+}export default App;
