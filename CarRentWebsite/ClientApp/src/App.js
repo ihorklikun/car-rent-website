@@ -6,8 +6,8 @@ import {
   Route
 } from 'react-router-dom';
 
-import NaviBar from './Components/Navibar'
-import Footer from './Components/Footer'
+import NaviBar from './components/Navibar.js'
+import Footer from './components/Footer.js'
 import Home from './Pages/HomePage/Home';
 import About from './Pages/AboutUsPage/About';
 
