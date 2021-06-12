@@ -1,13 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { Container, Table, Button } from 'react-bootstrap';
 import Service from '../services/CarsListService';
 import "./CarsListPageStyle.css"
+import ConditionReportModalWIndow from "../components/ConditionReportModalWindow";
 function CarsListPage(){
 
     const [cars, setCars] = useState({
         isLoading: true,
         carsData: null
     });
+    const [isShown, setShow] = useState(false);
+    var selectedCarId = useRef(0);
+
     useEffect(()=>{
         Service.getCarsList().then((responce)=>{
             var data = responce.data;
@@ -25,13 +29,17 @@ function CarsListPage(){
     }, [setCars]);
 
     const onRowClicked = (rowData)=>{
-        console.log("some data");
+        selectedCarId = rowData.CarId;
+        console.log(selectedCarId);
+        setShow(true);
     }
 
     const rows = ()=>{
-        if(cars.cars && cars.cars.length > 0)
-        return (cars.cars.map((car) => (<tr onClick ={onRowClicked(car)}></tr>)));
-        else return (<tr onClick={()=>onRowClicked(null)}>
+        var json = {"CarId": "1"};
+        if(cars.cars && cars.cars.length > 0){
+        
+        return (cars.cars.map((car) => (<tr onClick ={onRowClicked(car)}></tr>)));}
+        else return (<tr onClick={()=>onRowClicked(json)}>
             <td>1</td>
             <td>Kia</td>
             <td>Cerato</td>
@@ -65,6 +73,10 @@ function CarsListPage(){
                 </tbody>
             </Table>
             <Button variant ="secondary" size="md" block className = "buttonStyle">Add new car</Button>
+            <ConditionReportModalWIndow carid = {selectedCarId}
+                show = {isShown}            
+                onHide = {()=>setShow(false)}
+            />
         </Container>
     );
 }
