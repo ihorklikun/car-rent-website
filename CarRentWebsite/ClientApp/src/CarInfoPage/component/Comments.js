@@ -59,13 +59,13 @@ export function Comment(props){
         <Card className={"px-1"}>
             <Card.Header className={"px-sm-1 mx-0"}>
             <Row className={"d-flex pl-2  "}   >
-                <Coll className={"mr-1 px-0 ms-lg-3 ms-xl-3 ms-md-2 ms-sm-2 "} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"} >
+                <Coll className={"mr-1 px-0 ml-lg-3 ml-xl-3 ml-md-2 ml-sm-2 "} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"} >
                     <Image className={"rounded-circle px-0 mx-0 " } src={user} style={{minWidth:"3rem", maxWidth:"4rem"}}  alt={"UserIco"} roundedCircle={true}/></Coll>
-                <Coll className={"me-auto  ml-0 p-0 "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
+                <Coll className={"mr-auto  ml-0 p-0 "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
                     <h5>{props.userName}</h5>
                     <p>{props.date}</p>
                 </Coll>
-                <Coll className={"ms-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
+                <Coll className={"ml-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
                     <FiveStarsMark mark={5} starSize={"large"}></FiveStarsMark>
                 </Coll>
             </Row>
@@ -140,12 +140,12 @@ export class CommentForm extends React.Component{
                 <Form onSubmit={this.handleSubmit}>
                 <Card.Header className={"px-sm-1 mx-0"}>
                     <Row className={"d-flex pl-2   "}   >
-                        <Coll className={"mr-1 px-0 ms-lg-3 ms-xl-3 ms-md-2 ms-sm-2"} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"} > <Image src={user} style={{minWidth:"3rem", maxWidth:"4rem"}}  alt={"UserIco"} roundedCircle={true}/></Coll>
-                        <Coll className={"me-auto  ml-0 p-0 align-self-end "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
+                        <Coll className={"mr-1 px-0 ml-lg-3 ml-xl-3 ml-md-2 ml-sm-2"} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"} > <Image src={user} style={{minWidth:"3rem", maxWidth:"4rem"}}  alt={"UserIco"} roundedCircle={true}/></Coll>
+                        <Coll className={"mr-auto  ml-0 p-0 align-self-end "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
                             <h5>{this.props.userName}</h5>
                             <p>{this.props.date}</p>
                         </Coll>
-                        <Coll className={"ms-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
+                        <Coll className={"ml-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
                             <EditableFiveStarsMark mark={5} name={"Mark"} starSize={"large"} onChange={this.handleRatingChange.bind(this)} ></EditableFiveStarsMark>
                         </Coll>
                     </Row>
@@ -172,7 +172,7 @@ export class CommentForm extends React.Component{
                         <Coll xl={1} lg={2} md={2} sm={3} xs={4}  className={"d-grid ms-auto"}>
                             <Button className={""}  type={"submit"}  variant={"warning"}>Send</Button>
                         </Coll>
-                        <Coll xl={1} lg={2} md={2} sm={3} xs={4} className={"d-grid me-sm-auto me-xs-auto me-md-2 me-lg-2 me-xl-2  "}>
+                        <Coll xl={1} lg={2} md={2} sm={3} xs={4} className={"d-grid mr-sm-auto mr-xs-auto mr-md-2 mr-lg-2 mr-xl-2  "}>
                             <Button className={""} type={"reset"} variant={"warning"}>Cancel</Button>
                         </Coll>
                     </Row>
