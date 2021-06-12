@@ -22,6 +22,7 @@ export default function NaviBar(){
     function handleSignIn(){
         // some part of login and password check will be here
 
+        //check user stus worker or mechanic
         document.getElementById('dd-but-sign-in').style.display = "none"
         document.getElementById('dd-but-sign-out').style.display = "block"
         document.getElementById('dd-but-profile').style.display = "block"
@@ -59,6 +60,31 @@ export default function NaviBar(){
                             <DropdownButton id="dropdown-basic-button" title="Account">
                                 <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item>
                                 <Dropdown.Item variant="primary" id="dd-but-profile" style={{display:'none'}}>Profile</Dropdown.Item>
+
+                                <DropdownButton
+                                    id={'dd-but-manager-menu'}
+                                    drop='left'
+                                    variant="light"
+                                    title='Manager menu'
+                                >
+                                    <Dropdown.Item>Car rent requests</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item>Cars list</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item>System users list</Dropdown.Item>
+                                </DropdownButton>
+
+                                <DropdownButton
+                                    id={'dd-but-mechanic-menu'}
+                                    drop='left'
+                                    variant="light"
+                                    title='Mechanic menu'
+                                >
+                                    <Dropdown.Item>Cars service list</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item>Cars list</Dropdown.Item>
+                                </DropdownButton>
+
                                 <Dropdown.Item variant="primary" id="dd-but-sign-out" style={{display:'none'}} onClick={handleSignOut}>Sign out</Dropdown.Item>
                             </DropdownButton>
                         </Nav>
