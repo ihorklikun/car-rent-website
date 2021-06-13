@@ -3,21 +3,19 @@ import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import CarInfo from './CarInfoPage/CarInfo';
 import { FetchData } from './components/FetchData';
+import CarManagerInfo from "./CarManagerInfo/CarManagerInfo";
 import { Counter } from './components/Counter';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
-
 import './custom.css'
-
 export default class App extends Component {
   static displayName = App.name;
-
   render () {
     return (
       <Layout>
         <Route exact path='/' component={CarInfo} />
-        <Route path='/counter' component={Counter} />
+        <Route path='/carManagerInfo' component={CarManagerInfo} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
