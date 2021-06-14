@@ -13,9 +13,10 @@ export default class CarCardsDeck extends Component {
         return (
             <CardDeck>
                     {
-                        this.props.postArray.map((post, index)=>{
+                        this.props.postArray.map((post, index) =>{
                                 return(
                                     <CarCard
+                                        Id={post.CarId}
                                         Title={post.Model}
                                         Description={post.Description}
                                         Price={post.Price}

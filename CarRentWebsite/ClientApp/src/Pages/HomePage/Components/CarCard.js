@@ -24,7 +24,7 @@ export default class CarCard extends Component {
                     <Card.Text className="ml-3">
                         from {this.props.Price}$ / day
                     </Card.Text>
-                    <Button variant="primary" className="ml-2">Order</Button>
+                    <Button variant="primary" className="ml-2" href={'/carInfo/'+this.props.Id}>Order</Button>
                 </Row>
             </Card.Body>
         </Card>
