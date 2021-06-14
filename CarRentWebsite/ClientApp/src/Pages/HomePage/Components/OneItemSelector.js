@@ -18,9 +18,9 @@ export default class OneItemSelector extends Component{
                 this.props.postArray.map((post, index)=>{
                     return(
                         <label class="form-check">
-                             <input type="radio" class="form-check-input" value={post.id}  name="exampleRadio"/>
+                             <input type="radio" class="form-check-input" value={post.Id}  name="exampleRadio"/>
                              <span class="form-check-label">
-                                 {post.body}
+                                 {post.Name}
                              </span>
                         </label>
                     )

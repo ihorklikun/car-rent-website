@@ -13,91 +13,11 @@ import CarCardsDeck from './Components/CarCardsDeck'
 
 export default class Home extends Component {
     state = {
-        carBrandArray : [
-            {id: 1, body: "Ravon"},
-            {id: 2, body: "Chevrolet"},
-            {id: 3, body: "KIA"},
-            {id: 4, body: "BMW"},
-            {id: 5, body: "Mercedess-Benz"},
-        ],
-        cityArray : [
-            {id: 1, body: "All"},
-            {id: 2, body: "Lviv"},
-            {id: 3, body: "Kyiv"},
-            {id: 4, body: "Kharkiv"}
-        ],
-        transmitionArray : [
-            {id: 1, body: "4 wheel drive"},
-            {id: 2, body: "Front wheel drive"},
-            {id: 3, body: "Rear wheel drive"}
-        ],
-        fuelArray : [
-            {id: 1, body: "Diesel"},
-            {id: 2, body: "Gasoline"},
-            {id: 3, body: "Electricity"}
-        ],
-        carsArray : [
-            {id: 1, 
-                brand: "Ravon R2",
-                brandId: '1',
-                description: "Fine car for everyone. Can make everytjing you want to.", 
-                price : 10,
-                locationId: '2',
-                transmitionId: '2',
-                fuelTypeId: '2',
-                seats: '4'
-            },
-            {id: 2, 
-                brand: "Chevrolet Lanos",
-                brandId: '2',
-                description: "Fine car for everyone. Can make everytjing you want to.", 
-                price : 15,
-                locationId: '2',
-                transmitionId: '2',
-                fuelTypeId: '2',
-                seats: '5'
-            },
-            {id: 3, 
-                brand: "KIA K5",
-                brandId: '3',
-                description: "Fine car for everyone. Can make everytjing you want to.", 
-                price : 12,
-                locationId: '3',
-                transmitionId: '3',
-                fuelTypeId: '1',
-                seats: '5'
-            },
-            {id: 4, 
-                brand: "KIA Sportage",
-                brandId: '3', 
-                description: "Fine car for everyone. Can make everytjing you want to.", 
-                price : 20,
-                locationId: '4',
-                transmitionId: '1',
-                fuelTypeId: '1',
-                seats: '6'
-            },
-            {id: 5, 
-                brand: "BMW M2",
-                brandId: '4',
-                description: "Fine car for everyone. Can make everytjing you want to.", 
-                price : 27,
-                locationId: '3',
-                transmitionId: '3',
-                fuelTypeId: '1',
-                seats: '2'
-            },
-            {id: 6, 
-                brand: "Mercedes-Benz Profi Electro",
-                brandId: '5', 
-                description: "Fine car for everyone. Can make everytjing you want to.", 
-                price : 22,
-                locationId: '3',
-                transmitionId: '1',
-                fuelTypeId: '3',
-                seats: '10'
-            }
-        ],
+        carBrandArray : [],
+        cityArray : [],
+        transmitionArray : [],
+        fuelArray : [],
+        carsArray: [],
         sort:'',
         city:'',
         selectedMinPrice:'',
@@ -191,48 +111,63 @@ export default class Home extends Component {
     }
 
     render() {
+        const carList = require('./jsonData/Car.json');
+        this.state.carsArray = carList
+
+        const fuelList = require('./jsonData/Fuel.json');
+        this.state.fuelArray = fuelList
+
+        const transmitionList = require('./jsonData/Tansmition.json');
+        this.state.transmitionArray = transmitionList
+
+        const brandList = require('./jsonData/Brand.json');
+        this.state.carBrandArray = brandList
+
+        const cityList = require('./jsonData/Location.json');
+        this.state.cityArray = cityList
+
         let sortedBooks = this.state.carsArray.sort((a, b) =>{
             if(this.state.sort == "Name"){
-                if (a.brand > b.brand) {
+                if (a.Model > b.Model) {
                     return 1;
                   }
-                  if (a.brand < b.brand) {
+                  if (a.Model < b.Model) {
                     return -1;
                   }
                   return 0;
             }
             else if(this.state.sort == "High-to-low"){
-                return b.price - a.price
+                return b.Price - a.Price
             }
             else if(this.state.sort == "Low-to-high"){
-                return a.price - b.price
+                return a.Price - b.Price
             }
         })
 
         if(this.state.city != 1 && this.state.city){
-            sortedBooks = sortedBooks.filter(e => e.locationId === this.state.city);
+            sortedBooks = sortedBooks.filter(e => e.LocationId === this.state.city);
         }
 
         if(+this.state.selectedMaxPrice >= 0 && +this.state.selectedMinPrice >= 0 &&
             this.state.selectedMaxPrice && this.state.selectedMinPrice){
-            sortedBooks = sortedBooks.filter(e => ((+e.price <= +this.state.selectedMaxPrice) && (+e.price >= +this.state.selectedMinPrice)));
+            sortedBooks = sortedBooks.filter(e => ((+e.Price <= +this.state.selectedMaxPrice) && (+e.Price >= +this.state.selectedMinPrice)));
         }
 
         if(+this.state.brands.length > 0){
-            sortedBooks = sortedBooks.filter(e => this.state.brands.includes(e.brandId));
+            sortedBooks = sortedBooks.filter(e => this.state.brands.includes(e.BrandId));
         }
 
         if(+this.state.transmitions.length > 0){
-            sortedBooks = sortedBooks.filter(e => this.state.transmitions.includes(e.transmitionId));
+            sortedBooks = sortedBooks.filter(e => this.state.transmitions.includes(e.TransmitionId));
         }
 
         if(+this.state.fuelTypes.length > 0){
-            sortedBooks = sortedBooks.filter(e => this.state.fuelTypes.includes(e.fuelTypeId));
+            sortedBooks = sortedBooks.filter(e => this.state.fuelTypes.includes(e.FuelId));
         }
 
         if(+this.state.selectedMaxSeats >= 0 && +this.state.selectedMinSeats >= 0 &&
             this.state.selectedMaxSeats && this.state.selectedMinSeats){
-            sortedBooks = sortedBooks.filter(e => ((+e.seats <= +this.state.selectedMaxSeats) && (+e.seats >= +this.state.selectedMinSeats)));
+            sortedBooks = sortedBooks.filter(e => ((+e.SeatsCount <= +this.state.selectedMaxSeats) && (+e.SeatsCount >= +this.state.selectedMinSeats)));
         }
 
         return (

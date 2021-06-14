@@ -16,9 +16,9 @@ export default class CarCardsDeck extends Component {
                         this.props.postArray.map((post, index)=>{
                                 return(
                                     <CarCard
-                                        Title={post.brand}
-                                        Description={post.description}
-                                        Price={post.price}
+                                        Title={post.Model}
+                                        Description={post.Description}
+                                        Price={post.Price}
                                     />
                                 )
                         })
