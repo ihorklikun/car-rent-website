@@ -17,8 +17,8 @@ import Footer from './components/Footer.js'
 import Home from './Pages/HomePage/Home';
 import About from './Pages/AboutUsPage/About';
 import BookingCarPage from './Pages/BookingCarPage/BookingCarPage';
-import CarInfo from './CarInfoPage/CarInfo';
-import CarManagerInfo from "./CarManagerInfo/CarManagerInfo";
+import CarInfo from './Pages/CarInfoPage/CarInfo';
+import CarManagerInfo from "./Pages/CarManagerInfo/CarManagerInfo";
 
 function App() {
   return (
