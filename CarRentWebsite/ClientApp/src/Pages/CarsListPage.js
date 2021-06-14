@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Container, Table, Button } from 'react-bootstrap';
 import Service from '../services/CarsListService';
 import "./CarsListPageStyle.css"
+import http from "../http-common";
 //import ConditionReportModalWIndow from "../components/ConditionReportModalWindow";
 //TODO implement json
 function CarsListPage(){
@@ -15,7 +16,7 @@ function CarsListPage(){
     var selectedCarId = 1;
     var history = useHistory();
     useEffect(()=>{
-        Service.getCarsList().then((responce)=>{
+        http.get("url will be here").then((responce)=>{
             var data = responce.data;
             if(data != null){
                 setCars({isLoading: false, carsData: data});
