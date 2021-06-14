@@ -3,25 +3,30 @@ import {Modal, Button, Form} from 'react-bootstrap';
 import http from '../http-common';
 function ConditionReportModalWIndow(props){
     const carId = props.carid;
+    const managerId = props.managerid;
     const [conditionMark, setConditionMark] = useState(null);
     const [LCPConditionMark, setLCPConditionMark] = useState(null);
     const [description, setDescription] = useState(null);
     const [fuelVolume, setFuelVolume] = useState(0);
     const [carMileage, setCarMileage] = useState(0);
-
+    const [isCritial, setIsCritical] = useState(false);
     var options = [0,1,2,3,4,5]
     const generateReport = ()=>{
         //console.log("I`m here" + fuelVolume);
+        let date= new Date();
         var jsonData = {
-            "ManagerId": null,
+            "ManagerId": managerId,
             "FuelVolume": fuelVolume,
             "CarMileage": carMileage,
             "InteriorConditionMarkId": conditionMark,
             "LPCConditionMarkId": LCPConditionMark,
             "IsCritical": null,
             "Description": description,
-            "CarId": carId
+            "CarId": carId,
+            "CreateDate": date,
+            "IsCritical" : isCritial
         };
+        console.log(JSON.stringify(jsonData));
         http.post("", jsonData, validateStatus => true).then((responce)=>{
             var status = responce.status;
             console.log(status);
@@ -39,7 +44,7 @@ function ConditionReportModalWIndow(props){
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group>
+                    <Form.Group controlId ="fuelvolume">
                         <Form.Label>Fuel volume</Form.Label>
                         <Form.Control type = "text" value ={fuelVolume} placeholder ="123" onChange ={(e)=>{
                             const re = /^[0-9\b]+$/;
@@ -59,29 +64,36 @@ function ConditionReportModalWIndow(props){
                         }}></Form.Control>
                         <Form.Text>Enter current car mileage</Form.Text>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group controlId ="icm">
                         <Form.Label>Interior condition mark</Form.Label>
-                        <Form.Control as = "select" value = {conditionMark} onChange ={(e)=>{
+                        <Form.Control as = "select" value = {conditionMark ?? ""} onChange ={(e)=>{
                             setConditionMark(e.target.value);
                             }}>
                                 {options.map((option)=>(
-                                    <option value = {option}>{option}</option>
+                                    <option value = {option} key ={option}>{option}</option>
                                 ))}
                             </Form.Control>
                         <Form.Text>Select mark for interior condition</Form.Text>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group controlId ="lcm">
                         <Form.Label>LPC condition mark</Form.Label>
-                        <Form.Control as = "select" value = {LCPConditionMark} onChange ={(e)=>{
+                        <Form.Control as = "select" value = {LCPConditionMark ?? ""} onChange ={(e)=>{
                             setLCPConditionMark(e.target.value);
                             }}>
                                 {options.map((option)=>(
-                                    <option value = {option}>{option}</option>
+                                    <option value = {option} key ={option}>{option}</option>
                                 ))}
                             </Form.Control>
                         <Form.Text>Select mark for LPC condition</Form.Text>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group controlId ="lcm">
+                        <Form.Check type = "checkbox" label = "Is Critical?" checked = {isCritial} onChange ={()=>{
+                            setIsCritical(!isCritial);
+                            }}> 
+                        </Form.Check>
+                        {/* <Form.Text>Select mark for LPC condition</Form.Text> */}
+                    </Form.Group>
+                    <Form.Group controlId ="d">
                         <Form.Label>Description</Form.Label>
                         <Form.Control as = "textarea" onChange ={(e)=>{
                             setDescription(e.target.value);
