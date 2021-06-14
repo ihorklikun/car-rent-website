@@ -1,0 +1,38 @@
+[
+    {
+        "Id" : "1",
+        "Coordianate": "",
+        "Countri": "",
+        "City": "",
+        "Street": "",
+        "Building":"",
+        "Name": "All"
+    },
+    {
+        "Id" : "2",
+        "Coordianate": "",
+        "Countri": "",
+        "City": "",
+        "Street": "",
+        "Building":"",
+        "Name": "Lviv"
+    },
+    {
+        "Id" : "3",
+        "Coordianate": "",
+        "Countri": "",
+        "City": "",
+        "Street": "",
+        "Building":"",
+        "Name": "Kyiv"
+    },
+    {
+        "Id" : "4",
+        "Coordianate": "",
+        "Countri": "",
+        "City": "",
+        "Street": "",
+        "Building":"",
+        "Name": "Kharkiv"
+    }
+]

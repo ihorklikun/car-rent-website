@@ -1,0 +1,14 @@
+[
+    {
+        "Id": 1, 
+        "Name": "Diesel"
+    },
+    {
+        "Id": 2, 
+        "Name": "Gasoline"
+    },
+    {
+        "Id": 3, 
+        "Name": "Electricity"
+    }
+]
