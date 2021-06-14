@@ -1,3 +1,10 @@
+import React, { Component } from 'react';
+import { Route } from 'react-router';
+import { Layout } from './components/Layout';
+import CarInfo from './CarInfoPage/CarInfo';
+import { FetchData } from './components/FetchData';
+import CarManagerInfo from "./CarManagerInfo/CarManagerInfo";
+import { Counter } from './components/Counter';
 import React from 'react'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,7 +29,9 @@ function App() {
     <Router>
     <NaviBar/>
     <Switch>
-      <Route exact path="/" component={Home} />
+                  <Route exact path="/" component={Home} />
+                  <Route exact path='/carInfo' component={CarInfo} />
+                  <Route path='/carManagerInfo' component={CarManagerInfo} />
       <Route exact path="/about" component={About} />
       <Route exact path='/bookingCarPage' component={BookingCarPage} />
       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
