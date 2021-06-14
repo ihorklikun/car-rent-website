@@ -1,0 +1,102 @@
+.style1 {
+  /* background-color: red; */
+}
+
+.BookingButton {
+  background-color: yellow;
+  position: relative;
+  width: 200px;
+  color: black;
+  margin: auto;
+  margin-top: 20px;
+}
+.YelowStyle {
+  background: #f5c53d;
+  border-radius: 30px;
+}
+.number {
+  display: table;
+  margin: 1em auto 1em auto;
+  padding: 5px;
+  background-color: gray;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.style3 {
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: column;
+}
+.templateStyle {
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: #fffdfd;
+  margin: 1em;
+}
+
+.headerText {
+  /* display: table; */
+  margin: 0.5em auto 0.5em auto;
+  padding: 5px;
+  background-color: #9d9d9d;
+  /* border: 1px solid ; */
+  border-radius: 20px;
+  width: 100%;
+}
+
+.dataText {
+  /* display: table; */
+  text-align: center;
+  margin: 0.5em auto 0.5em auto;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+}
+.buttonStyle {
+  /* display: table; */
+  margin: 0.5em auto 0.5em auto;
+  padding: 5px;
+  border-radius: 30px;
+  width: 100%;
+  align-self: flex-end;
+}
+#tasksProgress {
+  margin-left: 1em;
+}
+.style {
+  /* margin: 0 auto; */
+  align-content: center;
+}
+.ModalButtonStyle {
+  margin: 1em;
+}
+
+.fixed-row-to-bottom {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+.CarNameStyle {
+  /* RAVON R2 R330 */
+
+  position: absolute;
+  width: 504px;
+  height: 76px;
+  left: 1240px;
+  top: 363px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  /*font-size: 62px;*/
+  line-height: 76px;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+.CarImageStyle {
+  /*background: url(image.png);*/
+}

@@ -10,7 +10,7 @@ import {
     DropdownButton
 } from 'react-bootstrap';
 
-import logo from './Logo.png';
+//import logo from '';
 
 export default function NaviBar(){
 
@@ -42,7 +42,7 @@ export default function NaviBar(){
                 <Container>
                     <Navbar.Brand href="/">
                         <img
-                            src={logo}
+                            
                             height="40"
                             width="auto"
                             className="d-inline-block align-top"
