@@ -1,5 +1,6 @@
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.Models.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

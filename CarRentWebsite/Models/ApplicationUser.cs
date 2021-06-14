@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CarRentWebsite.Models
+namespace CarRentWebsite.Models.Users
 {
     public class ApplicationUser : IdentityUser
     {
