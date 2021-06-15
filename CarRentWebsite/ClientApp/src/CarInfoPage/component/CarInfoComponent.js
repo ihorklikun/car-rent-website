@@ -101,19 +101,31 @@ export default class CarBaseInfo extends React.Component{
     constructor(props) {
         super(props);
         const basecost=20;
-        this.state={cost: basecost.toString(), valute: '$'};
+        let cars=require('./jsonData/Car.json');
+        let comments=require('./jsonData/Comments.json')
+        comments=comments.filter(comment=>comment.CarId==this.props.carId)
+        let mark=0;
+        comments.map((comment,index)=>{
+            mark+=comment.Mark;
+        })
+        mark=mark/comments.length;
+        console.log(cars);
+        const car=cars.find(car=>car.CarId==this.props.carId);
+        this.state={car:car,carId:this.props.carId,mark:mark,valute:"$"};
+        console.log(mark);
+        console.log(car);
     }
     render() {
         return(
             <Container fluid={true} className={"px-lg-3 px-md-3 px-sm-1 px-xl-5 px-xxl-5 pt-3 mx-0 bg-light "}>
                 <Row >
                     <Coll>
-                        <CarFullName brand="Ravon" model="R2 R330" />
+                        <CarFullName brand={this.state.car.Brand.Name} model={this.state.car.Model} />
                     </Coll>
                 </Row>
                 <Row>
                     <Coll>
-                    <FiveStarsMark mark="2.5"></FiveStarsMark>
+                    <FiveStarsMark mark={this.state.mark}></FiveStarsMark>
                     </Coll>
                 </Row>
                 <Row className={"pt-2"}>
@@ -123,7 +135,7 @@ export default class CarBaseInfo extends React.Component{
                     <Coll xxl={8} xl={7} lg={6} md={5} sm={12} xs={12} className={"pl-lg-5 pl-md-5 pl-sm-5 pl-xs-5 "} >
                         <Row className={"pt-2"}>
                             <Coll xxl={7}  xl={7} lg={6} md={6} sm={5} xs={6} className={"pr-0"} >
-                                <h3 >from {this.state.cost}{this.state.valute}/day </h3>
+                                <h3 >from {this.state.car.Price}{this.state.valute}/day </h3>
                             </Coll>
                             <Coll className={"pl-0 pr-4"}>
                                 <Button block={true} variant={"warning"} size={"lg"}>Book a car </Button>

@@ -68,6 +68,9 @@ const carsArray = [
 export default  class SimilarCars extends React.Component{
     constructor(props) {
         super(props);
+        let cars=require('./jsonData/Car.json');
+        this.state={similarCars:cars};
+
     }
     render(){
         return(
@@ -76,9 +79,9 @@ export default  class SimilarCars extends React.Component{
                     <h3> Similar Cars</h3>
                 </Row>
                 <Row  className={"d-flex flex-row flex-nowrap overflow-auto gx-lg-3 gx-xl-0  gx-xxl-3 gx-md-3 gx-sm-1 "}>
-                    {carsArray.map((carCard,index)=>{return(
+                    {this.state.similarCars.map((carCard,index)=>{return(
                         <Coll xxl={2} xl={3} lg={4} md={4} sm={5} xs={6} className={"mx-2 px-0"} >
-                        <CarCard Title={carCard.brand} Description={carCard.description} Price={carCard.price} />
+                        <CarCard Id={carCard.CarId} Title={carCard.Model} Description={carCard.Description} Price={carCard.Price} />
                         </Coll>
                     )})}
                 </Row>

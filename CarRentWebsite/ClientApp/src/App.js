@@ -14,8 +14,8 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={CarInfo} />
-        <Route path='/carManagerInfo' component={CarManagerInfo} />
+        <Route exact path='/carInfo/:id' component={CarInfo} />
+        <Route exact path='/carManagerInfo/:id' component={CarManagerInfo} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>

@@ -10,10 +10,10 @@ import ServiceReportsTable from "./components/ServiceReportsTable";
 export default class CarManagerInfo extends Component{
     constructor(props) {
         super(props);
-        if (this.props.CarId !== null) {
-            this.state = {CarId: this.props.CarId,brand: "Ravon", model: "R2 R330", winCode:"Win356917M"};
+        if (this.props.match.params.id !== null) {
+            this.state = {CarId:this.props.match.params.id ,brand: "Ravon", model: "R2 R330", winCode:"Win356917M"};
         } else {
-            this.state = {CardId: 0}
+            this.state = {CardId:0}
         }
     }
     render(){
@@ -23,13 +23,13 @@ export default class CarManagerInfo extends Component{
                 <p className={"text-secondary"}>{this.state.winCode}</p>
                 <Tabs >
                     <Tab title={"Rents"} eventKey={"rents"}>
-                        <RentTable/>
+                        <RentTable CarId={this.state.CarId}/>
                     </Tab>
                     <Tab title={"Reports"} eventKey={"reports"} >
-                        <ReportsTable/>
+                        <ReportsTable CarId={this.state.CarId}/>
                     </Tab>
                     <Tab title={"Services"} eventKey={"services"}>
-                        <ServiceReportsTable/>
+                        <ServiceReportsTable CarId={this.state.CarId}/>
                     </Tab>
                 </Tabs>
             </Container>);

@@ -9,7 +9,7 @@ import filterFactory, { textFilter,dateFilter,numberFilter,selectFilter } from '
 import Card from "react-bootstrap/Card";
 import Coll from "react-bootstrap/Col";
 import Rating from "@material-ui/lab/Rating";
-const rents=[
+const reports=[
     {
         id:0,
         createDate: new Date("2021-06-16"),
@@ -77,20 +77,6 @@ const defaultSorted=[{
     dataField: "id",
     order:"asc"
 }]
-const expandRow = {
-    renderer: row => (
-        <Card >
-            <Card.Header><h5>Description </h5></Card.Header>
-            <Card.Body>
-                <Card.Text>
-                    <p > {(rents.find(rent=>rent.id==row.id).description ? rents.find(rent=>rent.id==row.id).description : "None")}</p>
-                </Card.Text>
-            </Card.Body>
-        </Card>
-    ),
-    showExpandColumn: true
-};
-
 export function DateColumnFormatter(cell,row){
     return <span>{cell.toLocaleDateString()}</span>;
 }
@@ -103,15 +89,29 @@ export function CostColumnFormatter(cell,row){
 export default class ReportsTable extends Component{
     constructor(props) {
         super(props);
+        this.state={reports:reports}
     }
     render() {
+        const expandRow = {
+            renderer: row => (
+                <Card >
+                    <Card.Header><h5>Description </h5></Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <p > {(this.state.reports.find(rent=>rent.id==row.id).description ? this.state.reports.find(rent=>rent.id==row.id).description : "None")}</p>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            ),
+            showExpandColumn: true
+        };
         return(
             <BoostrapTable
                 wrapperClasses="table-responsive"
                 rowClasses="text-nowrap "
                 ref={n=>this.node=n}
                 keyField={"id"}
-                data={rents}
+                data={reports}
                 noDataIndication={"No rents"}
                 bootstrap4
                 hover

@@ -209,6 +209,7 @@ export function CostColumnFormatter(cell,row){
 export default class RentTable extends Component{
     constructor(props) {
         super(props);
+        this.state={rents:rents}
     }
     render() {
         return(
@@ -217,7 +218,7 @@ export default class RentTable extends Component{
             rowClasses="text-nowrap "
             ref={n=>this.node=n}
             keyField={"id"}
-            data={rents}
+            data={this.state.rents}
             noDataIndication={"No rents"}
             bootstrap4
             hover
