@@ -19,19 +19,19 @@ namespace CarRentWebsite.Models
         public double Price { get; set; }
 
         public int RentStatusId { get; set; }
-        public virtual RentStatus RentStatus { get; set; }
+        public RentStatus RentStatus { get; set; }
 
-        public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        //public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
-        public int ManagerId { get; set; }
-        public virtual Manager Manager { get; set; }
+        //public int ManagerId { get; set; }
+        public Manager Manager { get; set; }
 
         public int CarId { get; set; }
-        public virtual Car Car { get; set; }
+        public Car Car { get; set; }
 
 
-        public virtual ICollection<RentAdditionalOption> AdditionalOptions { get; set; }
+        public ICollection<RentAdditionalOption> AdditionalOptions { get; set; }
 
     }
 

@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using CarRentWebsite.Data;
 using CarRentWebsite.Data.Repositories;
 using CarRentWebsite.Models;
+using CarRentWebsite.Models.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,7 @@ namespace CarRentWebsite
             
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
+            
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
