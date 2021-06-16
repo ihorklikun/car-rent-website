@@ -10,9 +10,9 @@ namespace CarRentWebsite.Models
         public int Id { get; set; }
 
         public int RentId { get; set; }
-        public Rent Rent { get; set; }
+        public virtual Rent Rent { get; set; }
 
         public int RentAdditionalOptionId { get; set; }
-        public RentAdditionalOption RentAdditionalOption { get; set; }
+        public virtual RentAdditionalOption RentAdditionalOption { get; set; }
     }
 }

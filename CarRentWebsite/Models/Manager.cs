@@ -7,8 +7,8 @@ namespace CarRentWebsite.Models
         public int Id { get; set; }
 
         public int ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public ICollection<ConditionReport>? ConditionReports { get; set; }
+        public virtual ICollection<ConditionReport>? ConditionReports { get; set; }
     }
 }

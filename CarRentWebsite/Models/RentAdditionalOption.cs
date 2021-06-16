@@ -16,6 +16,6 @@ namespace CarRentWebsite.Models
         public string Name { get; set; }
         public double Price { get; set; }
 
-        public ICollection<Rent> Rents { get; set; }
+        public virtual ICollection<Rent> Rents { get; set; }
     }
 }
