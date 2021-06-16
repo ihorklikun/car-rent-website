@@ -8,6 +8,7 @@ using CarRentWebsite.Data;
 using CarRentWebsite.Data.Repositories;
 using CarRentWebsite.Models;
 using CarRentWebsite.Models.Users;
+using CarRentWebsite.Options;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -64,6 +65,10 @@ namespace CarRentWebsite
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+
+            services.RegisterMapperProfiles();
+
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
