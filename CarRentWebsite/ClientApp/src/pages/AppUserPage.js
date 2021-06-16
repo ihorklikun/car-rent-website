@@ -80,7 +80,7 @@ function AppUserPage(props){
         <h1 className = "header">Rented cars</h1>
             {getActiveRents()}
         <h1 className = "header">Rents history</h1>
-        <UserCarsInfoTemplate/>
+            <UserCarsInfoTemplate/>
         </Container>
         
     );
