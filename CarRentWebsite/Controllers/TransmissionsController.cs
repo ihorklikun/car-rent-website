@@ -25,14 +25,14 @@ namespace CarRentWebsite.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transmission>>> GetTransmitions()
         {
-            return await _context.Transmitions.ToListAsync();
+            return await _context.Transmissions.ToListAsync();
         }
 
         // GET: api/Transmissions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Transmission>> GetTransmission(int id)
         {
-            var transmission = await _context.Transmitions.FindAsync(id);
+            var transmission = await _context.Transmissions.FindAsync(id);
 
             if (transmission == null)
             {
@@ -78,7 +78,7 @@ namespace CarRentWebsite.Controllers
         [HttpPost]
         public async Task<ActionResult<Transmission>> PostTransmission(Transmission transmission)
         {
-            _context.Transmitions.Add(transmission);
+            _context.Transmissions.Add(transmission);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTransmission", new { id = transmission.Id }, transmission);
@@ -88,13 +88,13 @@ namespace CarRentWebsite.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransmission(int id)
         {
-            var transmission = await _context.Transmitions.FindAsync(id);
+            var transmission = await _context.Transmissions.FindAsync(id);
             if (transmission == null)
             {
                 return NotFound();
             }
 
-            _context.Transmitions.Remove(transmission);
+            _context.Transmissions.Remove(transmission);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace CarRentWebsite.Controllers
 
         private bool TransmissionExists(int id)
         {
-            return _context.Transmitions.Any(e => e.Id == id);
+            return _context.Transmissions.Any(e => e.Id == id);
         }
     }
 }

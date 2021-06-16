@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CarRentWebsite.Models
+namespace CarRentWebsite.Models.Users
 {
     public class ServiceWorker: ApplicationUser
     {

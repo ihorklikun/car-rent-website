@@ -25,14 +25,14 @@ namespace CarRentWebsite.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PriceCoefficient>>> GetPriceCoeficients()
         {
-            return await _context.PriceCoeficients.ToListAsync();
+            return await _context.PriceCoefficients .ToListAsync();
         }
 
         // GET: api/PriceCoefficients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PriceCoefficient>> GetPriceCoefficient(int id)
         {
-            var priceCoefficient = await _context.PriceCoeficients.FindAsync(id);
+            var priceCoefficient = await _context.PriceCoefficients .FindAsync(id);
 
             if (priceCoefficient == null)
             {
@@ -78,7 +78,7 @@ namespace CarRentWebsite.Controllers
         [HttpPost]
         public async Task<ActionResult<PriceCoefficient>> PostPriceCoefficient(PriceCoefficient priceCoefficient)
         {
-            _context.PriceCoeficients.Add(priceCoefficient);
+            _context.PriceCoefficients .Add(priceCoefficient);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPriceCoefficient", new { id = priceCoefficient.Id }, priceCoefficient);
@@ -88,13 +88,13 @@ namespace CarRentWebsite.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePriceCoefficient(int id)
         {
-            var priceCoefficient = await _context.PriceCoeficients.FindAsync(id);
+            var priceCoefficient = await _context.PriceCoefficients .FindAsync(id);
             if (priceCoefficient == null)
             {
                 return NotFound();
             }
 
-            _context.PriceCoeficients.Remove(priceCoefficient);
+            _context.PriceCoefficients .Remove(priceCoefficient);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace CarRentWebsite.Controllers
 
         private bool PriceCoefficientExists(int id)
         {
-            return _context.PriceCoeficients.Any(e => e.Id == id);
+            return _context.PriceCoefficients .Any(e => e.Id == id);
         }
     }
 }

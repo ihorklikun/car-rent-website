@@ -10,6 +10,7 @@ using CarRentWebsite.Models;
 
 namespace CarRentWebsite.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ConditionMarksController : ControllerBase

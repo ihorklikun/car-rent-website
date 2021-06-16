@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using CarRentWebsite.Models.Users;
+using System.Collections.Generic;
 
-namespace CarRentWebsite.Models
+namespace CarRentWebsite.Models.Users
 {
     public class Manager: ApplicationUser
     {

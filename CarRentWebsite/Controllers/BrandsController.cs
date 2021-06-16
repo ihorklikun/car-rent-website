@@ -10,6 +10,7 @@ using CarRentWebsite.Models;
 
 namespace CarRentWebsite.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class BrandsController : ControllerBase
@@ -23,16 +24,16 @@ namespace CarRentWebsite.Controllers
 
         // GET: api/Brands
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Brand>>> GetBrand()
+        public async Task<ActionResult<IEnumerable<Brand>>> GetBrands()
         {
-            return await _context.Brand.ToListAsync();
+            return await _context.Brands.ToListAsync();
         }
 
         // GET: api/Brands/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Brand>> GetBrand(int id)
         {
-            var brand = await _context.Brand.FindAsync(id);
+            var brand = await _context.Brands.FindAsync(id);
 
             if (brand == null)
             {
@@ -78,7 +79,7 @@ namespace CarRentWebsite.Controllers
         [HttpPost]
         public async Task<ActionResult<Brand>> PostBrand(Brand brand)
         {
-            _context.Brand.Add(brand);
+            _context.Brands.Add(brand);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBrand", new { id = brand.Id }, brand);
@@ -88,13 +89,13 @@ namespace CarRentWebsite.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBrand(int id)
         {
-            var brand = await _context.Brand.FindAsync(id);
+            var brand = await _context.Brands.FindAsync(id);
             if (brand == null)
             {
                 return NotFound();
             }
 
-            _context.Brand.Remove(brand);
+            _context.Brands.Remove(brand);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +103,7 @@ namespace CarRentWebsite.Controllers
 
         private bool BrandExists(int id)
         {
-            return _context.Brand.Any(e => e.Id == id);
+            return _context.Brands.Any(e => e.Id == id);
         }
     }
 }
