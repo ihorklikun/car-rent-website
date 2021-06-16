@@ -14,10 +14,10 @@ namespace CarRentWebsite.Models
         public DateTime CreateDate { get; set; }
 
         public int CarId { get; set; }
-        public virtual Car Car { get; set; }
+        public Car Car { get; set; }
 
-        public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        //public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
     }
 }
