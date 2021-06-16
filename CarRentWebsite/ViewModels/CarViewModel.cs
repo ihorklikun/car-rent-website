@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using CarRentWebsite.ViewModels.EngineViewModels;
 
 namespace CarRentWebsite.ViewModels
 {
@@ -34,7 +35,7 @@ namespace CarRentWebsite.ViewModels
         public EngineViewModel Engine { get; set; }
 
         public int TransmissionId { get; set; }
-        public TransmissionViewModel Transmission { get; set; }
+        public TransmissionViewModel.TransmissionViewModel Transmission { get; set; }
 
         public int CarStatusId { get; set; }
         public CarStatusViewModel CarStatus { get; set; }
