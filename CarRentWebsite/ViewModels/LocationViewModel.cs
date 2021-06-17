@@ -1,5 +1,5 @@
-﻿using CarRentWebsite.ViewModels.CityViewModels;
-using CarRentWebsite.ViewModels.CountryViewModels;
+﻿using CarRentWebsite.ViewModels.City;
+using CarRentWebsite.ViewModels.Country;
 using NetTopologySuite.Geometries;
 
 namespace CarRentWebsite.ViewModels

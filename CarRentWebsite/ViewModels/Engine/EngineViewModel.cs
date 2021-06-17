@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarRentWebsite.ViewModels.EngineViewModels
-{
+namespace CarRentWebsite.ViewModels.Engine
+{ 
     public class EngineViewModel
     {
         public int Id { get; set; }

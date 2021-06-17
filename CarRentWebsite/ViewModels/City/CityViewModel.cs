@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarRentWebsite.ViewModels.CountryViewModels
+namespace CarRentWebsite.ViewModels.City
 {
-    public class CountryViewModel
+    public class CityViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
