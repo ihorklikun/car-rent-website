@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.ViewModels.Rent;
 
 namespace CarRentWebsite.Controllers
 {
@@ -15,31 +17,53 @@ namespace CarRentWebsite.Controllers
     public class RentsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public RentsController(ApplicationDbContext context)
+        public RentsController(ApplicationDbContext context,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Rents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rent>>> GetRents()
+        public async Task<ActionResult<IEnumerable<RentViewModel>>> GetRents()
         {
-            return await _context.Rents.ToListAsync();
+            var rents = await _context.Rents
+                .Include(x=>x.RentStatus)
+                .Include(x=>x.Car)
+                .ToListAsync();
+            var rentViewModels = _mapper.Map<IEnumerable<Rent>, IEnumerable<RentViewModel>>(rents);
+
+            return Ok(rentViewModels);
         }
 
         // GET: api/Rents/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rent>> GetRent(int id)
         {
-            var rent = await _context.Rents.FindAsync(id);
+            var rent = await _context.Rents
+                .Include(x => x.RentStatus)
+                .Include(x=>x.AdditionalOptions)
+                .Include(x => x.Car)
+                .Include(x => x.Car.Brand)
+                .Include(x => x.Car.Fuel)
+                .Include(x => x.Car.Engine)
+                .Include(x => x.Car.Transmission)
+                .Include(x => x.Car.CarStatus)
+                .Include(x => x.Car.CarType)
+                .Include(x => x.Car.CarClass)
+                .FirstOrDefaultAsync(x=>x.Id == id);
+
+            var rentViewModel = _mapper.Map<Rent, RentViewModel>(rent);
+
 
             if (rent == null)
             {
                 return NotFound();
             }
 
-            return rent;
+            return Ok(rentViewModel);
         }
 
         // PUT: api/Rents/5
@@ -76,12 +100,35 @@ namespace CarRentWebsite.Controllers
         // POST: api/Rents
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Rent>> PostRent(Rent rent)
+        public async Task<ActionResult<RentViewModel>> PostRent(CreateRentViewModel rent)
         {
-            _context.Rents.Add(rent);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var createRent = _mapper.Map<CreateRentViewModel, Rent>(rent);
 
-            return CreatedAtAction("GetRent", new { id = rent.Id }, rent);
+            List<RentAdditionalOption> list = new List<RentAdditionalOption>();
+            foreach (var additionalOption in createRent.AdditionalOptions)
+            {
+                list.Add(_context.RentAdditionalOptions.FirstOrDefault(x => x.Id == additionalOption.Id));
+            }
+            createRent.AdditionalOptions.Clear();
+            createRent.AdditionalOptions = list;
+
+            //_context.Entry(createRent.AdditionalOptions).State = EntityState.Unchanged;
+
+            _context.Rents.Add(createRent);
+            await _context.SaveChangesAsync();
+            
+            //addedRent = await _context.Rents
+            //    .Include(x=>x.AdditionalOptions)
+            //    .Include(x=>x.Car)
+            //    .FirstOrDefaultAsync(x => x.Id == addedRent.Id);
+
+            var createdRent = _mapper.Map<Rent, RentViewModel>(_context.Entry(createRent).Entity);
+
+            return Ok(createdRent);
         }
 
         // DELETE: api/Rents/5

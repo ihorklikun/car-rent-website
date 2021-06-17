@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels;
+using CarRentWebsite.ViewModels.AdditionalOption;
 using CarRentWebsite.ViewModels.Car;
 using CarRentWebsite.ViewModels.Engine;
 using CarRentWebsite.ViewModels.RentStatus;
+using CarRentWebsite.ViewModels.Rent;
 using CarRentWebsite.ViewModels.Transmission;
 
 namespace CarRentWebsite.Options
@@ -51,8 +53,18 @@ namespace CarRentWebsite.Options
             CreateMap<FuelViewModel, Fuel>().MaxDepth(2);
 
 
-            //CreateMap<Location, LocationViewModel>().MaxDepth(2);
-            //CreateMap<LocationViewModel, Location>().MaxDepth(2);
+            CreateMap<Rent, RentViewModel>().MaxDepth(2);
+            CreateMap<RentViewModel, Rent>().MaxDepth(2);
+
+            CreateMap<Rent, CreateRentViewModel>().MaxDepth(2);
+            CreateMap<CreateRentViewModel, Rent>().MaxDepth(2);
+
+
+            CreateMap<RentAdditionalOption, CreateRentAdditionalOptionViewModel>().MaxDepth(2);
+            CreateMap<CreateRentAdditionalOptionViewModel, RentAdditionalOption>().MaxDepth(2);
+
+            CreateMap<RentAdditionalOption, RentAdditionalOptionViewModel>().MaxDepth(2);
+            CreateMap<RentAdditionalOptionViewModel, RentAdditionalOption>().MaxDepth(2);
         }
     }
 }
