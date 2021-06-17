@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
-import AppUserPage from './Pages/AppUserPage';
-import './custom.css'
+import Home from './Pages/HomePage/Home';
+import About from './Pages/AboutUsPage/About';
+import BookingCarPage from './Pages/BookingCarPage/BookingCarPage';
+import CarInfo from './Pages/CarInfoPage/CarInfo';
+import CarManagerInfo from "./Pages/CarManagerInfo/CarManagerInfo";
+import { Layout } from './components/Layout'
+
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { 
+  BrowserRouter as Router, 
+  Switch, 
+  Route
+} from 'react-router-dom';
+
+
 
 export default class App extends Component {
-  static displayName = App.name;
 
-  render () {
-    return (
-        <Layout>
-        <Route exact path='/' render = {(props) => <AppUserPage {...props} personId = {1}/>} />
-        <Route path='/counter' component={Counter} />
-        <AuthorizeRoute path='/fetch-data' component={FetchData} />
-        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-      </Layout>      
-    );
-  }
+    render() {
+        return (
+            <Layout>
+                <Router>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path='/carInfo' component={CarInfo} />
+                    <Route path='/carManagerInfo' component={CarManagerInfo} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path='/bookingCarPage' component={BookingCarPage} />
+                    <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+                </Router>
+            </Layout>
+        );
+    }
 }
+
+

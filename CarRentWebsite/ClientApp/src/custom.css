@@ -6,7 +6,10 @@ a {
 code {
   color: #E01A76;
 }
+.react-bootstrap-table table {
+  table-layout: auto;
 
+}
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
