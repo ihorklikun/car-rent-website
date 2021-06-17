@@ -1,0 +1,61 @@
+.number{
+    display: table;
+    margin: 1em auto 1em auto;
+    padding: 5px;
+    background-color: gray;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.style3{
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+}
+.templateStyle{
+    border: 2px solid black;
+    border-radius: 20px;
+    /* background-color: #FFFDFD; */
+    margin: 1em 0 1em 0;
+}
+
+.headerText{
+    /* display: table; */
+    margin: 0.5em auto 0.5em auto;
+    padding: 5px;
+    background-color: #9D9D9D;
+    /* border: 1px solid ; */
+    border-radius: 20px;
+    width: 100%;
+}
+
+.dataText{
+    /* display: table; */
+    margin: 0.5em auto 0.5em auto;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+}
+.buttonStyle{
+    /* display: table; */
+    margin: 0.5em auto 0.5em auto;
+    padding: 5px;
+    border-radius: 20px;
+    width: 100%;
+    align-self: flex-end;
+}
+#tasksProgress{
+    margin-left: 1em;
+}
+.style{
+    /* margin: 0 auto; */
+    align-content: center;
+}
+.ModalButtonStyle{
+    margin: 1em;
+}
+#carNameStyle{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0.25em auto 0.5em auto;
+}
