@@ -14,6 +14,6 @@ namespace CarRentWebsite.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<CarServiceReport> CarServiceReports { get; set; }
+        public ICollection<CarServiceReport> CarServiceReports { get; set; }
     }
 }

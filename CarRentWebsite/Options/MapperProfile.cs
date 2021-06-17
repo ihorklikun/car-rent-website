@@ -39,11 +39,7 @@ namespace CarRentWebsite.Options
 
             CreateMap<Car, CarViewModel>().MaxDepth(2);
             CreateMap<CarViewModel, Car>().MaxDepth(2);
-
-            CreateMap<Car, CreateCarViewModel>().MaxDepth(2);
-            CreateMap<CreateCarViewModel, Car>().MaxDepth(2);
-
-
+            
             CreateMap<Fuel, FuelViewModel>().MaxDepth(2);
             CreateMap<FuelViewModel, Fuel>().MaxDepth(2);
 

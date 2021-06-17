@@ -13,6 +13,6 @@ namespace CarRentWebsite.Models
 
         public string Name { get; set; }
 
-        public virtual ICollection<Location> Locations { get; set; }
+        public ICollection<Location> Locations { get; set; }
     }
 }

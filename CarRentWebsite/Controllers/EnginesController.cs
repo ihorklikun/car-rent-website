@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.ViewModels.EngineViewModels;
 
 namespace CarRentWebsite.Controllers
 {
@@ -15,17 +17,21 @@ namespace CarRentWebsite.Controllers
     public class EnginesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public EnginesController(ApplicationDbContext context)
+        public EnginesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Engines
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Engine>>> GetEngines()
+        public async Task<ActionResult<IEnumerable<EngineViewModel>>> GetEngines()
         {
-            return await _context.Engines.ToListAsync();
+            var engines = await _context.Engines.ToListAsync();
+            var enginesViewModel = _mapper.Map<IEnumerable<Engine>, IEnumerable<EngineViewModel>>(engines);
+            return Ok(enginesViewModel);
         }
 
         // GET: api/Engines/5

@@ -21,6 +21,6 @@ namespace CarRentWebsite.Models
 
         public string WinCode { get; set; }
 
-        public virtual ICollection<Car> Cars { get; set; }
+        public ICollection<Car> Cars { get; set; }
     }
 }

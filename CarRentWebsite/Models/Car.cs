@@ -34,33 +34,33 @@ namespace CarRentWebsite.Models
         public int TrunkSize { get; set; }
 
         public int BrandId { get; set; }
-        public virtual Brand Brand { get; set; }
+        public Brand Brand { get; set; }
 
         public int FuelId { get; set; }
-        public virtual Fuel Fuel { get; set; }
+        public Fuel Fuel { get; set; }
 
         public int EngineId { get; set; }
-        public virtual Engine Engine { get; set; }
+        public Engine Engine { get; set; }
 
         public int TransmissionId { get; set; }
-        public virtual Transmission Transmission { get; set; }
+        public Transmission Transmission { get; set; }
 
         public int CarStatusId { get; set; }
-        public virtual CarStatus CarStatus { get; set; }
+        public CarStatus CarStatus { get; set; }
 
         public int CarTypeId { get; set; }
-        public virtual CarType CarType { get; set; }
+        public CarType CarType { get; set; }
 
         public int CarClassId { get; set; }
-        public virtual CarClass CarClass { get; set; }
+        public CarClass CarClass { get; set; }
 
         public int LocationId { get; set; }
-        public virtual Location Location { get; set; }
+        public Location Location { get; set; }
 
 
-        public virtual ICollection<Rent> Rents { get; set; }
-        public virtual ICollection<ConditionReport> ConditionReports { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; }
-        public virtual ICollection<PriceCoefficient> PriceCoefficients { get; set; }
+        public ICollection<Rent> Rents { get; set; }
+        public ICollection<ConditionReport> ConditionReports { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+        public ICollection<PriceCoefficient> PriceCoefficients { get; set; }
     }
 }

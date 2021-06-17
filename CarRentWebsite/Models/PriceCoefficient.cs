@@ -11,7 +11,7 @@ namespace CarRentWebsite.Models
 
         public int CarId { get; set; }
 
-        public virtual Car Car  { get; set; }
+        public Car Car  { get; set; }
 
         public int DaysCount { get; set; }
 

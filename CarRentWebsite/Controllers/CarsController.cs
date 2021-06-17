@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.ViewModels;
 
 namespace CarRentWebsite.Controllers
 {
@@ -16,33 +18,26 @@ namespace CarRentWebsite.Controllers
     public class CarsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CarsController(ApplicationDbContext context)
+        public CarsController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Cars
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Car>>> GetCars()
+        public async Task<ActionResult<IEnumerable<CarViewModel>>> GetCars()
         {
-            return await _context.Cars
-                .Include(car => car.Brand)
-                .Include(car => car.CarClass)
-                .Include(car => car.CarStatus)
-                .Include(car => car.CarType)
-                .Include(car => car.Engine)
-                .Include(car => car.Transmission)
-                .Include(car => car.Fuel)
-                .Include(car => car.PriceCoefficients)
-                .Include(car => car.Rents)
-                .Include(car => car.Reviews)
-                .Include(car => car.ConditionReports)
-                .Include(car => car.Location)
-                    .ThenInclude(l => l.Country)
-                .Include(car => car.Location)
-                    .ThenInclude(l => l.City)
+
+            var cars = await _context.Cars
+                .Include(x=>x.Brand)
                 .ToListAsync();
+
+            var carsViewModel = _mapper.Map<IEnumerable<Car>, IEnumerable<CarViewModel>>(cars);
+
+            return Ok(carsViewModel);
         }
 
         // GET: api/Cars/5
