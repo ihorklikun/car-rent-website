@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CarRentWebsite.Models;
 using Microsoft.AspNetCore.Authorization;
 using CarRentWebsite.Models.Users;
 using Microsoft.AspNetCore.Authentication;

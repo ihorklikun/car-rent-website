@@ -51,6 +51,5 @@ namespace CarRentWebsite.Data
         public DbSet<RentAdditionalOption> RentAdditionalOptions { get; set; }
         public DbSet<RentStatus> RentStatuses { get; set; }
         public DbSet<PriceCoefficient> PriceCoefficients { get; set; }
-        public DbSet<Location> Locations { get; set; }
     }
 }

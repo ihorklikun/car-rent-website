@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels;
+using CarRentWebsite.ViewModels.CarViewModels;
 
 namespace CarRentWebsite.Controllers
 {
@@ -30,9 +31,14 @@ namespace CarRentWebsite.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CarViewModel>>> GetCars()
         {
-
             var cars = await _context.Cars
                 .Include(x=>x.Brand)
+                .Include(x => x.Fuel)
+                .Include(x => x.Engine)
+                .Include(x => x.Transmission)
+                .Include(x => x.CarStatus)
+                .Include(x => x.CarType)
+                .Include(x => x.CarClass)
                 .ToListAsync();
 
             var carsViewModel = _mapper.Map<IEnumerable<Car>, IEnumerable<CarViewModel>>(cars);
@@ -42,32 +48,29 @@ namespace CarRentWebsite.Controllers
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Car>> GetCar(int id)
+        public async Task<ActionResult<CarViewModel>> GetCar(int id)
         {
-            var car = _context.Cars
-                .Include(car => car.Brand)
-                .Include(car => car.CarClass)
-                .Include(car => car.CarStatus)
-                .Include(car => car.CarType)
-                .Include(car => car.Engine)
-                .Include(car => car.Transmission)
-                .Include(car => car.Fuel)
-                .Include(car => car.PriceCoefficients)
-                .Include(car => car.Rents)
-                .Include(car => car.Reviews)
-                .Include(car => car.ConditionReports)
-                .Include(car => car.Location)
-                    .ThenInclude(l => l.Country)
-                .Include(car => car.Location)
-                    .ThenInclude(l => l.City)
-                .Single(car => car.Id == id);
-
+            var car = await _context.Cars
+                .Include(x => x.Brand)
+                .Include(x => x.CarClass)
+                .Include(x => x.CarStatus)
+                .Include(x => x.CarType)
+                .Include(x => x.Engine)
+                .Include(x => x.Transmission)
+                .Include(x => x.Fuel)
+                .Include(x => x.PriceCoefficients)
+                .Include(x => x.Rents)
+                .Include(x => x.Reviews)
+                .Include(x => x.ConditionReports)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (car == null)
             {
                 return NotFound();
             }
 
-            return car;
+            var carViewModel = _mapper.Map<Car, CarViewModel>(car);
+            
+            return carViewModel;
         }
 
         // PUT: api/Cars/5

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace CarRentWebsite.Models.Users
+namespace CarRentWebsite.Models
 {
     public class ApplicationUser : IdentityUser
     {

@@ -338,45 +338,45 @@ namespace CarRentWebsite.Data
             );
             #endregion
 
-            #region Engine
-            modelBuilder.Entity<Location>().HasData(
-                new Location
-                {
-                    Id = 1,
-                    Building = "7a",
-                    Street = "Veresneva Street",
-                    CityId = 4,
-                    CountryId = 1,
-                    Coordinate = new LocationPoint(50.507593, 30.388593)
-                },
-                new Location
-                {
-                    Id = 2,
-                    Building = "17",
-                    Street = "Bandera Street",
-                    CityId = 2,
-                    CountryId = 1,
-                    Coordinate = new LocationPoint(49.834799, 24.008853)
-                },
-                new Location
-                {
-                    Id = 3,
-                    Building = "46",
-                    Street = "Heroes Avenue",
-                    CityId = 1,
-                    CountryId = 1,
-                    Coordinate = new LocationPoint(48.408784, 35.075180)
-                },
-                new Location
-                {
-                    Id = 4,
-                    Building = "34",
-                    Street = "Antonov Street",
-                    CityId = 3,
-                    CountryId = 1,
-                    Coordinate = new LocationPoint(51.834799, 24.008853)
-                }
-            );
+            #region Location
+            //modelBuilder.Entity<Location>().HasData(
+            //    new Location
+            //    {
+            //        Id = 1,
+            //        Building = "7a",
+            //        Street = "Veresneva Street",
+            //        CityId = 4,
+            //        CountryId = 1,
+            //        Coordinate = new LocationPoint(50.507593, 30.388593)
+            //    },
+            //    new Location
+            //    {
+            //        Id = 2,
+            //        Building = "17",
+            //        Street = "Bandera Street",
+            //        CityId = 2,
+            //        CountryId = 1,
+            //        Coordinate = new LocationPoint(49.834799, 24.008853)
+            //    },
+            //    new Location
+            //    {
+            //        Id = 3,
+            //        Building = "46",
+            //        Street = "Heroes Avenue",
+            //        CityId = 1,
+            //        CountryId = 1,
+            //        Coordinate = new LocationPoint(48.408784, 35.075180)
+            //    },
+            //    new Location
+            //    {
+            //        Id = 4,
+            //        Building = "34",
+            //        Street = "Antonov Street",
+            //        CityId = 3,
+            //        CountryId = 1,
+            //        Coordinate = new LocationPoint(51.834799, 24.008853)
+            //    }
+            //);
             #endregion
 
             modelBuilder.Entity<Car>().HasData(
@@ -390,13 +390,13 @@ namespace CarRentWebsite.Data
                     EngineId = 2,
                     Description = "Car description...",
                     SeatsCount = 4,
-                    LocationId = 1,
+                    //LocationId = 1,
                     FuelId = 1,
                     TransmissionId = 1,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 40,
-                    RegisterNunber = "BO7104RT",
-                    ImageURL = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
+                    RegisterNumber = "BO7104RT",
+                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
                 }, 
 
                 new Car
@@ -409,13 +409,13 @@ namespace CarRentWebsite.Data
                     EngineId = 3,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    LocationId = 4,
+                    //LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 2,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 60,
-                    RegisterNunber = "AA7104MT",
-                    ImageURL = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
+                    RegisterNumber = "AA7104MT",
+                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
 
                 },
 
@@ -429,13 +429,13 @@ namespace CarRentWebsite.Data
                     EngineId = 4,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    LocationId = 2,
+                    //LocationId = 2,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 80,
-                    RegisterNunber = "AE5544KE",
-                    ImageURL = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
+                    RegisterNumber = "AE5544KE",
+                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
                 },
 
                 new Car
@@ -448,13 +448,13 @@ namespace CarRentWebsite.Data
                     EngineId = 4,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    LocationId = 4,
+                    //LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 60,
-                    RegisterNunber = "AE5544KE",
-                    ImageURL = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
+                    RegisterNumber = "AE5544KE",
+                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
                 }
             );
             #region PriceCoeficients
