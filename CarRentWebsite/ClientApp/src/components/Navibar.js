@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { 
     Container, 
     Navbar, 
@@ -15,27 +16,35 @@ import {
 export default function NaviBar(){
 
     const [show, setShow] = useState(false);
-
+    const [userId, setUserId] = useState(0);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    let history = useHistory();
     function handleSignIn(){
         // some part of login and password check will be here
-
+        //setUserId(0);
         //check user stus worker or mechanic
         document.getElementById('dd-but-sign-in').style.display = "none"
         document.getElementById('dd-but-sign-out').style.display = "block"
         document.getElementById('dd-but-profile').style.display = "block"
         document.getElementById('dropdown-basic-button').innerHTML = "User_123"
+
+        setShow(false);
     }
 
     function handleSignOut(){
+        setUserId(-1);
         document.getElementById('dd-but-sign-in').style.display = "block"
         document.getElementById('dd-but-sign-out').style.display = "none"
         document.getElementById('dd-but-profile').style.display = "none"
         document.getElementById('dropdown-basic-button').innerHTML = "Account"
     }
-
+    function handleProfileClick(){
+        history.push({
+            pathname: '/user/'+userId,
+            state: {personId: userId}
+        });
+    }
     return (
         <>
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
@@ -59,7 +68,7 @@ export default function NaviBar(){
                         <Nav>
                             <DropdownButton id="dropdown-basic-button" title="Account">
                                 <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item>
-                                <Dropdown.Item variant="primary" id="dd-but-profile" style={{display:'none'}}>Profile</Dropdown.Item>
+                                <Dropdown.Item variant="primary" id="dd-but-profile" style={{display:'none'}} onClick = {handleProfileClick}>Profile</Dropdown.Item>
                                 <Dropdown.Item variant="primary" id="dd-but-sign-out" style={{display:'none'}} onClick={handleSignOut}>Sign out</Dropdown.Item>
                             </DropdownButton>
                         </Nav>
@@ -74,7 +83,7 @@ export default function NaviBar(){
                     <Form>
                         <Form.Group controlId="fromBasicEmail">
                             <Form.Label>Email Address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" value = {userId} onChange ={e => {setUserId(e.target.value)}}/>
                             <Form.Text className="text-muted">We`ll never share your email with anyone else.</Form.Text>
                         </Form.Group>
                         <Form.Group controlId="fromBasicPassword">

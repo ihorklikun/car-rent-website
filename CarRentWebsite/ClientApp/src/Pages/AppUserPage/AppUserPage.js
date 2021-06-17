@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import './AppUserPageStyle.css';
 import {RiUserLine} from 'react-icons/ri';
 import {Container, Row, Col} from 'react-bootstrap';
-import UserCarsInfoTemplate from '../components/UserCarsInfoTemplate'
-import http from '../http-common';
-
+import UserCarsInfoTemplate from '../../components/UserCarsInfoTemplate'
+import http from '../../http-common';
+import { useLocation } from "react-router-dom";
 var personInfo = {
     "Name": "Andrii",
     "Surname": "Harashchak",
@@ -25,7 +25,8 @@ var json = [{
 function AppUserPage(props){
     //var history = null;
     //var active= null;
-    var personId = props.personId;
+    const location = useLocation();
+    var personId = location.state.personId;
     const [userRentInfo, setUserRentInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
 

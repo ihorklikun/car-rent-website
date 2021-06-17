@@ -11,6 +11,7 @@ import { Layout } from './components/Layout'
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AppUserPage  from './Pages/AppUserPage/AppUserPage';
 import { 
   BrowserRouter as Router, 
   Switch, 
@@ -23,16 +24,19 @@ export default class App extends Component {
 
     render() {
         return (
+        <Router>
             <Layout>
-                <Router>
+                
                     <Route exact path="/" component={Home} />
                     <Route exact path='/carInfo' component={CarInfo} />
                     <Route path='/carManagerInfo' component={CarManagerInfo} />
                     <Route exact path="/about" component={About} />
                     <Route exact path='/bookingCarPage' component={BookingCarPage} />
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-                </Router>
+                    <Route exact path = "/user/:id" component = {AppUserPage}></Route>
             </Layout>
+        </Router>
+            
         );
     }
 }
