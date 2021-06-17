@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import Rating from '@material-ui/lab/Rating'
 import Container from 'react-bootstrap/Container'
@@ -26,6 +26,7 @@ import transmition from  "./Resource/Images/Icons/transmition.png"
 import trunkSize from  "./Resource/Images/Icons/TrunkSize.png"
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import {useHistory} from "react-router-dom";
 const carImages=[{car:RavonR2_1},{car:RavonR2_2},{car:RavonR2_3},{car:RavonR2_4}]
 const params=[
     {
@@ -97,13 +98,24 @@ function CarImageCarousel(props){
 function CarFullName(props){
     return <h3 className={"fs-1 pb-0 mb-0 fw-bold"}>{props.brand} {props.model} </h3>
 }
-export default class CarBaseInfo extends React.Component{
-    constructor(props) {
-        super(props);
-        const basecost=20;
-        this.state={cost: basecost.toString(), valute: '$'};
-    }
-    render() {
+function CarBaseInfo (props){
+    // constructor(props) {
+    //     super(props);
+    //     const basecost=20;
+    //     this.state={cost: basecost.toString(), valute: '$'};
+    // }
+    const [data, setData] = useState({
+        basecost: 0,
+        valute: ''
+
+    });
+    var history = useHistory();
+    useEffect(()=>{
+        setData({
+            basecost: 20,
+            valute: "$"
+        });
+    }, [setData]);
         return(
             <Container fluid={true} className={"px-lg-3 px-md-3 px-sm-1 px-xl-5 px-xxl-5 pt-3 mx-0 bg-light "}>
                 <Row >
@@ -123,10 +135,13 @@ export default class CarBaseInfo extends React.Component{
                     <Coll xxl={8} xl={7} lg={6} md={5} sm={12} xs={12} className={"pl-lg-5 pl-md-5 pl-sm-5 pl-xs-5 "} >
                         <Row className={"pt-2"}>
                             <Coll xxl={7}  xl={7} lg={6} md={6} sm={5} xs={6} className={"pr-0"} >
-                                <h3 >from {this.state.cost}{this.state.valute}/day </h3>
+                                <h3 >from {data.cost}{data.valute}/day </h3>
                             </Coll>
                             <Coll className={"pl-0 pr-4"}>
-                                <Button block={true} variant={"warning"} size={"lg"}>Book a car </Button>
+                                <Button block={true} variant={"warning"} size={"lg"} onClick ={()=>{history.push({
+                                    pathname: '/booking',
+                                    state: {carId: 1}
+                                })}}>Book a car </Button>
                             </Coll>
                         </Row>
                         <Row lg={4} xxl={4} xl={4} md={4} sm={4} xs={4} className={"pt-3 g-lg-2 g-xxl-2 g-md-1 g-sm-1 px-0 justify-content-center "}>
@@ -144,5 +159,5 @@ export default class CarBaseInfo extends React.Component{
                 </Row>
             </Container>
         );
-    }
 }
+export default CarBaseInfo;

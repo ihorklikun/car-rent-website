@@ -1,19 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './AppUserPageStyle.css';
 import {RiUserLine} from 'react-icons/ri';
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import UserCarsInfoTemplate from '../../components/UserCarsInfoTemplate'
 import http from '../../http-common';
 import {useHistory, useLocation } from "react-router-dom";
-var personInfo = {
-    "Name": "Andrii",
-    "Surname": "Harashchak",
-    "Email": "abc@abc.abc",
-    "Role": {
-      "RoleId": "0",
-      "Name": "Manager"
-    }
-  };
+import UserContext from '../../UserContext';
+// var personInfo = {
+//     "Name": "Andrii",
+//     "Surname": "Harashchak",
+//     "Email": "abc@abc.abc",
+//     "Role": {
+//       "RoleId": "0",
+//       "Name": "Manager"
+//     }
+//   };
 var json = [{
      "Price": "1800",
      "BeginDate": "2020-01-01",
@@ -30,7 +31,7 @@ function AppUserPage(props){
     var personId = location.state.personId;
     const [userRentInfo, setUserRentInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
-
+    var personInfo = useContext(UserContext);
     useEffect(()=>{
         // http.get("/user/" + personId).then((responce)=>{
             //     const data = responce.data;

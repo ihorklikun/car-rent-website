@@ -2,13 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom'
+//import { createBrowserHistory } from 'history'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+//import history from './history';
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

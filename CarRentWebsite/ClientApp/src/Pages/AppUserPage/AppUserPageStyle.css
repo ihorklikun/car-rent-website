@@ -15,4 +15,5 @@
 #buttonStyle{
     margin: 1em 0em 1em 0em ;
     width: 100%;
+    border-radius: 20px;
 }

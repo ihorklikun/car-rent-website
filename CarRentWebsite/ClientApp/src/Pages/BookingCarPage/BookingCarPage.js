@@ -4,7 +4,7 @@ import './TemplateStyle.css'
 import { Container, Col, Row, Form } from 'react-bootstrap'
 import { AiFillCar } from 'react-icons/ai'
 import Button from 'react-bootstrap/Button'
-
+import {useHistory, useLocation} from "react-router-dom";
 let carList = [
   { id: 1, name: 'Renault megane' },
   { id: 2, name: 'Audi a7' },
@@ -21,7 +21,7 @@ function BookingCarPage() {
     requests: null,
     inProgress: null,
   })
-
+  let history = useHistory();
   const [carId, setCarId] = useState(1)
   const [price, setPrice] = useState(100)
   const [starsCount, setStarsCount] = useState(5)
@@ -192,7 +192,7 @@ function BookingCarPage() {
                 <Button
                   className='BookingButton'
                   variant='warning'
-                  onClick={GoToUserPage()}
+                  onClick={GoToUserPage}
                 >
                   BOOK
                 </Button>
@@ -201,10 +201,17 @@ function BookingCarPage() {
           </Col>
         </Row>
       </Container>
-    )
+    );
+
+function GoToUserPage() {
+  history.push({
+    pathname: '/user/'+'1', // userId must be here
+    state: {personId : 1}// here too
+  })
+}
 }
 
-function GoToUserPage() {}
+
 
 export default BookingCarPage
 

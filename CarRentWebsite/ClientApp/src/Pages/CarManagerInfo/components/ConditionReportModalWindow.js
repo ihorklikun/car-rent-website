@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Modal, Button, Form} from 'react-bootstrap';
-import http from '../http-common';
+import http from '../../../http-common';
 function ConditionReportModalWIndow(props){
     const carId = props.carid;
     const managerId = props.managerid;

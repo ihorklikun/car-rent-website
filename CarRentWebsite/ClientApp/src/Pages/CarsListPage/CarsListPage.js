@@ -1,20 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { useHistory } from "react-router-dom";
 import { Container, Table, Button } from 'react-bootstrap';
-import Service from '../services/CarsListService';
 import "./CarsListPageStyle.css"
-import http from "../http-common";
+import { useHistory } from 'react-router-dom';
+import http from "../../http-common";
 //import ConditionReportModalWIndow from "../components/ConditionReportModalWindow";
 //TODO implement json
 function CarsListPage(){
-
+    let history = useHistory();
     const [cars, setCars] = useState({
         isLoading: true,
         carsData: null
     });
-    const [isShown, setShow] = useState(false);
     var selectedCarId = 1;
-    var history = useHistory();
     useEffect(()=>{
         http.get("url will be here").then((responce)=>{
             var data = responce.data;
@@ -33,6 +30,10 @@ function CarsListPage(){
 
     const onRowClicked = (rowData)=>{
         selectedCarId = rowData.CarId;
+        history.replace({
+            pathname: "/manager/cars/"+selectedCarId,
+            state: {CarId: selectedCarId}
+        });
         //selectedCarId = 1;
         //console.log(selectedCarId);
         //history.push('');
