@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarRentWebsite.ViewModels.CityViewModels
+namespace CarRentWebsite.ViewModels.RentStatus
 {
-    public class CityViewModel
+    public class RentStatusViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
     }
 }

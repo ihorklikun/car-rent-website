@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels;
-using CarRentWebsite.ViewModels.CarViewModels;
+using CarRentWebsite.ViewModels.Car;
 
 namespace CarRentWebsite.Controllers
 {
@@ -31,6 +31,11 @@ namespace CarRentWebsite.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CarViewModel>>> GetCars()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var cars = await _context.Cars
                 .Include(x=>x.Brand)
                 .Include(x => x.Fuel)
@@ -50,6 +55,11 @@ namespace CarRentWebsite.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CarViewModel>> GetCar(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var car = await _context.Cars
                 .Include(x => x.Brand)
                 .Include(x => x.CarClass)
@@ -70,20 +80,23 @@ namespace CarRentWebsite.Controllers
 
             var carViewModel = _mapper.Map<Car, CarViewModel>(car);
             
-            return carViewModel;
+            return Ok(carViewModel);
         }
 
         // PUT: api/Cars/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCar(int id, Car car)
+        public async Task<ActionResult<CarViewModel>> PutCar(int id, UpdateCarViewModel car)
         {
-            if (id != car.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-            _context.Entry(car).State = EntityState.Modified;
+            var updateCar = _mapper.Map<UpdateCarViewModel, Car>(car);
+
+            _context.Entry(updateCar).State = EntityState.Modified;
+            var updatedCarViewModel = _mapper.Map<Car, CarViewModel>(updateCar);
 
             try
             {
@@ -101,18 +114,31 @@ namespace CarRentWebsite.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(updatedCarViewModel);
         }
 
         // POST: api/Cars
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Car>> PostCar(Car car)
+        public async Task<ActionResult<CarViewModel>> PostCar(CreateCarViewModel car)
         {
-            _context.Cars.Add(car);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var createCar = _mapper.Map<CreateCarViewModel, Car>(car);
+            _context.Cars.Add(createCar);
+            _context.Entry(createCar.Brand).State = EntityState.Unchanged;
+            _context.Entry(createCar.CarType).State = EntityState.Unchanged;
+            _context.Entry(createCar.CarStatus).State = EntityState.Unchanged;
+            _context.Entry(createCar.CarClass).State = EntityState.Unchanged;
+            _context.Entry(createCar.Engine).State = EntityState.Unchanged;
+            _context.Entry(createCar.Fuel).State = EntityState.Unchanged;
+            _context.Entry(createCar.Transmission).State = EntityState.Unchanged;
             await _context.SaveChangesAsync();
+            var createdCar = _mapper.Map<Car, CarViewModel>(_context.Entry(createCar).Entity);
 
-            return CreatedAtAction("GetCar", new { id = car.Id }, car);
+            return Ok(createdCar);
         }
 
         // DELETE: api/Cars/5

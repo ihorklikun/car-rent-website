@@ -1,8 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using CarRentWebsite.ViewModels.EngineViewModels;
+using CarRentWebsite.ViewModels.Engine;
+using CarRentWebsite.ViewModels.Transmission;
 
-namespace CarRentWebsite.ViewModels.CarViewModels
+namespace CarRentWebsite.ViewModels.Car
 {
     public class CarViewModel
     {
@@ -21,7 +22,7 @@ namespace CarRentWebsite.ViewModels.CarViewModels
         public BrandViewModel Brand { get; set; }
         public FuelViewModel Fuel { get; set; }
         public EngineViewModel Engine { get; set; }
-        public TransmissionViewModel.TransmissionViewModel Transmission { get; set; }
+        public TransmissionViewModel Transmission { get; set; }
         public CarStatusViewModel CarStatus { get; set; }
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }

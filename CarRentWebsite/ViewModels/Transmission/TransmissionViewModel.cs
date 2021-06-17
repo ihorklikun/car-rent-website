@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarRentWebsite.ViewModels.TransmissionViewModel
+namespace CarRentWebsite.ViewModels.Transmission
 {
     public class TransmissionViewModel
     {
