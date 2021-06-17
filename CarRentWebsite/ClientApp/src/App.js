@@ -34,6 +34,9 @@ export default class App extends Component {
                     <Route exact path='/bookingCarPage' component={BookingCarPage} />
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                     <Route exact path = "/user/:id" component = {AppUserPage}></Route>
+                    <Route exact path = "/manager/cars" component = {null}></Route>
+                    <Route exact path = "/service" component = {null}></Route>
+                    <Route exact path = "/manager/rents" component = {null}></Route>
             </Layout>
         </Router>
             

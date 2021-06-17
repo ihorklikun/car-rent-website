@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import './AppUserPageStyle.css';
 import {RiUserLine} from 'react-icons/ri';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import UserCarsInfoTemplate from '../../components/UserCarsInfoTemplate'
 import http from '../../http-common';
-import { useLocation } from "react-router-dom";
+import {useHistory, useLocation } from "react-router-dom";
 var personInfo = {
     "Name": "Andrii",
     "Surname": "Harashchak",
     "Email": "abc@abc.abc",
     "Role": {
-      "RoleId": "1",
+      "RoleId": "0",
       "Name": "Manager"
     }
   };
@@ -26,6 +26,7 @@ function AppUserPage(props){
     //var history = null;
     //var active= null;
     const location = useLocation();
+    var history = useHistory();
     var personId = location.state.personId;
     const [userRentInfo, setUserRentInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
@@ -59,6 +60,36 @@ function AppUserPage(props){
             return <Container/>;
         }
     }
+
+    function getContent () {
+        if(userInfo?.Role?.RoleId == 1){
+            return (
+            <Container fluid>
+                <h1 className = "header">Rented cars</h1>
+                {getActiveRents()}
+                <h1 className = "header">Rents history</h1>
+                <UserCarsInfoTemplate/>
+            </Container>
+            );
+        }
+        else if(userInfo?.Role?.RoleId == 0){
+            return <Container fluid>
+                    <Button variant="secondary" id ="buttonStyle" onClick = {() =>history.push({
+                        pathname: '/manager/cars'
+                    })}>Cars page</Button>
+                    <Button variant="secondary" id ="buttonStyle" style ={{marginTop : "0"}} onClick = {() =>history.push({
+                        pathname: '/manager/rents'
+                    })}>Rents page</Button>
+            </Container>
+        }
+        else if(userInfo?.Role?.RoleId == 2){
+            return <Container>
+                    <Button variant="secondary" id ="buttonStyle" onClick = {()=>history.push({
+                        pathname: '/service'
+                    })}>Service tasks page</Button>
+            </Container>
+        }
+    }
     if(userInfo!= null)
     return(
         <Container className = 'col-md-8 col-sm-12 mt-5 text-center'>
@@ -77,11 +108,12 @@ function AppUserPage(props){
                 </Col>
             </Row>
             </Container>
-            
-        <h1 className = "header">Rented cars</h1>
+        
+        {getContent()}
+        {/* <h1 className = "header">Rented cars</h1>
             {getActiveRents()}
         <h1 className = "header">Rents history</h1>
-            <UserCarsInfoTemplate/>
+            <UserCarsInfoTemplate/> */}
         </Container>
         
     );
