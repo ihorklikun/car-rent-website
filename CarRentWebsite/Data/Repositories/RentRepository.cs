@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CarRentWebsite.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CarRentWebsite.Data.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class RentRepository : IRepository<Rent>
     {
         internal ApplicationDbContext context;
-        internal DbSet<TEntity> dbSet;
+        internal DbSet<Rent> dbSet;
 
-        public Repository(ApplicationDbContext context)
+        public RentRepository(ApplicationDbContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            this.dbSet = context.Set<Rent>();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAll(params Expression<Func<TEntity, object>>[] includes)
+        public async Task<IEnumerable<Rent>> GetAll(params Expression<Func<Rent, object>>[] includes)
         {
-            IQueryable<TEntity> query = dbSet;
+            IQueryable<Rent> query = dbSet;
 
             if (includes != null)
             {
@@ -33,34 +34,41 @@ namespace CarRentWebsite.Data.Repositories
         }
 
 
-        public virtual async Task<TEntity> GetById(object id, params Expression<Func<TEntity, object>>[] includes)
+        public async Task<Rent> GetById(object id, params Expression<Func<Rent, object>>[] includes)
         {
-           
+            IQueryable<Rent> query = dbSet;
             var entity = dbSet.Find(id);
-            IQueryable<TEntity> query = (IQueryable<TEntity>)entity;
             if (includes != null)
             {
                 query = includes.Aggregate(query,
                           (current, include) => current.Include(include));
             }
 
-            return await query.SingleOrDefaultAsync();
+            return await query.FirstOrDefaultAsync(e => e.Id == (int)id);
         }
 
-        public virtual async Task<TEntity> Add(TEntity entity)
+        public async Task<Rent> Add(Rent entity)
         {
+            List<RentAdditionalOption> list = new List<RentAdditionalOption>();
+            foreach (var additionalOption in entity.AdditionalOptions)
+            {
+                list.Add(context.RentAdditionalOptions.FirstOrDefault(x => x.Id == additionalOption.Id));
+            }
+            entity.AdditionalOptions.Clear();
+            entity.AdditionalOptions = list;
+
             await dbSet.AddAsync(entity);
             await context.SaveChangesAsync();
             return entity;
         }
 
-        public virtual async Task Delete(object id)
+        public async Task Delete(object id)
         {
-            TEntity entityToDelete = await dbSet.FindAsync(id);
+            Rent entityToDelete = await dbSet.FindAsync(id);
             Delete(entityToDelete);
         }
 
-        public virtual void Delete(TEntity entityToDelete)
+        public void Delete(Rent entityToDelete)
         {
             if (context.Entry(entityToDelete).State == EntityState.Detached)
             {
@@ -69,7 +77,7 @@ namespace CarRentWebsite.Data.Repositories
             dbSet.Remove(entityToDelete);
         }
 
-        public virtual async Task<TEntity> Update(TEntity entityToUpdate)
+        public async Task<Rent> Update(Rent entityToUpdate)
         {
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
@@ -77,14 +85,9 @@ namespace CarRentWebsite.Data.Repositories
             return entityToUpdate;
         }
 
-        public Task<IEnumerable<TEntity>> GetAll()
+        public bool Exist(object id)
         {
-            throw new NotImplementedException();
-        }
-
-        public virtual bool Exist(object id)
-        {
-            return dbSet.Find(id) != null;
+            return dbSet.Any(entity => entity.Id == (int)id);
         }
     }
 }

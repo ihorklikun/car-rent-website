@@ -8,12 +8,17 @@ namespace CarRentWebsite.Data.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "");
-        Task<TEntity> GetByID(object id);
-        void Insert(TEntity entity);
-        void Update(TEntity entityToUpdate);
-        void Delete(object id);
-        void Delete(TEntity entityToDelete);
+        Task<IEnumerable<TEntity>> GetAll(params Expression<Func<TEntity, object>>[] includes);
+
+        Task<TEntity> GetById(object id, params Expression<Func<TEntity, object>>[] includes);
+
+        Task<TEntity> Add(TEntity fuel);
+
+        Task<TEntity> Update(TEntity fuel);
+
+        Task Delete(object id);
+
+        bool Exist(object id);
 
     }
 }

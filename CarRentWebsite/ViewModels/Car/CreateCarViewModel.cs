@@ -19,12 +19,12 @@ namespace CarRentWebsite.ViewModels.Car
         public int SeatsCount { get; set; }
         public int TrunkSize { get; set; }
 
-        public BrandViewModel Brand { get; set; }
-        public FuelViewModel Fuel { get; set; }
-        public EngineViewModel Engine { get; set; }
-        public TransmissionViewModel Transmission { get; set; }
-        public CarStatusViewModel CarStatus { get; set; }
-        public CarTypeViewModel CarType { get; set; }
-        public CarClassViewModel CarClass { get; set; }
+        public int BrandId { get; set; }
+        public int FuelId { get; set; }
+        public int EngineId { get; set; }
+        public int TransmissionId { get; set; }
+        public int CarStatusId { get; set; }
+        public int CarTypeId { get; set; }
+        public int CarClassId { get; set; }
     }
 }

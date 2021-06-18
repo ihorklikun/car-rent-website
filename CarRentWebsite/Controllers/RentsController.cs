@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels.Rent;
+using CarRentWebsite.Data.Services;
 
 namespace CarRentWebsite.Controllers
 {
@@ -16,23 +17,20 @@ namespace CarRentWebsite.Controllers
     [ApiController]
     public class RentsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IDataService<Rent> _service;
 
-        public RentsController(ApplicationDbContext context,IMapper mapper)
+        public RentsController(IMapper mapper, IDataService<Rent> service)
         {
-            _context = context;
             _mapper = mapper;
+            _service = service;
         }
 
         // GET: api/Rents
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RentViewModel>>> GetRents()
         {
-            var rents = await _context.Rents
-                .Include(x=>x.RentStatus)
-                .Include(x=>x.Car)
-                .ToListAsync();
+            var rents = await _service.Get();
             var rentViewModels = _mapper.Map<IEnumerable<Rent>, IEnumerable<RentViewModel>>(rents);
 
             return Ok(rentViewModels);
@@ -42,19 +40,7 @@ namespace CarRentWebsite.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Rent>> GetRent(int id)
         {
-            var rent = await _context.Rents
-                .Include(x => x.RentStatus)
-                .Include(x=>x.AdditionalOptions)
-                .Include(x => x.Car)
-                .Include(x => x.Car.Brand)
-                .Include(x => x.Car.Fuel)
-                .Include(x => x.Car.Engine)
-                .Include(x => x.Car.Transmission)
-                .Include(x => x.Car.CarStatus)
-                .Include(x => x.Car.CarType)
-                .Include(x => x.Car.CarClass)
-                .FirstOrDefaultAsync(x=>x.Id == id);
-
+            var rent = await _service.Get(id);
             var rentViewModel = _mapper.Map<Rent, RentViewModel>(rent);
 
 
@@ -76,11 +62,10 @@ namespace CarRentWebsite.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(rent).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.Update(rent);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -107,49 +92,27 @@ namespace CarRentWebsite.Controllers
                 return BadRequest(ModelState);
             }
             var createRent = _mapper.Map<CreateRentViewModel, Rent>(rent);
+            var createdRent = await _service.Get((await _service.Create(createRent)).Id);
+            var createdRentViewModel = _mapper.Map<Rent, RentViewModel>(createdRent);
 
-            List<RentAdditionalOption> list = new List<RentAdditionalOption>();
-            foreach (var additionalOption in createRent.AdditionalOptions)
-            {
-                list.Add(_context.RentAdditionalOptions.FirstOrDefault(x => x.Id == additionalOption.Id));
-            }
-            createRent.AdditionalOptions.Clear();
-            createRent.AdditionalOptions = list;
-
-            //_context.Entry(createRent.AdditionalOptions).State = EntityState.Unchanged;
-
-            _context.Rents.Add(createRent);
-            await _context.SaveChangesAsync();
-            
-            //addedRent = await _context.Rents
-            //    .Include(x=>x.AdditionalOptions)
-            //    .Include(x=>x.Car)
-            //    .FirstOrDefaultAsync(x => x.Id == addedRent.Id);
-
-            var createdRent = _mapper.Map<Rent, RentViewModel>(_context.Entry(createRent).Entity);
-
-            return Ok(createdRent);
+            return Ok(createdRentViewModel);
         }
 
         // DELETE: api/Rents/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRent(int id)
         {
-            var rent = await _context.Rents.FindAsync(id);
-            if (rent == null)
+            if (_service.Exist(id))
             {
                 return NotFound();
             }
-
-            _context.Rents.Remove(rent);
-            await _context.SaveChangesAsync();
-
+            await _service.Delete(id);
             return NoContent();
         }
 
         private bool RentExists(int id)
         {
-            return _context.Rents.Any(e => e.Id == id);
+            return _service.Exist(id);
         }
     }
 }

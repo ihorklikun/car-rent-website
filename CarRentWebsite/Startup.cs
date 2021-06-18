@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using CarRentWebsite.Data;
 using CarRentWebsite.Data.Repositories;
+using CarRentWebsite.Data.Services;
 using CarRentWebsite.Models;
 using CarRentWebsite.Models.Users;
 using CarRentWebsite.Options;
@@ -58,7 +59,11 @@ namespace CarRentWebsite
                     options.SerializerSettings.Converters.Add(new NetTopologySuite.IO.Converters.GeometryConverter());
                 });
             services.AddRazorPages();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IRepository<Car>,CarRepository>();
+            services.AddScoped<IRepository<Rent>, RentRepository>();
+            services.AddScoped(typeof(IDataService<Car>), typeof(CarDataService));
+            services.AddScoped(typeof(IDataService<Rent>), typeof(RentDataService));
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
