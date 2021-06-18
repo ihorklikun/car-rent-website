@@ -12,8 +12,6 @@ import CarsListPage from './Pages/CarsListPage/CarsListPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppUserPage  from './Pages/AppUserPage/AppUserPage';
-import { useContext } from 'react';
-import UserContext from './UserContext';
 import { 
   BrowserRouter as Router, 
   Switch, 
@@ -21,13 +19,11 @@ import {
 } from 'react-router-dom';
 
 function App () {
-  const [person, setPerson] = useState(null);
-  const value = { person, setPerson }; 
+  //const [person, setPerson] = useState(null);
+  //const value = { person, setPerson }; 
         return (
-        <UserContext.Provider value = {value}>
             <Router>
             <Layout>
-                
                     <Route exact path="/" component={Home} />
                     <Route exact path="/index" component={Home} />
                     <Route exact path="/index.html" component={Home} />
@@ -42,10 +38,7 @@ function App () {
                     <Route exact path = "/service" component = {null}></Route>
                     <Route exact path = "/manager/rents" component = {null}></Route>
             </Layout>
-        </Router>
-        </UserContext.Provider>
-        
-            
+        </Router>    
         );
     }
 export default App;
