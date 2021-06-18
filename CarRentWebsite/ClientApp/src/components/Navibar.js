@@ -11,14 +11,24 @@ import {
     DropdownButton
 } from 'react-bootstrap';
 
-var personInfo = {
+var managerInfo = {
     "id": "1",
     "Name": "Andrii",
     "Surname": "Harashchak",
-    "Email": "abc@abc.abc",
+    "Email": "manager@abc.abc",
     "Role": {
       "RoleId": "0",
       "Name": "Manager"
+    }
+  };
+  var customerInfo = {
+    "id": "1",
+    "Name": "Andrii",
+    "Surname": "Harashchak",
+    "Email": "customer@abc.abc",
+    "Role": {
+      "RoleId": "1",
+      "Name": "Usual user"
     }
   };
 //import logo from '';
@@ -41,9 +51,14 @@ export default function NaviBar(){
         // document.getElementById('dropdown-basic-button').innerHTML = "User_123"
         //setPerson(personInfo);
 
-
-        localStorage.setItem('person', JSON.stringify(personInfo));
-        setPerson(personInfo);
+        if(userId == 0){
+            localStorage.setItem('person', JSON.stringify(managerInfo));
+            setPerson(managerInfo);
+        }            
+        else {
+            localStorage.setItem('person', JSON.stringify(customerInfo));
+            setPerson(customerInfo);
+        }         
         setShow(false);
     }
 
