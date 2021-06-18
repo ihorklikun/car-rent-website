@@ -19,15 +19,15 @@ namespace CarRentWebsite.Models
 
         public int Id { get; set; }
 
-        public string RegisterNunber { get; set; }
+        public string RegisterNumber { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime RegisterDate { get; set; }
 
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
-        public string ImageURL { get; set; }
+        public string ImageUrl { get; set; }
 
         public int SeatsCount { get; set; }
 
@@ -54,8 +54,8 @@ namespace CarRentWebsite.Models
         public int CarClassId { get; set; }
         public CarClass CarClass { get; set; }
 
-        public int LocationId { get; set; }
-        public Location Location { get; set; }
+        //public int LocationId { get; set; }
+        //public Location Location { get; set; }
 
 
         public ICollection<Rent> Rents { get; set; }
