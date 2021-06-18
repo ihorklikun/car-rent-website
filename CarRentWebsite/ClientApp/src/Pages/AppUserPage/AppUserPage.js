@@ -31,7 +31,8 @@ function AppUserPage(props){
     var personId = location.state.personId;
     const [userRentInfo, setUserRentInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
-    var personInfo = useContext(UserContext);
+    var {person, setPerson} = useContext(UserContext);
+    var personInfo = person;
     useEffect(()=>{
         // http.get("/user/" + personId).then((responce)=>{
             //     const data = responce.data;

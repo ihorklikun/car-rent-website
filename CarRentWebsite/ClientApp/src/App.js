@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -19,23 +19,18 @@ import {
   Switch, 
   Route
 } from 'react-router-dom';
-var personInfo = {
-    "Name": "Andrii",
-    "Surname": "Harashchak",
-    "Email": "abc@abc.abc",
-    "Role": {
-      "RoleId": "0",
-      "Name": "Manager"
-    }
-  };
 
 function App () {
+  const [person, setPerson] = useState(null);
+  const value = { person, setPerson }; 
         return (
-        <UserContext.Provider value = {personInfo}>
+        <UserContext.Provider value = {value}>
             <Router>
             <Layout>
                 
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/index" component={Home} />
+                    <Route exact path="/index.html" component={Home} />
                     <Route exact path='/carInfo/:id' component={CarInfo} />
                     <Route path='/carManagerInfo' component={CarManagerInfo} />
                     <Route exact path="/about" component={About} />

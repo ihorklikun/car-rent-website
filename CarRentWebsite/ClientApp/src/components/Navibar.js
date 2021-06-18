@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { useHistory } from "react-router-dom";
+import UserContext from '../UserContext';
 import { 
     Container, 
     Navbar, 
@@ -11,10 +12,19 @@ import {
     DropdownButton
 } from 'react-bootstrap';
 
+var personInfo = {
+    "Name": "Andrii",
+    "Surname": "Harashchak",
+    "Email": "abc@abc.abc",
+    "Role": {
+      "RoleId": "0",
+      "Name": "Manager"
+    }
+  };
 //import logo from '';
 
 export default function NaviBar(){
-
+    const {person, setPerson} = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [userId, setUserId] = useState(0);
     const handleClose = () => setShow(false);
@@ -28,7 +38,7 @@ export default function NaviBar(){
         document.getElementById('dd-but-sign-out').style.display = "block"
         document.getElementById('dd-but-profile').style.display = "block"
         document.getElementById('dropdown-basic-button').innerHTML = "User_123"
-
+        setPerson(personInfo);
         setShow(false);
     }
 
@@ -38,6 +48,7 @@ export default function NaviBar(){
         document.getElementById('dd-but-sign-out').style.display = "none"
         document.getElementById('dd-but-profile').style.display = "none"
         document.getElementById('dropdown-basic-button').innerHTML = "Account"
+        setPerson(null);
     }
     function handleProfileClick(){
         history.push({

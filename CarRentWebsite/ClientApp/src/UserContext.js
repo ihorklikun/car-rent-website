@@ -9,6 +9,6 @@ var personInfo = {
       "Name": "Manager"
     }
   };
-const UserContext = createContext(personInfo);
+const UserContext = createContext({person: null, setPerson: ()=>{}});
 
 export default UserContext;
