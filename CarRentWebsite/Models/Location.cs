@@ -6,7 +6,7 @@ namespace CarRentWebsite.Models
     {
         public int Id { get; set; }
         
-        public Point Coordinate { get; set; }
+        public LocationPoint Coordinate { get; set; }
         
         public int CountryId { get; set; }
 
