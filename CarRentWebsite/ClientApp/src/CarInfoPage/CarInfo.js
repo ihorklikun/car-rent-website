@@ -19,7 +19,7 @@ export default class CarInfo extends Component{
                 <CarBaseInfo carId={this.state.carId}/>
                 <AdditionalOptions/>
                 <Comments carId={this.state.carId}/>
-                <SimilarCars/>
+                <SimilarCars carId={this.state.carId}/>
             </Container>)
     }
 }

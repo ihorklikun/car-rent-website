@@ -29,7 +29,120 @@ const brands=[
         name:"Volvo"
     }
 ]
+const fuel=[
+    {
+        id:0,
+        name:"gasoline"
+    },
+    {
+        id:1,
+        name:"electricity"
+    },
+    {
+        id:2,
+        name:"diesel"
+    }
+]
+const status=[
+    {
+        id:0,
+        name:"Idle"
+    },
+    {
+        id:1,
+        name:"Rent"
+    },
+    {
+        id:2,
+        name:"Repair"
+    }
+]
+const types=[
+    {
+        id:0,
+        name:"Econom"
+    },
+    {
+        id:1,
+        name:"Business"
+    },
+    {
+        id:2,
+        name:"Luxury"
+    }
+]
 
+const engines=[
+    {
+        id: 1,
+        name: "Engine1",
+        fuelCapacity: 6,
+        power: 120,
+        torque: 45,
+        winCode: "ASD45ufa95"
+    },
+    {
+        id: 2,
+        name: "Engine2",
+        fuelCapacity: 6,
+        power: 120,
+        torque: 45,
+        winCode: "ASttrra95"
+    },
+    {
+        id: 3,
+        name: "Engine3",
+        fuelCapacity: 6,
+        power: 120,
+        torque: 45,
+        winCode: "1123456"
+    },
+    {
+        id: 4,
+        name: "Engine4",
+        fuelCapacity: 6,
+        power: 120,
+        torque: 45,
+        winCode: "9034hh5"
+    }
+]
+const brands=[
+    {
+        id:0,
+        name:"Microcar"
+    },
+    {
+        id:1,
+        name:"Subcompact car"
+    },{
+        id:2,
+        name:"Compact car"
+    },
+    {
+        id:3,
+        name:"Mid-size"
+    },{
+        id:4,
+        name:"Entry-level car"
+    }
+]
+const transmissions=[
+    {
+        id:0,
+        name:"AT"
+    },
+    {
+        id:1,
+        name:"MT"
+    },{
+        id:2,
+        name:"AM"
+    },
+    {
+        id:3,
+        name:"CVT"
+    }
+]
 export default class AddNewCar extends Component{
     constructor(props) {
         super(props);
@@ -43,7 +156,14 @@ export default class AddNewCar extends Component{
                 transmissionModalShow:false,
                 classModalShow:false,
                 imagesModelShow:false,
-                brands:brands
+                brands:brands,
+                fuels:fuel,
+                status:status,
+                types:types,
+                engines:engines,
+                transmissions:transmissions,
+                classes:classes,
+                sBrand:NaN,sFuel:NaN,sStatus:NaN,sType:NaN,sEngine:NaN,sTransmission:NaN,sClass:NaN
             };
         this.handleShowFuel=this.handleShowFuel.bind(this);
         this.handleHideFuel=this.handleHideFuel.bind(this);
@@ -106,6 +226,19 @@ export default class AddNewCar extends Component{
     handleHideClass(){
         this.setState(state=>({classModalShow:false}));
     }
+    componentDidMount() {
+
+    }
+    handleOnChange(event){
+
+
+
+    }
+    handleOnSubmit(){
+
+
+
+}
     render() {
         return(
             <Container>
@@ -183,8 +316,8 @@ export default class AddNewCar extends Component{
                                                Fuel Type
                                            </Form.Label>
                                             <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.brands.map((brand,index)=>
-                                                <option value={brand.id}>{brand.name}</option>
+                                            {this.state.fuels.map((fuel,index)=>
+                                                <option value={fuel.id}>{fuel.name}</option>
                                             )}
                                                 <option onClick={this.handleShowFuel}>add new...</option>
                                             </FormControl>
@@ -197,8 +330,8 @@ export default class AddNewCar extends Component{
                                             Engine
                                         </Form.Label>
                                         <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.brands.map((brand,index)=>
-                                                <option value={brand.id}>{brand.name}</option>
+                                            {this.state.engines.map((engine,index)=>
+                                                <option value={engine.id}>{engine.name}</option>
                                             )}
                                             <option onClick={this.handleShowEngine}>add new...</option>
                                         </FormControl>
@@ -211,8 +344,8 @@ export default class AddNewCar extends Component{
                                             Transmission
                                         </Form.Label>
                                         <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.brands.map((brand,index)=>
-                                                <option value={brand.id}>{brand.name}</option>
+                                            {this.state.transmissions.map((transmission,index)=>
+                                                <option value={transmission.id}>{transmission.name}</option>
                                             )}
                                             <option onClick={this.handleShowTransmission}>add new...</option>
                                         </FormControl>
@@ -227,8 +360,8 @@ export default class AddNewCar extends Component{
                                             Car Status
                                         </Form.Label>
                                         <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.brands.map((brand,index)=>
-                                                <option value={brand.id}>{brand.name}</option>
+                                            {this.state.status.map((brand,index)=>
+                                                <option value={status.id}>{status.name}</option>
                                             )}
                                             <option onClick={this.handleShowStatus}>add new...</option>
                                         </FormControl>
@@ -241,8 +374,8 @@ export default class AddNewCar extends Component{
                                             Car Type
                                         </Form.Label>
                                         <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.brands.map((brand,index)=>
-                                                <option value={brand.id}>{brand.name}</option>
+                                            {this.state.type.map((type,index)=>
+                                                <option value={type.id}>{type.name}</option>
                                             )}
                                             <option onClick={this.handleShowType}>add new...</option>
                                         </FormControl>
@@ -255,8 +388,8 @@ export default class AddNewCar extends Component{
                                             Car Class
                                         </Form.Label>
                                         <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.brands.map((brand,index)=>
-                                                <option value={brand.id}>{brand.name}</option>
+                                            {this.state.classes.map((clas,index)=>
+                                                <option value={clas.id}>{clas.name}</option>
                                             )}
                                             <option onClick={this.handleShowClass}>add new...</option>
                                         </FormControl>

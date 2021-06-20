@@ -7,13 +7,32 @@ import Tab from "react-bootstrap/Tab";
 import RentTable from "./components/RentTable";
 import ReportsTable from "./components/ReportsTable";
 import ServiceReportsTable from "./components/ServiceReportsTable";
+import http from "../http-common";
 export default class CarManagerInfo extends Component{
     constructor(props) {
         super(props);
         if (this.props.match.params.id !== null) {
-            this.state = {CarId:this.props.match.params.id ,brand: "Ravon", model: "R2 R330", winCode:"Win356917M"};
+            this.state = {carId:this.props.match.params.id ,brand: "Ravon", model: "R2 R330", winCode:"Win356917M",car:null};
         } else {
-            this.state = {CardId:0}
+            this.state = {carId:0,brand: "Ravon", model: "R2 R330", winCode:"Win356917M",car:null}
+        }
+    }
+    componentDidMount() {
+        console.log(this.state);
+        if(this.state.carId) {
+            http.get("./Cars/" + this.state.carId).then((responce)=> {
+                const data = responce.data;
+                this.setState(state=>({
+                    car: data,
+                    brand: data.brand.name,
+                    model: data.registerNumber,
+                    winCode: data.engine.winCode
+                }))
+                console.log(this.state);
+            }).catch(error=>{
+                this.setState(state=>({car:null}))
+                console.log(error);
+            });
         }
     }
     render(){
