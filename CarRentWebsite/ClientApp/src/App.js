@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -12,31 +12,24 @@ import CarsListPage from './Pages/CarsListPage/CarsListPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppUserPage  from './Pages/AppUserPage/AppUserPage';
-import { useContext } from 'react';
-import UserContext from './UserContext';
+import Rules from './Pages/RulesPage/Rules';
 import { 
   BrowserRouter as Router, 
   Switch, 
   Route
 } from 'react-router-dom';
-var personInfo = {
-    "Name": "Andrii",
-    "Surname": "Harashchak",
-    "Email": "abc@abc.abc",
-    "Role": {
-      "RoleId": "0",
-      "Name": "Manager"
-    }
-  };
 
 function App () {
+  //const [person, setPerson] = useState(null);
+  //const value = { person, setPerson }; 
         return (
-        <UserContext.Provider value = {personInfo}>
             <Router>
             <Layout>
-                
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/index" component={Home} />
+                    <Route exact path="/index.html" component={Home} />
                     <Route exact path='/carInfo/:id' component={CarInfo} />
+                    <Route exact path="/rules" component={Rules} />
                     <Route path='/carManagerInfo' component={CarManagerInfo} />
                     <Route exact path="/about" component={About} />
                     <Route exact path='/booking' component={BookingCarPage} />
@@ -47,10 +40,7 @@ function App () {
                     <Route exact path = "/service" component = {null}></Route>
                     <Route exact path = "/manager/rents" component = {null}></Route>
             </Layout>
-        </Router>
-        </UserContext.Provider>
-        
-            
+        </Router>    
         );
     }
 export default App;

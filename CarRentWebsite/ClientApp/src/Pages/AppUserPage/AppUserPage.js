@@ -5,7 +5,6 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import UserCarsInfoTemplate from '../../components/UserCarsInfoTemplate'
 import http from '../../http-common';
 import {useHistory, useLocation } from "react-router-dom";
-import UserContext from '../../UserContext';
 // var personInfo = {
 //     "Name": "Andrii",
 //     "Surname": "Harashchak",
@@ -31,7 +30,7 @@ function AppUserPage(props){
     var personId = location.state.personId;
     const [userRentInfo, setUserRentInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
-    var personInfo = useContext(UserContext);
+    
     useEffect(()=>{
         // http.get("/user/" + personId).then((responce)=>{
             //     const data = responce.data;
@@ -39,7 +38,10 @@ function AppUserPage(props){
             // }).catch(e=>{
             //     console.log(e);
             // });
-            setUserInfo(personInfo);
+            var personInfo = localStorage.getItem("person");
+            var data =  JSON.parse(personInfo);
+            console.log(personInfo);
+            setUserInfo(data);
     }, [setUserInfo]);
 
     useEffect(()=>{

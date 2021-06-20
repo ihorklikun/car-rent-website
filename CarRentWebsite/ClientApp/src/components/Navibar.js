@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import { 
     Container, 
@@ -11,10 +11,31 @@ import {
     DropdownButton
 } from 'react-bootstrap';
 
+var managerInfo = {
+    "id": "1",
+    "Name": "Andrii",
+    "Surname": "Harashchak",
+    "Email": "manager@abc.abc",
+    "Role": {
+      "RoleId": "0",
+      "Name": "Manager"
+    }
+  };
+  var customerInfo = {
+    "id": "1",
+    "Name": "Andrii",
+    "Surname": "Harashchak",
+    "Email": "customer@abc.abc",
+    "Role": {
+      "RoleId": "1",
+      "Name": "Usual user"
+    }
+  };
 //import logo from '';
 
 export default function NaviBar(){
-
+    //const person = localStorage.getItem('person');
+    const [person, setPerson] = useState(null);
     const [show, setShow] = useState(false);
     const [userId, setUserId] = useState(0);
     const handleClose = () => setShow(false);
@@ -22,28 +43,67 @@ export default function NaviBar(){
     let history = useHistory();
     function handleSignIn(){
         // some part of login and password check will be here
-        //setUserId(0);
-        //check user stus worker or mechanic
-        document.getElementById('dd-but-sign-in').style.display = "none"
-        document.getElementById('dd-but-sign-out').style.display = "block"
-        document.getElementById('dd-but-profile').style.display = "block"
-        document.getElementById('dropdown-basic-button').innerHTML = "User_123"
 
+        //check user stus worker or mechanic
+        // document.getElementById('dd-but-sign-in').style.display = "none"
+        // document.getElementById('dd-but-sign-out').style.display = "block"
+        // document.getElementById('dd-but-profile').style.display = "block"
+        // document.getElementById('dropdown-basic-button').innerHTML = "User_123"
+        //setPerson(personInfo);
+
+        if(userId == 0){
+            localStorage.setItem('person', JSON.stringify(managerInfo));
+            setPerson(managerInfo);
+        }            
+        else {
+            localStorage.setItem('person', JSON.stringify(customerInfo));
+            setPerson(customerInfo);
+        }         
         setShow(false);
     }
 
     function handleSignOut(){
-        setUserId(-1);
-        document.getElementById('dd-but-sign-in').style.display = "block"
-        document.getElementById('dd-but-sign-out').style.display = "none"
-        document.getElementById('dd-but-profile').style.display = "none"
-        document.getElementById('dropdown-basic-button').innerHTML = "Account"
+        //setUserId(-1);
+        // document.getElementById('dd-but-sign-in').style.display = "block"
+        // document.getElementById('dd-but-sign-out').style.display = "none"
+        // document.getElementById('dd-but-profile').style.display = "none"
+        // document.getElementById('dropdown-basic-button').innerHTML = "Account"
+        //setPerson(null);
+        localStorage.clear();
+        setPerson(null);
     }
     function handleProfileClick(){
         history.push({
-            pathname: '/user/'+userId,
-            state: {personId: userId}
+            pathname: '/user/'+person.id,
+            state: {personId: person.id}
         });
+    }
+    useEffect(()=>{
+        var personData = localStorage.getItem("person");
+        var data = JSON.parse(personData);
+        if( personData !== null){
+            setPerson(data);
+        }
+    }, []);
+    const getDropdown = ()=>{
+        if(person !== null){
+            return( 
+            <Nav>
+                <DropdownButton id="dropdown-basic-button" title={person.Email}>
+                    {/* <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item> */}
+                    <Dropdown.Item variant="primary" id="dd-but-profile" onClick = {handleProfileClick}>Profile</Dropdown.Item>
+                    <Dropdown.Item variant="primary" id="dd-but-sign-out" onClick={handleSignOut}>Sign out</Dropdown.Item>
+                </DropdownButton>
+            </Nav>)
+        }else {
+            return (
+                <Nav>
+                <DropdownButton id="dropdown-basic-button" title="Account">
+                    <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item>
+                </DropdownButton>
+            </Nav>
+            )
+        }
     }
     return (
         <>
@@ -65,13 +125,7 @@ export default function NaviBar(){
                             <Nav.Link href="/about"> About us </Nav.Link>
                             <Nav.Link href="/rules"> Rules </Nav.Link>
                         </Nav>
-                        <Nav>
-                            <DropdownButton id="dropdown-basic-button" title="Account">
-                                <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item>
-                                <Dropdown.Item variant="primary" id="dd-but-profile" style={{display:'none'}} onClick = {handleProfileClick}>Profile</Dropdown.Item>
-                                <Dropdown.Item variant="primary" id="dd-but-sign-out" style={{display:'none'}} onClick={handleSignOut}>Sign out</Dropdown.Item>
-                            </DropdownButton>
-                        </Nav>
+                        {getDropdown()}
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
