@@ -1,6 +1,10 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
-
+import { Container, Row, Col } from 'react-bootstrap'
+import logoFacebook from "./FacebookLogo.png";
+import logoTelegram from "./TelegramLogo.png";
+import logoYoutube from "./YoutubeLogo.png";
+import logoInsta from "./InstagramLogo.png";
+import logo from "./Logo.png";
 const Footer = () =>(
     <Container fluid style={{backgroundColor: '#212529', color:'#fff'}}>
         <Row>
