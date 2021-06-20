@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarRentWebsite.Models.Users;
 
 namespace CarRentWebsite.Data
 {
@@ -17,25 +18,38 @@ namespace CarRentWebsite.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
-        public DbSet<CarRentWebsite.Models.Engine> Engines { get; set; }
-        public DbSet<CarRentWebsite.Models.Car> Cars { get; set; }
-        public DbSet<CarRentWebsite.Models.CarClass> CarClasses { get; set; }
-        public DbSet<CarRentWebsite.Models.CarService> CarServices { get; set; }
-        public DbSet<CarRentWebsite.Models.CarServiceReport> CarServiceReports { get; set; }
-        public DbSet<CarRentWebsite.Models.CarType> CarTypes { get; set; }
-        public DbSet<CarRentWebsite.Models.City> Cities { get; set; }
-        public DbSet<CarRentWebsite.Models.Country> Countries { get; set; }
-        public DbSet<CarRentWebsite.Models.ConditionMark> ConditionMarks { get; set; }
-        public DbSet<CarRentWebsite.Models.ConditionReport> ConditionReports { get; set; }
-        public DbSet<CarRentWebsite.Models.Fuel> Fuels { get; set; }
-        public DbSet<CarRentWebsite.Models.Transmission> Transmitions { get; set; }
-        public DbSet<CarRentWebsite.Models.CarStatus> CarStatuses { get; set; }
-        public DbSet<CarRentWebsite.Models.Review> Reviews { get; set; }
-        public DbSet<CarRentWebsite.Models.Rent> Rents { get; set; }
-        public DbSet<CarRentWebsite.Models.RentAddedOption> RentAddedOptions { get; set; }
-        public DbSet<CarRentWebsite.Models.RentAdditionalOption> RentAdditionalOptions { get; set; }
-        public DbSet<CarRentWebsite.Models.RentStatus> RentStatuses { get; set; }
-        public DbSet<CarRentWebsite.Models.PriceCoefficient> PriceCoeficients { get; set; }
-        public DbSet<CarRentWebsite.Models.Location> Locations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Seed();
+        }
+
+
+        
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<ServiceWorker> ServiceWorkers { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+
+        public DbSet<Engine> Engines { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<CarClass> CarClasses { get; set; }
+        public DbSet<CarService> CarServices { get; set; }
+        public DbSet<CarServiceReport> CarServiceReports { get; set; }
+        public DbSet<CarType> CarTypes { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<ConditionMark> ConditionMarks { get; set; }
+        public DbSet<ConditionReport> ConditionReports { get; set; }
+        public DbSet<Fuel> Fuels { get; set; }
+        public DbSet<Transmission> Transmissions { get; set; }
+        public DbSet<CarStatus> CarStatuses { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Rent> Rents { get; set; }
+        public DbSet<RentAddedOption> RentAddedOptions { get; set; }
+        public DbSet<RentAdditionalOption> RentAdditionalOptions { get; set; }
+        public DbSet<RentStatus> RentStatuses { get; set; }
+        public DbSet<PriceCoefficient> PriceCoefficients { get; set; }
     }
 }
