@@ -12,6 +12,7 @@ import CarsListPage from './Pages/CarsListPage/CarsListPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppUserPage  from './Pages/AppUserPage/AppUserPage';
+import Rules from './Pages/RulesPage/Rules';
 import { 
   BrowserRouter as Router, 
   Switch, 
@@ -28,6 +29,7 @@ function App () {
                     <Route exact path="/index" component={Home} />
                     <Route exact path="/index.html" component={Home} />
                     <Route exact path='/carInfo/:id' component={CarInfo} />
+                    <Route exact path="/rules" component={Rules} />
                     <Route path='/carManagerInfo' component={CarManagerInfo} />
                     <Route exact path="/about" component={About} />
                     <Route exact path='/booking' component={BookingCarPage} />
