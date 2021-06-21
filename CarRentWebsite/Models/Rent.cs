@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRentWebsite.Models.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,15 +22,14 @@ namespace CarRentWebsite.Models
         public int RentStatusId { get; set; }
         public RentStatus RentStatus { get; set; }
 
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public Customer Customer { get; set; }
-
-        public int ManagerId { get; set; }
+        
+        public string ManagerId { get; set; }
         public Manager Manager { get; set; }
 
         public int CarId { get; set; }
         public Car Car { get; set; }
-
 
         public ICollection<RentAdditionalOption> AdditionalOptions { get; set; }
 

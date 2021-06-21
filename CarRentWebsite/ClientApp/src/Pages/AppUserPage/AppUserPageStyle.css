@@ -1,0 +1,19 @@
+.pageStyle{
+    border: 2px solid black;
+    padding-top: 1em;
+    border-radius: 25px;
+}
+
+.textStyle {
+    text-align: start;
+    padding-left: 5em;
+    padding-bottom: 1em;
+}
+.header {
+    margin:1em 0 0.5em 0;
+}
+#buttonStyle{
+    margin: 1em 0em 1em 0em ;
+    width: 100%;
+    border-radius: 20px;
+}

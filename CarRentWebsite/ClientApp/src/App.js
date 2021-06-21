@@ -1,17 +1,25 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import React, { Component, useState } from 'react';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
-import { CarRequestPage } from './components/car-request-page/CarRequestPage';
-
+import Home from './Pages/HomePage/Home';
+import About from './Pages/AboutUsPage/About';
+import BookingCarPage from './Pages/BookingCarPage/BookingCarPage';
+import CarInfo from './Pages/CarInfoPage/CarInfo';
+import CarManagerInfo from "./Pages/CarManagerInfo/CarManagerInfo";
+import { Layout } from './components/Layout'
+import CarsListPage from './Pages/CarsListPage/CarsListPage';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AppUserPage  from './Pages/AppUserPage/AppUserPage';
+import Rules from './Pages/RulesPage/Rules';
+import { 
+  BrowserRouter as Router, 
+  Switch, 
+  Route
+} from 'react-router-dom';
 
 import './custom.css'
-import ServiceCarsPage from './components/car-request-page/CarRequestPage';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -19,11 +27,10 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-            <Route exact path='/' component={ServiceCarsPage} />
+        <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
-            <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-            <Route path='/manager/CarRequests' component={CarRequestPage} />
+        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );
   }
