@@ -20,8 +20,6 @@ import {
 } from 'react-router-dom';
 
 function App () {
-  //const [person, setPerson] = useState(null);
-  //const value = { person, setPerson }; 
         return (
             <Router>
             <Layout>

@@ -40,16 +40,20 @@ function CarsListPage(){
         //TODO implement navigation to Car details page
         //setShow(true);
     }
-
+    const DateParcer = (date)=>{
+        var data = new Date(date);
+        var stringDate =  data.toLocaleDateString('en-GB');
+        return stringDate;
+    }
     const rows = ()=>{
         var json = {"CarId": "1"};
         if(cars?.carsData && cars?.carsData?.length > 0){
         return (cars.carsData.map((car) => (<tr onDoubleClick ={()=>onRowClicked(car)}>
             <td>{car.id}</td>
             <td>{car.brand.name}</td>
-            <td>Cerato</td>
-            <td>{car.registerDate}</td>
-            <td>100</td>
+            <td>{car.model?? "model"}</td>
+            <td>{DateParcer(car.registerDate)}</td>
+            <td>{car.kilometersDriven ?? 1000}</td>
             <td>{car.registerNumber}</td>
             <td>{car.engine.winCode}</td>
             <td>{car.carStatus.name}</td></tr>)));}
