@@ -9,7 +9,7 @@ import NewClassModal from "./component/NewClassModal";
 import NewEngineModal from "./component/NewEngine";
 import NewTransmissionModal from "./component/NewTransmission";
 import AddCarImages from "./component/AddCarImages";
-import http from "../http-common";
+import http from "../../http-common";
 const brands=[
     {
         id:0,
@@ -462,11 +462,11 @@ export default class AddNewCar extends Component{
                                 </Col>
                             </Row>
                             <Row className={"d-flex flex-row"} >
-                                <Col className={"mr-auto d-flex justify-content-start mt-1 "} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"}>
+                                <Col className={"mr-auto d-flex justify-content-start my-1 "} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"}>
                                     <Button variant={"secondary"}>Create Initial Report </Button>
                                     <Button variant={"secondary"} className={"mx-1"} onClick={this.handleShowImages}>Add Car Images</Button>
                                 </Col>
-                                <Col className={"ml-auto mr-0 d-flex justify-content-end mt-1"}  xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"}  >
+                                <Col className={"ml-auto mr-0 d-flex justify-content-end my-1"}  xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"}  >
                                     <Button className={"mx-1"} variant={"secondary"} href={"/"}> Cancel</Button>
                                     <Button className={"mx-1"} variant={"primary"} >Submit</Button>
                                 </Col>

@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Coll from "react-bootstrap/Col";
 import CarCard from "./CarCard";
-import http from "../../http-common";
+import http from '../../../http-common'
 
 const carsArray = [
     {id: 1,
@@ -70,7 +70,7 @@ export default  class SimilarCars extends React.Component{
     constructor(props) {
         super(props);
         let cars=require('./jsonData/Car.json');
-        this.state={similarCars:null,carId:this.props.carId,car:null };
+        this.state={similarCars:carsArray,carId:this.props.carId,car:null };
     }
     componentDidMount() {
         if(this.state.carId) {
@@ -83,9 +83,10 @@ export default  class SimilarCars extends React.Component{
                 this.setState(state=>({
                     similarCars:data
                 }));
-
-
-            })
+            }).catch(error=>{
+                this.setState(state=>({car:null}))
+                console.log(error);
+            });
         }
     }
 

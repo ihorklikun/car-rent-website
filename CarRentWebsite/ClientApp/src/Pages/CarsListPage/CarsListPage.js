@@ -85,7 +85,7 @@ function CarsListPage(){
                     {/* <tr></tr> */}
                 </tbody>
             </Table>
-            <Button variant ="secondary" size="md" block className = "buttonStyle">Add new car</Button>
+            <Button variant ="secondary" size="md" block className = "buttonStyle" href={'/manager/newCar'}>Add new car</Button>
             {/* <ConditionReportModalWIndow carid = {selectedCarId}
                 show = {isShown}            
                 onHide = {()=>setShow(false)}

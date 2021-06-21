@@ -4,9 +4,8 @@ import Rating from '@material-ui/lab/Rating'
 import Container from 'react-bootstrap/Container'
 import Coll from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import http from '../../http-common'
+import http from '../../../http-common'
 import 'react-bootstrap/'
-import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";
 import Carousel from "react-bootstrap/Carousel"
 import CarouselItem from "react-bootstrap/CarouselItem";
@@ -25,7 +24,7 @@ import transmition from  "./Resource/Images/Icons/transmition.png"
 import trunkSize from  "./Resource/Images/Icons/TrunkSize.png"
 import carClass from "./Resource/Images/Icons/carClass.png"
 import carType from "./Resource/Images/Icons/carType.png"
-import Button from "react-bootstrap/Button";
+import {Button} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 const carImages=[{car:RavonR2_1},{car:RavonR2_2},{car:RavonR2_3},{car:RavonR2_4}]
 const costs=[{Time:"30 day+",Cost:"30"},{Time:"8 day+",Cost:"40"},{Time:"3-7 day",Cost:"50"},{Time:"1-2 day",Cost:"100"}]
@@ -207,7 +206,7 @@ export default class CarBaseInfo extends React.Component{
                                     <h3>from 30{this.state.valute}/day </h3>
                                 </Coll>
                                 <Coll className={"pl-0 pr-4"}>
-                                    <Button block={true} variant={"warning"} size={"lg"}>Book a car </Button>
+                                    <Button block={true} variant={"warning"} size={"lg"} href={"/booking/"+this.state.carId}>Book a car </Button>
                                 </Coll>
                             </Row>
                             <Row lg={4} xxl={4} xl={4} md={4} sm={4} xs={4}
@@ -252,7 +251,7 @@ export default class CarBaseInfo extends React.Component{
                             <h3>from 30{this.state.valute}/day </h3>
                         </Coll>
                         <Coll className={"pl-0 pr-4"}>
-                            <Button block={true} variant={"warning"} size={"lg"}>Book a car </Button>
+                            <Button block={true} variant={"warning"} size={"lg"} href={"/booking/"+this.state.carId}>Book a car </Button>
                         </Coll>
                     </Row>
                     <Row lg={4} xxl={4} xl={4} md={4} sm={4} xs={4}
