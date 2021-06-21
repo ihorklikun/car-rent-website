@@ -9,6 +9,7 @@ import NewClassModal from "./component/NewClassModal";
 import NewEngineModal from "./component/NewEngine";
 import NewTransmissionModal from "./component/NewTransmission";
 import AddCarImages from "./component/AddCarImages";
+import http from "../http-common";
 const brands=[
     {
         id:0,
@@ -106,7 +107,7 @@ const engines=[
         winCode: "9034hh5"
     }
 ]
-const brands=[
+const classes=[
     {
         id:0,
         name:"Microcar"
@@ -163,7 +164,7 @@ export default class AddNewCar extends Component{
                 engines:engines,
                 transmissions:transmissions,
                 classes:classes,
-                sBrand:NaN,sFuel:NaN,sStatus:NaN,sType:NaN,sEngine:NaN,sTransmission:NaN,sClass:NaN
+                sBrand:NaN,sFuel:NaN,sStatus:NaN,sType:NaN,sEngine:NaN,sTransmission:NaN,sClass:NaN,sDate:NaN,sNumber:NaN,sTrunk:NaN,sSeats:NaN
             };
         this.handleShowFuel=this.handleShowFuel.bind(this);
         this.handleHideFuel=this.handleHideFuel.bind(this);
@@ -181,6 +182,7 @@ export default class AddNewCar extends Component{
         this.handleHideTransmission=this.handleHideTransmission.bind(this);
         this.handleShowImages=this.handleShowImages.bind(this);
         this.handleHideImages=this.handleHideImages.bind(this);
+        this.handleOnChange=this.handleOnChange.bind(this);
     }
     handleShowImages(){
         this.setState(state=>({imagesModalShow:true}));
@@ -227,18 +229,80 @@ export default class AddNewCar extends Component{
         this.setState(state=>({classModalShow:false}));
     }
     componentDidMount() {
-
+        http.get("./Brands/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                brands:data
+            }))
+        }).catch(error=>{
+                this.setState(state=>({car:null}))
+                console.log(error);
+        });
+        http.get("./CarClasses/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                classes:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
+        http.get("./CarStatus/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                status:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
+        http.get("./CarTypes/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                types:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
+        http.get("./Engines/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                engines:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
+        http.get("./Fuels/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                fuels:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
+        http.get("./Transmissions/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                transmissions:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
     }
     handleOnChange(event){
-
-
-
+       const value=event.target.value;
+       const name=event.target.name;
+        if(value&&name){
+         this.setState(state=>({[name]:value}))
+        }
+        console.log(this.state)
     }
     handleOnSubmit(){
-
-
-
-}
+    }
     render() {
         return(
             <Container>
@@ -256,11 +320,11 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Brand
                                         </Form.Label>
-                                        <FormControl as={"select"} defaultValue={"Choose..."} >
+                                        <FormControl name={"sBrand"} as={"select"} defaultValue={"Choose..."} onChange={this.handleOnChange} >
                                             {this.state.brands.map((brand,index)=>
                                                 <option value={brand.id}>{brand.name}</option>
                                             )}
-                                            <option onClick={this.handleShowBrand}>add new...</option>
+                                            <option onClick={this.handleShowBrand} selected={true}>add new...</option>
                                         </FormControl>
                                         <NewBrandModal show={this.state.brandModalShow} onHide={this.handleHideBrand}></NewBrandModal>
                                     </FormGroup>
@@ -270,7 +334,7 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Model
                                         </Form.Label>
-                                        <FormControl type={"text"} placeholder={"Model"}>
+                                        <FormControl name={"sModel"} type={"text"} placeholder={"Model"} onChange={this.handleOnChange}>
                                         </FormControl>
                                     </FormGroup>
                                 </Col>
@@ -279,7 +343,7 @@ export default class AddNewCar extends Component{
                                         <Form.Label >
                                             Registration Number
                                         </Form.Label>
-                                        <FormControl type={"text"} placeholder={"Registration"}></FormControl>
+                                        <FormControl name={"sNumber"} type={"text"} placeholder={"Registration"} onChange={this.handleOnChange}></FormControl>
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -289,7 +353,7 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Seats Count
                                         </Form.Label>
-                                        <FormControl min={0} type={"number"} placeholder={"Seats"}/>
+                                        <FormControl name={"sSeats"} min={0} type={"number"} placeholder={"Seats"} onChange={this.handleOnChange}/>
                                     </FormGroup>
                                 </Col>
                                 <Col>
@@ -297,7 +361,7 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             ManufacturedDate
                                         </Form.Label>
-                                        <FormControl type={"date"} placeholder={"Date"}/>
+                                        <FormControl name={"sDate"} type={"date"} placeholder={"Date"} onChange={this.handleOnChange}/>
                                     </FormGroup>
                                 </Col>
                                 <Col>
@@ -305,7 +369,7 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Trunk Size
                                         </Form.Label>
-                                        <FormControl min={0} type={"number"} placeholder={"Chose"}></FormControl>
+                                        <FormControl name={"sTrunk"} min={0} type={"number"} placeholder={"Chose"} onChange={this.handleOnChange}/>
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -315,7 +379,7 @@ export default class AddNewCar extends Component{
                                            <Form.Label>
                                                Fuel Type
                                            </Form.Label>
-                                            <FormControl as={"select"} defaultValue={"Choose..."} >
+                                            <FormControl name={"sFuel"} as={"select"} defaultValue={"Choose..."} onChange={this.handleOnChange}>
                                             {this.state.fuels.map((fuel,index)=>
                                                 <option value={fuel.id}>{fuel.name}</option>
                                             )}
@@ -329,7 +393,7 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Engine
                                         </Form.Label>
-                                        <FormControl as={"select"} defaultValue={"Choose..."} >
+                                        <FormControl name={"sEngine"} as={"select"} defaultValue={"Choose..."} onChange={this.handleOnChange}>
                                             {this.state.engines.map((engine,index)=>
                                                 <option value={engine.id}>{engine.name}</option>
                                             )}
@@ -343,7 +407,7 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Transmission
                                         </Form.Label>
-                                        <FormControl as={"select"} defaultValue={"Choose..."} >
+                                        <FormControl name={"sTransmission"} as={"select"} defaultValue={"Choose..."} onChange={this.handleOnChange}>
                                             {this.state.transmissions.map((transmission,index)=>
                                                 <option value={transmission.id}>{transmission.name}</option>
                                             )}
@@ -359,8 +423,8 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Car Status
                                         </Form.Label>
-                                        <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.status.map((brand,index)=>
+                                        <FormControl name={"sStatus"} as={"select"} defaultValue={"Choose..."} onChange={this.handleOnChange}>
+                                            {this.state.status.map((status,index)=>
                                                 <option value={status.id}>{status.name}</option>
                                             )}
                                             <option onClick={this.handleShowStatus}>add new...</option>
@@ -373,8 +437,8 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Car Type
                                         </Form.Label>
-                                        <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.type.map((type,index)=>
+                                        <FormControl name={"sType"} as={"select"} defaultValue={"Choose..."} onChange={this.handleOnChange}>
+                                            {this.state.types.map((type,index)=>
                                                 <option value={type.id}>{type.name}</option>
                                             )}
                                             <option onClick={this.handleShowType}>add new...</option>
@@ -387,9 +451,9 @@ export default class AddNewCar extends Component{
                                         <Form.Label>
                                             Car Class
                                         </Form.Label>
-                                        <FormControl as={"select"} defaultValue={"Choose..."} >
-                                            {this.state.classes.map((clas,index)=>
-                                                <option value={clas.id}>{clas.name}</option>
+                                        <FormControl name={"sClass"} as={"select"} defaultValue={"Choose..."} onChange={this.handleOnChange}>
+                                            {this.state.classes.map((carClass,index)=>
+                                                <option value={carClass.id}>{carClass.name}</option>
                                             )}
                                             <option onClick={this.handleShowClass}>add new...</option>
                                         </FormControl>
