@@ -1,5 +1,4 @@
-import React, { Component, useState } from 'react'
-import AuthorizeRoute from './components/api-authorization/AuthorizeRoute'
+import React from 'react'
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes'
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants'
 import Home from './Pages/HomePage/Home'
@@ -13,7 +12,7 @@ import UserListPage from './Pages/UserListPage/UserListPage'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AppUserPage from './Pages/AppUserPage/AppUserPage'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 function App() {
   //const [person, setPerson] = useState(null);
@@ -41,7 +40,7 @@ function App() {
         ></Route>
         <Route exact path='/service' component={null}></Route>
         <Route exact path='/manager/rents' component={null}></Route>
-        <Route exact path='/manager/userList' component={UserListPage}></Route>
+        <Route exact path='/manager/users' component={UserListPage}></Route>
       </Layout>
     </Router>
   )
