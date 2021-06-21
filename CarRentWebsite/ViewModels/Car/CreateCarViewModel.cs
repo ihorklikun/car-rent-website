@@ -18,6 +18,8 @@ namespace CarRentWebsite.ViewModels.Car
         public string ImageUrl { get; set; }
         public int SeatsCount { get; set; }
         public int TrunkSize { get; set; }
+        public string Model { get; set; }
+        public int KilometersDriven { get; set; }
 
         public int BrandId { get; set; }
         public int FuelId { get; set; }
