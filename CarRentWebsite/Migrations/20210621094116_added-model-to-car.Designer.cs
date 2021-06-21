@@ -4,14 +4,16 @@ using CarRentWebsite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRentWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210621094116_added-model-to-car")]
+    partial class addedmodeltocar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,9 +191,6 @@ namespace CarRentWebsite.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("KilometersDriven")
-                        .HasColumnType("int");
-
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
@@ -240,8 +239,7 @@ namespace CarRentWebsite.Migrations
                             EngineId = 2,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 959, DateTimeKind.Local).AddTicks(2253),
+                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 484, DateTimeKind.Local).AddTicks(8818),
                             RegisterNumber = "BO7104RT",
                             SeatsCount = 4,
                             TransmissionId = 1,
@@ -258,8 +256,7 @@ namespace CarRentWebsite.Migrations
                             EngineId = 3,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 961, DateTimeKind.Local).AddTicks(4786),
+                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 488, DateTimeKind.Local).AddTicks(426),
                             RegisterNumber = "AA7104MT",
                             SeatsCount = 4,
                             TransmissionId = 2,
@@ -276,8 +273,7 @@ namespace CarRentWebsite.Migrations
                             EngineId = 4,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 961, DateTimeKind.Local).AddTicks(4824),
+                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 488, DateTimeKind.Local).AddTicks(482),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -294,8 +290,7 @@ namespace CarRentWebsite.Migrations
                             EngineId = 4,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 961, DateTimeKind.Local).AddTicks(4831),
+                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 488, DateTimeKind.Local).AddTicks(488),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
