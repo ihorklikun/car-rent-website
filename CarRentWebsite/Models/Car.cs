@@ -54,6 +54,9 @@ namespace CarRentWebsite.Models
         public int CarClassId { get; set; }
         public CarClass CarClass { get; set; }
 
+        public string Model { get; set; }
+
+
         //public int LocationId { get; set; }
         //public Location Location { get; set; }
 
