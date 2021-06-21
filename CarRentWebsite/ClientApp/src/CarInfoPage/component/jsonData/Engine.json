@@ -1,0 +1,39 @@
+[{
+  "id": 0,
+  "Name": "",
+  "FuelCapacity": 1.4,
+  "Power": 150,
+  "Torque": 300,
+  "WinCode": ""
+},
+  {
+    "id": 1,
+    "Name": "",
+    "FuelCapacity": 1.4,
+    "Power": 150,
+    "Torque": 300,
+    "WinCode": ""
+  },
+  {
+    "id": 2,
+    "Name": "",
+    "FuelCapacity": 1.4,
+    "Power": 150,
+    "Torque": 300,
+    "WinCode": ""
+  },
+  {
+    "id": 3,
+    "Name": "",
+    "FuelCapacity": 1.4,
+    "Power": 150,
+    "Torque": 300,
+    "WinCode": ""
+  },{
+  "id": 4,
+  "Name": "",
+  "FuelCapacity": 1.4,
+  "Power": 150,
+  "Torque": 300,
+  "WinCode": ""
+}]

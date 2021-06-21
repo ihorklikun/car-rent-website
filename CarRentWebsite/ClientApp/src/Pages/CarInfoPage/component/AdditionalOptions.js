@@ -130,6 +130,8 @@ function AdditionalOptionCard(props){
 class AdditionalOptions extends React.Component{
     constructor(props) {
         super(props);
+        let options=require('./jsonData/Options.json');
+        this.state={options:options};
     }
     render(){
         return(
@@ -138,9 +140,9 @@ class AdditionalOptions extends React.Component{
                 <h3> Additional Options</h3>
             </Row>
             <Row  className={"d-flex flex-row flex-nowrap overflow-auto gx-lg-3 gx-xl-0  gx-xxl-3 gx-md-3 gx-sm-1 "}>
-                {addOptions.map((anObjectMapped,index)=>{return(
+                {this.state.options.map((anObjectMapped,index)=>{return(
                    <Coll xxl={1} xl={1} lg={2} md={2} sm={3} xs={3} className={"mx-0 px-0"} >
-                       <AdditionalOptionCard Valuta={anObjectMapped.Valuta} Image={anObjectMapped.Image} Cost={anObjectMapped.Cost} optionName={anObjectMapped.Name}  />
+                       <AdditionalOptionCard Valuta={anObjectMapped.Valuta} Image={gpsMeter} Cost={anObjectMapped.Price} optionName={anObjectMapped.Name}  />
                    </Coll>
                 )})}
             </Row>
