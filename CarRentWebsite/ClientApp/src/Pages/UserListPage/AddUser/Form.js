@@ -172,7 +172,7 @@ function AddUserForm(props) {
           helperText={errors.password}
         />
         <br />
-        <FormControl component='fieldset'>
+        <FormControl margin='normal' component='fieldset'>
           <FormLabel component='legend'>Position</FormLabel>
           <RadioGroup
             aria-label='position'
