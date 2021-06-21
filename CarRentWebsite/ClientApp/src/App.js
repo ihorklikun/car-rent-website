@@ -15,7 +15,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AppUserPage from './Pages/AppUserPage/AppUserPage'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import Rules from './Pages/RulesPage/Rules';
 function App() {
   //const [person, setPerson] = useState(null);
   //const value = { person, setPerson };
@@ -28,6 +28,7 @@ function App() {
         <Route exact path='/carInfo/:id' component={CarInfo} />
         <Route path='/carManagerInfo' component={CarManagerInfo} />
         <Route exact path='/about' component={About} />
+        <Route exact path='/rules' component={Rules} />
         <Route exact path='/booking/:id' component={BookingCarPage} />
         <Route exact path='/manager/newCar' component={AddNewCar}/>
         <Route
@@ -38,8 +39,8 @@ function App() {
         <Route exact path='/manager/cars' component={CarsListPage} />
         <Route exact path='/manager/cars/:id' component={CarManagerInfo} />
         <Route exact path='/service' component={null} />
-        <Route exact path='/manager/rents' component={null} />
-        <Route exact path='/manager/CarRequests' component={CarRequestPage} />
+        <Route exact path='/manager/rents' component={CarRequestPage} />
+        {/* <Route exact path='/manager/CarRequests' component={CarRequestPage} /> */}
               <Route exact path='/manager/users' component={UserListPage}></Route>
           </Layout>
     </Router>
