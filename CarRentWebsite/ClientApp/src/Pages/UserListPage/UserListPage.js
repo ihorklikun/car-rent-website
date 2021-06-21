@@ -64,6 +64,9 @@ function createData(firstName, lastName, email, position) {
 const rows = [createData('Ivan', 'Ivanov', 'manager', 'Ivan.Ivanov@gmail.com')]
 
 const ModalWrapper = styled.div`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 800px;
   height: 500px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
@@ -143,75 +146,65 @@ function UserListPage() {
   }
 
   return (
-    <Container>
-      <ModalWrapper>
-        <ModalContent>
-          <h1>User List</h1>
-        </ModalContent>
+    <ModalWrapper>
+      <ModalContent>
+        <h1>User List</h1>
+      </ModalContent>
 
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label='sticky table'>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
+      <TableContainer className={classes.container}>
+        <Table stickyHeader aria-label='sticky table'>
+          <TableRow>
+            {columns.map((column) => (
+              <TableCell
+                key={column.id}
+                align={column.align}
+                style={{ minWidth: column.minWidth }}
+              >
+                {column.label}
+              </TableCell>
+            ))}
+          </TableRow>
 
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={row.code}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id]
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        )
-                      })}
-                    </TableRow>
-                  )
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component='div'
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
+                    {columns.map((column) => {
+                      const value = row[column.id]
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      )
+                    })}
+                  </TableRow>
+                )
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-        <ModalContent>
-          <Button className='AddUserButton' onClick={openModal}>
-            Add user
-          </Button>
-          <br />
-          <AddUserModalWindow
-            showModal={showModal}
-            setShowModal={setShowModal}
-          />
-        </ModalContent>
-      </ModalWrapper>
-    </Container>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component='div'
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+      <ModalContent>
+        <Button className='AddUserButton' onClick={openModal}>
+          Add user
+        </Button>
+        <br />
+        <AddUserModalWindow showModal={showModal} setShowModal={setShowModal} />
+      </ModalContent>
+    </ModalWrapper>
   )
 }
 
