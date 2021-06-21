@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
+import logo from './Logo.png'
 import { 
     Container, 
     Navbar, 
@@ -111,7 +112,7 @@ export default function NaviBar(){
                 <Container>
                     <Navbar.Brand href="/">
                         <img
-                            
+                            src = {logo}
                             height="40"
                             width="auto"
                             className="d-inline-block align-top"

@@ -11,6 +11,54 @@ namespace CarRentWebsite.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            
+            #region RentAdditionalOption
+            modelBuilder.Entity<RentAdditionalOption>().HasData(
+                new RentAdditionalOption
+                {
+                    Id = 1,
+                    Name = "Child Chair",
+                    Price = 50
+                },
+                new RentAdditionalOption
+                {
+                    Id = 2,
+                    Name = "Gps",
+                    Price = 25
+                },
+                new RentAdditionalOption
+                {
+                    Id = 3,
+                    Name = "Phone Holder",
+                    Price = 10
+                }
+            );
+            #endregion
+
+            #region RentStatus
+            modelBuilder.Entity<RentStatus>().HasData(
+                new CarStatus
+                {
+                    Id = 1,
+                    Name = "Created"
+                },
+                new CarStatus
+                {
+                    Id = 2,
+                    Name = "Accepted"
+                },
+                new CarStatus
+                {
+                    Id = 3,
+                    Name = "Started"
+                },
+                new CarStatus
+                {
+                    Id = 4,
+                    Name = "Finished"
+                }
+            );
+            #endregion
 
             #region CarStatus
             modelBuilder.Entity<CarStatus>().HasData(
@@ -318,65 +366,38 @@ namespace CarRentWebsite.Data
             );
             #endregion
 
-            #region Country
-            modelBuilder.Entity<Country>().HasData(
-                new Country
+            #region Location
+            modelBuilder.Entity<Location>().HasData(
+                new Location
                 {
                     Id = 1,
-                    Name = "Ukraine"
+                    Building = "7a",
+                    Street = "Veresneva Street",
+                    CityId = 4,
+                    
                 },
-                new Country
+                new Location
                 {
                     Id = 2,
-                    Name = "Poland"
+                    Building = "17",
+                    Street = "Bandera Street",
+                    CityId = 2,
                 },
-                new Country
+                new Location
                 {
                     Id = 3,
-                    Name = "Germany"
+                    Building = "46",
+                    Street = "Heroes Avenue",
+                    CityId = 1,
+                },
+                new Location
+                {
+                    Id = 4,
+                    Building = "34",
+                    Street = "Antonov Street",
+                    CityId = 3,
                 }
             );
-            #endregion
-
-            #region Location
-            //modelBuilder.Entity<Location>().HasData(
-            //    new Location
-            //    {
-            //        Id = 1,
-            //        Building = "7a",
-            //        Street = "Veresneva Street",
-            //        CityId = 4,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(50.507593, 30.388593)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 2,
-            //        Building = "17",
-            //        Street = "Bandera Street",
-            //        CityId = 2,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(49.834799, 24.008853)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 3,
-            //        Building = "46",
-            //        Street = "Heroes Avenue",
-            //        CityId = 1,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(48.408784, 35.075180)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 4,
-            //        Building = "34",
-            //        Street = "Antonov Street",
-            //        CityId = 3,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(51.834799, 24.008853)
-            //    }
-            //);
             #endregion
 
             modelBuilder.Entity<Car>().HasData(
@@ -390,13 +411,15 @@ namespace CarRentWebsite.Data
                     EngineId = 2,
                     Description = "Car description...",
                     SeatsCount = 4,
-                    //LocationId = 1,
+                    LocationId = 1,
                     FuelId = 1,
                     TransmissionId = 1,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 40,
                     RegisterNumber = "BO7104RT",
-                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
+                    KilometersDriven = 324234,
+                    Model = "X5",
+                    ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU"
                 }, 
 
                 new Car
@@ -409,13 +432,15 @@ namespace CarRentWebsite.Data
                     EngineId = 3,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    //LocationId = 4,
+                    LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 2,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 60,
                     RegisterNumber = "AA7104MT",
-                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
+                    KilometersDriven = 3234,
+                    Model = "X4",
+                    ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU",
 
                 },
 
@@ -429,13 +454,15 @@ namespace CarRentWebsite.Data
                     EngineId = 4,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    //LocationId = 2,
+                    LocationId = 2,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 80,
                     RegisterNumber = "AE5544KE",
-                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
+                    KilometersDriven = 300032,
+                    Model = "525",
+                    ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU"
                 },
 
                 new Car
@@ -448,133 +475,137 @@ namespace CarRentWebsite.Data
                     EngineId = 4,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    //LocationId = 4,
+                    LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,
                     TrunkSize = 60,
                     RegisterNumber = "AE5544KE",
-                    ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
+                    KilometersDriven = 3343,
+                    Model = "325",
+                    ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU"
                 }
             );
-            #region PriceCoeficients
-            modelBuilder.Entity<PriceCoefficient>().HasData(
-                new PriceCoefficient
+            #region CarPrices
+            modelBuilder.Entity<CarPrice>().HasData(
+                new CarPrice
                 {
                     Id =1,
                     CarId = 1,
                     DaysCount = 4,
-                    Coefficient = 0.9
+                    Price = 200
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 2,
                     CarId = 1,
                     DaysCount = 7,
-                    Coefficient = 0.6
+                    Price = 150
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 3,
                     CarId = 1,
                     DaysCount = 14,
-                    Coefficient = 0.5
+                    Price = 90
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 4,
                     CarId = 1,
                     DaysCount = 21,
-                    Coefficient = 0.2
+                    Price = 70
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 5,
                     CarId = 2,
                     DaysCount = 4,
-                    Coefficient = 0.8
+                    Price = 90
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 6,
                     CarId = 2,
                     DaysCount = 7,
-                    Coefficient = 0.7
+                    Price = 70
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 7,
                     CarId = 2,
                     DaysCount = 14,
-                    Coefficient = 0.6
+                    Price = 60
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 8,
                     CarId = 2,
                     DaysCount = 21,
-                    Coefficient = 0.5
+                    Price = 40
                 },
 
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 9,
                     CarId = 3,
                     DaysCount = 4,
-                    Coefficient = 0.8
+                    Price = 150
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 10,
                     CarId = 3,
                     DaysCount = 7,
-                    Coefficient = 0.7
+                    Price = 120
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 11,
                     CarId = 3,
                     DaysCount = 14,
-                    Coefficient = 0.6
+                    Price = 90
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 12,
                     CarId = 3,
                     DaysCount = 21,
-                    Coefficient = 0.5
+                    Price = 80
                 },
 
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 13,
                     CarId = 4,
                     DaysCount = 4,
-                    Coefficient = 0.9
+                    Price = 70
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 14,
                     CarId = 4,
                     DaysCount = 7,
-                    Coefficient = 0.8
+                    Price = 60
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 15,
                     CarId = 4,
                     DaysCount = 14,
-                    Coefficient = 0.7
+                    Price = 50
                 },
-                new PriceCoefficient
+                new CarPrice
                 {
                     Id = 16,
                     CarId = 4,
                     DaysCount = 21,
-                    Coefficient = 0.6
+                    Price = 40
                 }
             );
             #endregion
+
+
 
         }
     }

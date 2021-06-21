@@ -11,6 +11,8 @@ using CarRentWebsite.ViewModels.Engine;
 using CarRentWebsite.ViewModels.RentStatus;
 using CarRentWebsite.ViewModels.Rent;
 using CarRentWebsite.ViewModels.Transmission;
+using CarRentWebsite.ViewModels.CarPrice;
+using CarRentWebsite.ViewModels.City;
 
 namespace CarRentWebsite.Options
 {
@@ -39,6 +41,14 @@ namespace CarRentWebsite.Options
             CreateMap<CarType, CarTypeViewModel>().MaxDepth(2);
             CreateMap<CarTypeViewModel, CarType>().MaxDepth(2);
 
+            CreateMap<CarPrice, CarPriceViewModel>().MaxDepth(2);
+            CreateMap<CarPriceViewModel, CarPrice>().MaxDepth(2);
+
+            CreateMap<Location, LocationViewModel>().MaxDepth(2);
+            CreateMap<LocationViewModel, Location>().MaxDepth(2);
+
+            CreateMap<City, CityViewModel>().MaxDepth(2);
+            CreateMap<CityViewModel, City>().MaxDepth(2);
 
             CreateMap<Car, CarViewModel>().MaxDepth(2);
             CreateMap<CarViewModel, Car>().MaxDepth(2);

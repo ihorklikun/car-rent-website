@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CarRentWebsite.Models
 {
-    public class PriceCoefficient
+    public class CarPrice
     {
         public int Id { get; set; }
 
@@ -15,6 +15,6 @@ namespace CarRentWebsite.Models
 
         public int DaysCount { get; set; }
 
-        public double Coefficient { get; set; }
+        public double Price { get; set; }
     }
 }

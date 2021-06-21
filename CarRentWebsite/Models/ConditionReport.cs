@@ -24,15 +24,15 @@ namespace CarRentWebsite.Models
         public int CarId { get; set; }
         public Car Car { get; set; }
 
-        //public int ManagerId { get; set; }
+        public int ManagerId { get; set; }
         public Manager Manager { get; set; }
 
 
         public int InteriorConditionId { get; set; }
         public ConditionMark InteriorCondition { get; set; }
 
-        //public int LpcConditionId { get; set; }
-        //public virtual ConditionMark LpcCondition { get; set; }
+        public int LpcConditionId { get; set; }
+        public virtual ConditionMark LpcCondition { get; set; }
 
         public ICollection<CarServiceReport> CarServiceReports { get; set; }
     }
