@@ -1,0 +1,18 @@
+.pageStyle {
+  border: 2px solid black;
+  box-sizing: border-box;
+  /* display: flex; */
+  /* height: 500px; */
+  /*  */
+  /* border-color: black; */
+  border-radius: 25px;
+  /* border-width: 10px; */
+  background-color: white;
+}
+
+.textStyle {
+  height: max-content;
+  vertical-align: middle;
+  background-color: yellow;
+  height: 100%;
+}

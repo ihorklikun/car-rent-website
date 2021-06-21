@@ -8,6 +8,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { textFilter,dateFilter,numberFilter } from 'react-bootstrap-table2-filter';
 import Card from "react-bootstrap/Card";
 import Coll from "react-bootstrap/Col";
+import http from "../../http-common";
 const rents=[
     {
     id:0,
@@ -15,8 +16,8 @@ const rents=[
     manager: "Taras Dyhdalovych",
     beginDate: new Date("2021-06-10"),
     endDate: new Date("2021-06-16"),
-    price: 100,
-    status: "Payed",
+    price: 100, 
+    rentStatus: {name:"Payed"},
     description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
@@ -26,7 +27,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:200,
@@ -35,7 +36,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:3,
@@ -44,7 +45,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:4,
@@ -53,7 +54,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:5,
@@ -62,7 +63,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:6,
@@ -71,7 +72,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:7,
@@ -80,7 +81,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:8,
@@ -89,7 +90,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:9,
@@ -98,7 +99,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:10,
@@ -107,7 +108,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:11,
@@ -116,7 +117,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:12,
@@ -125,7 +126,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed",
+        rentStatus: {name:"Payed"},
         description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
@@ -135,7 +136,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:14,
@@ -144,7 +145,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:15,
@@ -153,7 +154,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:16,
@@ -162,7 +163,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     },
     {
         id:17,
@@ -171,7 +172,7 @@ const rents=[
         beginDate: new Date("2021-06-10"),
         endDate: new Date("2021-06-16"),
         price: 100,
-        status: "Payed"
+        rentStatus: {name:"Payed"}
     }
 ]
 const rentColumns=[
@@ -181,7 +182,7 @@ const rentColumns=[
     {dataField: 'beginDate', text: "Begin Date",sort:true,filter: dateFilter(),formatter:DateColumnFormatter },
     {dataField: 'endDate', text: "End Date",sort:true,filter: dateFilter(),formatter:DateColumnFormatter},
     {dataField: 'price', text: "Price",sort:true,formatter:CostColumnFormatter,filter: textFilter()},
-    {dataField: 'status', text: "Status",sort:true,filter: textFilter()}
+    {dataField: 'rentStatus.name', text: "Status",sort:true,filter: textFilter()}
 ]
 const defaultSorted=[{
     dataField: "id",
@@ -209,6 +210,23 @@ export function CostColumnFormatter(cell,row){
 export default class RentTable extends Component{
     constructor(props) {
         super(props);
+        this.state={rents:rents,carId:this.props.carId}
+    }
+    componentDidMount() {
+        console.log("test log");
+        if(this.state.carId) {
+            http.get("./Rents/" + this.state.carId).then((responce) => {
+                const data = responce.data;
+                console.log("test1234")
+                this.setState(state=>({
+                    rents:responce.data.filter(rent=>rent.car.id==this.state.carId)
+                }))
+            }).catch(error => {
+                this.setState(state => ({car: null}))
+                console.log(error);
+                console.log("test")
+            })
+        };
     }
     render() {
         return(
@@ -217,7 +235,7 @@ export default class RentTable extends Component{
             rowClasses="text-nowrap "
             ref={n=>this.node=n}
             keyField={"id"}
-            data={rents}
+            data={this.state.rents}
             noDataIndication={"No rents"}
             bootstrap4
             hover
