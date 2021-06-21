@@ -5,7 +5,7 @@ import './TemplateStyle.css'
 //import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Col, Row } from 'react-bootstrap'
 import axios from 'axios'
-function ServiceCarsPage() {
+function CarRequestPage() {
   const [data, saveData] = useState({
     isLoading: false,
     requests: null,
@@ -42,4 +42,4 @@ function ServiceCarsPage() {
       </Row>
     )
 }
-export default ServiceCarsPage
+export default CarRequestPage
