@@ -1,0 +1,14 @@
+[
+    { 
+        "Id": 1, 
+        "Name": "4 wheel drive" 
+    },
+    { 
+        "Id": 2, 
+        "Name": "Front wheel drive" 
+    },
+    { 
+        "Id": 3, 
+        "Name": "Rear wheel drive" 
+    }
+]

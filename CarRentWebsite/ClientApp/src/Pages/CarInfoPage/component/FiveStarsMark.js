@@ -1,15 +1,17 @@
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
-import Rating from "@material-ui/lab/Rating";
+import {Rating} from "@material-ui/lab";
 import React, {Component} from "react";
 import {render} from "react-dom";
 
 export function FiveStarsMark(props){
     const mark=parseInt( props.mark);
     let starSize="large"
+
     if(props.starSize!=NaN){
         starSize=props.starSize;
     }
+
     if(isNaN(mark)) {
         return <Alert variant={"danger"}>Error cant parse mark</Alert>
     }else {

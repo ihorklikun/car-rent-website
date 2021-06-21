@@ -83,6 +83,9 @@ function AppUserPage(props){
                     <Button variant="secondary" id ="buttonStyle" style ={{marginTop : "0"}} onClick = {() =>history.push({
                         pathname: '/manager/rents'
                     })}>Rents page</Button>
+                    <Button variant="secondary" id ="buttonStyle" style ={{marginTop : "0"}} onClick = {() =>history.push({
+                        pathname: '/manager/users'
+                    })}>Users page</Button>
             </Container>
         }
         else if(userInfo?.Role?.RoleId == 2){

@@ -26,7 +26,7 @@ export default class CarCard extends Component {
                         </Card.Text>
                         </Coll>
                         <Coll xl={4}>
-                        <Button variant="primary" className="ml-2">Order</Button>
+                            <Button variant="primary" className="ml-2" href={'/carInfo/'+this.props.Id}>Order</Button>
                         </Coll>
                     </Row>
                 </Card.Body>

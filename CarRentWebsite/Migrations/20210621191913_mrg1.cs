@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarRentWebsite.Migrations
 {
-    public partial class mgr1 : Migration
+    public partial class mrg1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -141,19 +141,6 @@ namespace CarRentWebsite.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ConditionMarks", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Countries",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Countries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -372,6 +359,27 @@ namespace CarRentWebsite.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Locations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Building = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Locations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Locations_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cars",
                 columns: table => new
                 {
@@ -389,7 +397,10 @@ namespace CarRentWebsite.Migrations
                     TransmissionId = table.Column<int>(type: "int", nullable: false),
                     CarStatusId = table.Column<int>(type: "int", nullable: false),
                     CarTypeId = table.Column<int>(type: "int", nullable: false),
-                    CarClassId = table.Column<int>(type: "int", nullable: false)
+                    CarClassId = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    KilometersDriven = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -431,6 +442,12 @@ namespace CarRentWebsite.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Cars_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Cars_Transmissions_TransmissionId",
                         column: x => x.TransmissionId,
                         principalTable: "Transmissions",
@@ -450,15 +467,17 @@ namespace CarRentWebsite.Migrations
                     IsCritical = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CarId = table.Column<int>(type: "int", nullable: false),
-                    ManagerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    InteriorConditionId = table.Column<int>(type: "int", nullable: false)
+                    ManagerId = table.Column<int>(type: "int", nullable: false),
+                    ManagerId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    InteriorConditionId = table.Column<int>(type: "int", nullable: false),
+                    LpcConditionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ConditionReports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ConditionReports_AspNetUsers_ManagerId",
-                        column: x => x.ManagerId,
+                        name: "FK_ConditionReports_AspNetUsers_ManagerId1",
+                        column: x => x.ManagerId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -472,8 +491,12 @@ namespace CarRentWebsite.Migrations
                         name: "FK_ConditionReports_ConditionMarks_InteriorConditionId",
                         column: x => x.InteriorConditionId,
                         principalTable: "ConditionMarks",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ConditionReports_ConditionMarks_LpcConditionId",
+                        column: x => x.LpcConditionId,
+                        principalTable: "ConditionMarks",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -484,7 +507,7 @@ namespace CarRentWebsite.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarId = table.Column<int>(type: "int", nullable: false),
                     DaysCount = table.Column<int>(type: "int", nullable: false),
-                    Coefficient = table.Column<double>(type: "float", nullable: false)
+                    Price = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -683,11 +706,11 @@ namespace CarRentWebsite.Migrations
                     { 13, "Mid-size SUV" },
                     { 12, "Mini SUV" },
                     { 10, "Compact minivan" },
-                    { 18, "Compact SUV" },
+                    { 5, "Entry-level car" },
                     { 8, "Hatchback" },
                     { 7, "Mid-size car" },
                     { 6, "Full-size car" },
-                    { 5, "Entry-level car" },
+                    { 18, "Compact SUV" },
                     { 4, "Mid-size car" },
                     { 3, "Compact car" },
                     { 2, "Subcompact car" },
@@ -700,9 +723,9 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Idle" },
+                    { 3, "Repair" },
                     { 2, "Rent" },
-                    { 3, "Repair" }
+                    { 1, "Idle" }
                 });
 
             migrationBuilder.InsertData(
@@ -720,29 +743,10 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 4, "Kyiv" },
-                    { 3, "Kharkiw" },
                     { 1, "Dnipro" },
-                    { 2, "Lviv" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Countries",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Ukraine" },
-                    { 2, "Poland" },
-                    { 3, "Germany" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Engines",
-                columns: new[] { "Id", "FuelCapacity", "Name", "Power", "Torque", "WinCode" },
-                values: new object[,]
-                {
-                    { 3, 6, "Engine3", 120, 45, "1123456" },
-                    { 4, 6, "Engine4", 120, 45, "9034hh5" }
+                    { 2, "Lviv" },
+                    { 3, "Kharkiw" },
+                    { 4, "Kyiv" }
                 });
 
             migrationBuilder.InsertData(
@@ -751,19 +755,46 @@ namespace CarRentWebsite.Migrations
                 values: new object[,]
                 {
                     { 1, 6, "Engine1", 120, 45, "ASD45ufa95" },
-                    { 2, 6, "Engine2", 120, 45, "ASttrra95" }
+                    { 2, 6, "Engine2", 120, 45, "ASttrra95" },
+                    { 3, 6, "Engine3", 120, 45, "1123456" },
+                    { 4, 6, "Engine4", 120, 45, "9034hh5" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Fuels",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 5, "Propane" });
 
             migrationBuilder.InsertData(
                 table: "Fuels",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Petrol" },
-                    { 2, "Diesel" },
-                    { 3, "Electric" },
                     { 4, "Hybrid" },
-                    { 5, "Propane" }
+                    { 2, "Diesel" },
+                    { 1, "Petrol" },
+                    { 3, "Electric" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RentAdditionalOptions",
+                columns: new[] { "Id", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, "Child Chair", 50.0 },
+                    { 2, "Gps", 25.0 },
+                    { 3, "Phone Holder", 10.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RentStatuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Created" },
+                    { 2, "Accepted" },
+                    { 3, "Started" },
+                    { 4, "Finished" }
                 });
 
             migrationBuilder.InsertData(
@@ -778,37 +809,48 @@ namespace CarRentWebsite.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Cars",
-                columns: new[] { "Id", "BrandId", "CarClassId", "CarStatusId", "CarTypeId", "Description", "EngineId", "FuelId", "ImageUrl", "RegisterDate", "RegisterNumber", "SeatsCount", "TransmissionId", "TrunkSize" },
+                table: "Locations",
+                columns: new[] { "Id", "Building", "CityId", "Street" },
                 values: new object[,]
                 {
-                    { 1, 1, 2, 1, 1, "Car description...", 2, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", new DateTime(2021, 6, 17, 11, 43, 19, 461, DateTimeKind.Local).AddTicks(8031), "BO7104RT", 4, 1, 40 },
-                    { 2, 3, 4, 1, 2, "Car description2...", 3, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", new DateTime(2021, 6, 17, 11, 43, 19, 464, DateTimeKind.Local).AddTicks(2283), "AA7104MT", 4, 2, 60 },
-                    { 3, 1, 5, 1, 3, "Car description2...", 4, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", new DateTime(2021, 6, 17, 11, 43, 19, 464, DateTimeKind.Local).AddTicks(2315), "AE5544KE", 4, 3, 80 },
-                    { 4, 1, 5, 1, 3, "Car description2...", 4, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", new DateTime(2021, 6, 17, 11, 43, 19, 464, DateTimeKind.Local).AddTicks(2321), "AE5544KE", 4, 3, 60 }
+                    { 3, "46", 1, "Heroes Avenue" },
+                    { 2, "17", 2, "Bandera Street" },
+                    { 4, "34", 3, "Antonov Street" },
+                    { 1, "7a", 4, "Veresneva Street" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cars",
+                columns: new[] { "Id", "BrandId", "CarClassId", "CarStatusId", "CarTypeId", "Description", "EngineId", "FuelId", "ImageUrl", "KilometersDriven", "LocationId", "Model", "RegisterDate", "RegisterNumber", "SeatsCount", "TransmissionId", "TrunkSize" },
+                values: new object[,]
+                {
+                    { 3, 1, 5, 1, 3, "Car description2...", 4, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 300032, 2, "525", new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5148), "AE5544KE", 4, 3, 80 },
+                    { 2, 3, 4, 1, 2, "Car description2...", 3, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 3234, 4, "X4", new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5106), "AA7104MT", 4, 2, 60 },
+                    { 4, 1, 5, 1, 3, "Car description2...", 4, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 3343, 4, "325", new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5155), "AE5544KE", 4, 3, 60 },
+                    { 1, 1, 2, 1, 1, "Car description...", 2, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 324234, 1, "X5", new DateTime(2021, 6, 21, 22, 19, 13, 398, DateTimeKind.Local).AddTicks(1702), "BO7104RT", 4, 1, 40 }
                 });
 
             migrationBuilder.InsertData(
                 table: "PriceCoefficients",
-                columns: new[] { "Id", "CarId", "Coefficient", "DaysCount" },
+                columns: new[] { "Id", "CarId", "DaysCount", "Price" },
                 values: new object[,]
                 {
-                    { 1, 1, 0.90000000000000002, 4 },
-                    { 2, 1, 0.59999999999999998, 7 },
-                    { 3, 1, 0.5, 14 },
-                    { 4, 1, 0.20000000000000001, 21 },
-                    { 5, 2, 0.80000000000000004, 4 },
-                    { 6, 2, 0.69999999999999996, 7 },
-                    { 7, 2, 0.59999999999999998, 14 },
-                    { 8, 2, 0.5, 21 },
-                    { 9, 3, 0.80000000000000004, 4 },
-                    { 10, 3, 0.69999999999999996, 7 },
-                    { 11, 3, 0.59999999999999998, 14 },
-                    { 12, 3, 0.5, 21 },
-                    { 13, 4, 0.90000000000000002, 4 },
-                    { 14, 4, 0.80000000000000004, 7 },
-                    { 15, 4, 0.69999999999999996, 14 },
-                    { 16, 4, 0.59999999999999998, 21 }
+                    { 9, 3, 4, 150.0 },
+                    { 10, 3, 7, 120.0 },
+                    { 11, 3, 14, 90.0 },
+                    { 12, 3, 21, 80.0 },
+                    { 5, 2, 4, 90.0 },
+                    { 6, 2, 7, 70.0 },
+                    { 7, 2, 14, 60.0 },
+                    { 8, 2, 21, 40.0 },
+                    { 13, 4, 4, 70.0 },
+                    { 14, 4, 7, 60.0 },
+                    { 15, 4, 14, 50.0 },
+                    { 16, 4, 21, 40.0 },
+                    { 1, 1, 4, 200.0 },
+                    { 2, 1, 7, 150.0 },
+                    { 3, 1, 14, 90.0 },
+                    { 4, 1, 21, 70.0 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -881,6 +923,11 @@ namespace CarRentWebsite.Migrations
                 column: "FuelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cars_LocationId",
+                table: "Cars",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cars_TransmissionId",
                 table: "Cars",
                 column: "TransmissionId");
@@ -911,9 +958,14 @@ namespace CarRentWebsite.Migrations
                 column: "InteriorConditionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConditionReports_ManagerId",
+                name: "IX_ConditionReports_LpcConditionId",
                 table: "ConditionReports",
-                column: "ManagerId");
+                column: "LpcConditionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConditionReports_ManagerId1",
+                table: "ConditionReports",
+                column: "ManagerId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
@@ -925,6 +977,11 @@ namespace CarRentWebsite.Migrations
                 name: "IX_DeviceCodes_Expiration",
                 table: "DeviceCodes",
                 column: "Expiration");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locations_CityId",
+                table: "Locations",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_Expiration",
@@ -1013,12 +1070,6 @@ namespace CarRentWebsite.Migrations
                 name: "CarServiceReports");
 
             migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
-                name: "Countries");
-
-            migrationBuilder.DropTable(
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
@@ -1082,7 +1133,13 @@ namespace CarRentWebsite.Migrations
                 name: "Fuels");
 
             migrationBuilder.DropTable(
+                name: "Locations");
+
+            migrationBuilder.DropTable(
                 name: "Transmissions");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
         }
     }
 }

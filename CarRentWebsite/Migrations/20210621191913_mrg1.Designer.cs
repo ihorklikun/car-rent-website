@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210621094116_added-model-to-car")]
-    partial class addedmodeltocar
+    [Migration("20210621191913_mrg1")]
+    partial class mrg1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,6 +191,12 @@ namespace CarRentWebsite.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("KilometersDriven")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
@@ -223,6 +229,8 @@ namespace CarRentWebsite.Migrations
 
                     b.HasIndex("FuelId");
 
+                    b.HasIndex("LocationId");
+
                     b.HasIndex("TransmissionId");
 
                     b.ToTable("Cars");
@@ -238,8 +246,11 @@ namespace CarRentWebsite.Migrations
                             Description = "Car description...",
                             EngineId = 2,
                             FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 484, DateTimeKind.Local).AddTicks(8818),
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU",
+                            KilometersDriven = 324234,
+                            LocationId = 1,
+                            Model = "X5",
+                            RegisterDate = new DateTime(2021, 6, 21, 22, 19, 13, 398, DateTimeKind.Local).AddTicks(1702),
                             RegisterNumber = "BO7104RT",
                             SeatsCount = 4,
                             TransmissionId = 1,
@@ -255,8 +266,11 @@ namespace CarRentWebsite.Migrations
                             Description = "Car description2...",
                             EngineId = 3,
                             FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 488, DateTimeKind.Local).AddTicks(426),
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU",
+                            KilometersDriven = 3234,
+                            LocationId = 4,
+                            Model = "X4",
+                            RegisterDate = new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5106),
                             RegisterNumber = "AA7104MT",
                             SeatsCount = 4,
                             TransmissionId = 2,
@@ -272,8 +286,11 @@ namespace CarRentWebsite.Migrations
                             Description = "Car description2...",
                             EngineId = 4,
                             FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 488, DateTimeKind.Local).AddTicks(482),
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU",
+                            KilometersDriven = 300032,
+                            LocationId = 2,
+                            Model = "525",
+                            RegisterDate = new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5148),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -289,8 +306,11 @@ namespace CarRentWebsite.Migrations
                             Description = "Car description2...",
                             EngineId = 4,
                             FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 41, 15, 488, DateTimeKind.Local).AddTicks(488),
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU",
+                            KilometersDriven = 3343,
+                            LocationId = 4,
+                            Model = "325",
+                            RegisterDate = new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5155),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -402,6 +422,143 @@ namespace CarRentWebsite.Migrations
                         {
                             Id = 18,
                             Name = "Compact SUV"
+                        });
+                });
+
+            modelBuilder.Entity("CarRentWebsite.Models.CarPrice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DaysCount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("PriceCoefficients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CarId = 1,
+                            DaysCount = 4,
+                            Price = 200.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarId = 1,
+                            DaysCount = 7,
+                            Price = 150.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarId = 1,
+                            DaysCount = 14,
+                            Price = 90.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarId = 1,
+                            DaysCount = 21,
+                            Price = 70.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarId = 2,
+                            DaysCount = 4,
+                            Price = 90.0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CarId = 2,
+                            DaysCount = 7,
+                            Price = 70.0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CarId = 2,
+                            DaysCount = 14,
+                            Price = 60.0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CarId = 2,
+                            DaysCount = 21,
+                            Price = 40.0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CarId = 3,
+                            DaysCount = 4,
+                            Price = 150.0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CarId = 3,
+                            DaysCount = 7,
+                            Price = 120.0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CarId = 3,
+                            DaysCount = 14,
+                            Price = 90.0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CarId = 3,
+                            DaysCount = 21,
+                            Price = 80.0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CarId = 4,
+                            DaysCount = 4,
+                            Price = 70.0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CarId = 4,
+                            DaysCount = 7,
+                            Price = 60.0
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CarId = 4,
+                            DaysCount = 14,
+                            Price = 50.0
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CarId = 4,
+                            DaysCount = 21,
+                            Price = 40.0
                         });
                 });
 
@@ -594,7 +751,13 @@ namespace CarRentWebsite.Migrations
                     b.Property<bool>("IsCritical")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ManagerId")
+                    b.Property<int>("LpcConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ManagerId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -603,41 +766,11 @@ namespace CarRentWebsite.Migrations
 
                     b.HasIndex("InteriorConditionId");
 
-                    b.HasIndex("ManagerId");
+                    b.HasIndex("LpcConditionId");
+
+                    b.HasIndex("ManagerId1");
 
                     b.ToTable("ConditionReports");
-                });
-
-            modelBuilder.Entity("CarRentWebsite.Models.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Ukraine"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Poland"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Germany"
-                        });
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Engine", b =>
@@ -747,140 +880,56 @@ namespace CarRentWebsite.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.PriceCoefficient", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarId")
+                    b.Property<string>("Building")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Coefficient")
-                        .HasColumnType("float");
-
-                    b.Property<int>("DaysCount")
-                        .HasColumnType("int");
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CityId");
 
-                    b.ToTable("PriceCoefficients");
+                    b.ToTable("Locations");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CarId = 1,
-                            Coefficient = 0.90000000000000002,
-                            DaysCount = 4
+                            Building = "7a",
+                            CityId = 4,
+                            Street = "Veresneva Street"
                         },
                         new
                         {
                             Id = 2,
-                            CarId = 1,
-                            Coefficient = 0.59999999999999998,
-                            DaysCount = 7
+                            Building = "17",
+                            CityId = 2,
+                            Street = "Bandera Street"
                         },
                         new
                         {
                             Id = 3,
-                            CarId = 1,
-                            Coefficient = 0.5,
-                            DaysCount = 14
+                            Building = "46",
+                            CityId = 1,
+                            Street = "Heroes Avenue"
                         },
                         new
                         {
                             Id = 4,
-                            CarId = 1,
-                            Coefficient = 0.20000000000000001,
-                            DaysCount = 21
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CarId = 2,
-                            Coefficient = 0.80000000000000004,
-                            DaysCount = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CarId = 2,
-                            Coefficient = 0.69999999999999996,
-                            DaysCount = 7
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CarId = 2,
-                            Coefficient = 0.59999999999999998,
-                            DaysCount = 14
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CarId = 2,
-                            Coefficient = 0.5,
-                            DaysCount = 21
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CarId = 3,
-                            Coefficient = 0.80000000000000004,
-                            DaysCount = 4
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CarId = 3,
-                            Coefficient = 0.69999999999999996,
-                            DaysCount = 7
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CarId = 3,
-                            Coefficient = 0.59999999999999998,
-                            DaysCount = 14
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CarId = 3,
-                            Coefficient = 0.5,
-                            DaysCount = 21
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CarId = 4,
-                            Coefficient = 0.90000000000000002,
-                            DaysCount = 4
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CarId = 4,
-                            Coefficient = 0.80000000000000004,
-                            DaysCount = 7
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CarId = 4,
-                            Coefficient = 0.69999999999999996,
-                            DaysCount = 14
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CarId = 4,
-                            Coefficient = 0.59999999999999998,
-                            DaysCount = 21
+                            Building = "34",
+                            CityId = 3,
+                            Street = "Antonov Street"
                         });
                 });
 
@@ -963,6 +1012,26 @@ namespace CarRentWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RentAdditionalOptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Child Chair",
+                            Price = 50.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Gps",
+                            Price = 25.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Phone Holder",
+                            Price = 10.0
+                        });
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.RentStatus", b =>
@@ -978,6 +1047,28 @@ namespace CarRentWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RentStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Created"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Accepted"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Started"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Finished"
+                        });
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Review", b =>
@@ -1372,6 +1463,12 @@ namespace CarRentWebsite.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CarRentWebsite.Models.Location", "Location")
+                        .WithMany("Cars")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CarRentWebsite.Models.Transmission", "Transmission")
                         .WithMany("Cars")
                         .HasForeignKey("TransmissionId")
@@ -1390,7 +1487,20 @@ namespace CarRentWebsite.Migrations
 
                     b.Navigation("Fuel");
 
+                    b.Navigation("Location");
+
                     b.Navigation("Transmission");
+                });
+
+            modelBuilder.Entity("CarRentWebsite.Models.CarPrice", b =>
+                {
+                    b.HasOne("CarRentWebsite.Models.Car", "Car")
+                        .WithMany("CarPrices")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.CarServiceReport", b =>
@@ -1427,31 +1537,39 @@ namespace CarRentWebsite.Migrations
                         .IsRequired();
 
                     b.HasOne("CarRentWebsite.Models.ConditionMark", "InteriorCondition")
-                        .WithMany("LpcConditionReports")
+                        .WithMany("InteriorConditionReports")
                         .HasForeignKey("InteriorConditionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CarRentWebsite.Models.ConditionMark", "LpcCondition")
+                        .WithMany("LpcConditionReports")
+                        .HasForeignKey("LpcConditionId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("CarRentWebsite.Models.Users.Manager", "Manager")
                         .WithMany("ConditionReports")
-                        .HasForeignKey("ManagerId");
+                        .HasForeignKey("ManagerId1");
 
                     b.Navigation("Car");
 
                     b.Navigation("InteriorCondition");
 
+                    b.Navigation("LpcCondition");
+
                     b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("CarRentWebsite.Models.PriceCoefficient", b =>
+            modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
                 {
-                    b.HasOne("CarRentWebsite.Models.Car", "Car")
-                        .WithMany("PriceCoefficients")
-                        .HasForeignKey("CarId")
+                    b.HasOne("CarRentWebsite.Models.City", "City")
+                        .WithMany("Locations")
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Car");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Rent", b =>
@@ -1594,9 +1712,9 @@ namespace CarRentWebsite.Migrations
 
             modelBuilder.Entity("CarRentWebsite.Models.Car", b =>
                 {
-                    b.Navigation("ConditionReports");
+                    b.Navigation("CarPrices");
 
-                    b.Navigation("PriceCoefficients");
+                    b.Navigation("ConditionReports");
 
                     b.Navigation("Rents");
 
@@ -1623,8 +1741,15 @@ namespace CarRentWebsite.Migrations
                     b.Navigation("Cars");
                 });
 
+            modelBuilder.Entity("CarRentWebsite.Models.City", b =>
+                {
+                    b.Navigation("Locations");
+                });
+
             modelBuilder.Entity("CarRentWebsite.Models.ConditionMark", b =>
                 {
+                    b.Navigation("InteriorConditionReports");
+
                     b.Navigation("LpcConditionReports");
                 });
 
@@ -1639,6 +1764,11 @@ namespace CarRentWebsite.Migrations
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Fuel", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
                 {
                     b.Navigation("Cars");
                 });
