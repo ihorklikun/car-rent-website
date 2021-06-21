@@ -8,6 +8,7 @@ import CarInfo from './Pages/CarInfoPage/CarInfo'
 import CarManagerInfo from './Pages/CarManagerInfo/CarManagerInfo'
 import { Layout } from './components/Layout'
 import CarsListPage from './Pages/CarsListPage/CarsListPage'
+import UserListPage from './Pages/UserListPage/UserListPage'
 import CarRequestPage from './Pages/CarRequestPage/CarRequestPage'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -37,7 +38,8 @@ function App() {
         <Route exact path='/service' component={null} />
         <Route exact path='/manager/rents' component={null} />
         <Route exact path='/manager/CarRequests' component={CarRequestPage} />
-      </Layout>
+              <Route exact path='/manager/users' component={UserListPage}></Route>
+          </Layout>
     </Router>
   )
 }
