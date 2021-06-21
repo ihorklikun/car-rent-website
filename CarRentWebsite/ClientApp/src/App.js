@@ -10,6 +10,7 @@ import { Layout } from './components/Layout'
 import CarsListPage from './Pages/CarsListPage/CarsListPage'
 import UserListPage from './Pages/UserListPage/UserListPage'
 import CarRequestPage from './Pages/CarRequestPage/CarRequestPage'
+import AddNewCar from "./Pages/AddNewCarPage/AddNewCar";
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AppUserPage from './Pages/AppUserPage/AppUserPage'
@@ -27,7 +28,8 @@ function App() {
         <Route exact path='/carInfo/:id' component={CarInfo} />
         <Route path='/carManagerInfo' component={CarManagerInfo} />
         <Route exact path='/about' component={About} />
-        <Route exact path='/booking' component={BookingCarPage} />
+        <Route exact path='/booking/:id' component={BookingCarPage} />
+        <Route exact path='/manager/newCar' component={AddNewCar}/>
         <Route
           path={ApplicationPaths.ApiAuthorizationPrefix}
           component={ApiAuthorizationRoutes}
