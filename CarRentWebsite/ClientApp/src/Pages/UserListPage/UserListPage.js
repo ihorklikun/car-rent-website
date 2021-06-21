@@ -31,15 +31,15 @@ const columns = [
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'position',
-    label: 'Position',
+    id: 'email',
+    label: 'Email',
     minWidth: 100,
     align: 'left',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'email',
-    label: 'Email',
+    id: 'position',
+    label: 'Position',
     minWidth: 100,
     align: 'left',
     format: (value) => value.toLocaleString('en-US'),
@@ -61,7 +61,7 @@ function createData(firstName, lastName, email, position) {
   return { firstName, lastName, email, position }
 }
 
-const rows = [createData('Ivan', 'Ivanov', 'manager', 'Ivan.Ivanov@gmail.com')]
+const rows = [createData('Ivan', 'Ivanov', 'Ivan.Ivanov@gmail.com', 'manager')]
 
 const ModalWrapper = styled.div`
   display: block;
