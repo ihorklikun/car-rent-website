@@ -8,13 +8,13 @@ import CarInfo from './Pages/CarInfoPage/CarInfo'
 import CarManagerInfo from './Pages/CarManagerInfo/CarManagerInfo'
 import { Layout } from './components/Layout'
 import CarsListPage from './Pages/CarsListPage/CarsListPage'
+import UserListPage from './Pages/UserListPage/UserListPage'
 import CarRequestPage from './Pages/CarRequestPage/CarRequestPage'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AppUserPage from './Pages/AppUserPage/AppUserPage'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Rules from "./Pages/RulesPage/Rules";
-import UserListPage from './Pages/UserListPage/UserListPage';
 function App () {
         return (
             <Router>

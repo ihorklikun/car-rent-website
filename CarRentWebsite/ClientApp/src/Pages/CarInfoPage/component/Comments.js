@@ -11,48 +11,7 @@ import {Collapse, Form, FormControl, InputGroup} from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
 import Image from "react-bootstrap/Image";
 import triggerBrowserReflow from "react-bootstrap/triggerBrowserReflow";
-const comments=[{userName:"Melcor Eruson-1", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson0", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson1", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson2", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson3", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson4", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson5", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson6", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson7", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson8", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson9", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson10", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson11", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson12", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson13", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson14", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson15", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson16", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson17", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson18", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson19", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson20", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"},
-    {userName:"Melcor Eruson", date:"10.06.2021", title:"Review Title"}]
+
 
 export function Comment(props){
     return (
@@ -63,19 +22,19 @@ export function Comment(props){
                     <Image className={"rounded-circle px-0 mx-0 " } src={user} style={{minWidth:"3rem", maxWidth:"4rem"}}  alt={"UserIco"} roundedCircle={true}/></Coll>
                 <Coll className={"mr-auto  ml-0 p-0 "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
                     <h5>{props.userName}</h5>
-                    <p>{props.date}</p>
+                    <p>{props.CreateDate}</p>
                 </Coll>
                 <Coll className={"ml-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
-                    <FiveStarsMark mark={5} starSize={"large"}></FiveStarsMark>
+                    <FiveStarsMark mark={props.Mark} starSize={"large"}></FiveStarsMark>
                 </Coll>
             </Row>
             </Card.Header>
             <Card.Body>
                 <Card.Title className={"text-body "}>
-                    {props.title}
+                    {props.Title}
                 </Card.Title>
                 <Card.Text>
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    {props.Text}
                 </Card.Text>
             </Card.Body>
             <Card.Footer></Card.Footer>
@@ -108,6 +67,8 @@ export class CommentForm extends React.Component{
                 CommentError: "Comment must be entered"
             }));
         }
+        const comment={CustomerId:0,Title: this.state.Title,Text:this.state.Text,Mark: this.state.Mark,CreateDate: new Date()};
+        console.log(JSON.stringify(comment));
     }
     handleRatingChange(field,value){
         console.log(field+" "+value.toString());
@@ -186,6 +147,7 @@ export class CommentForm extends React.Component{
 export class Comments extends React.Component{
     constructor(props) {
         super(props);
+        this.state={carId:this.props.carId};
     }
     render() {return(
         <Container fluid className={"px-lg-4 px-md-4 px-sm-3 px-xs-1 px-xl-5 px-xxl-5 pt-3 mx-0 bg-light "}>
@@ -193,7 +155,7 @@ export class Comments extends React.Component{
                 <h3> Comments</h3>
             </Row>
             <Row><CommentForm userName={"Melcor Eruson"} date={"10.06.2021"}/></Row>
-            <ShowPaginationComments />
+            <ShowPaginationComments carId={this.state.carId} />
         </Container>
     )
     }
@@ -202,6 +164,9 @@ export class ShowPaginationComments extends React.Component {
     pages = [];
     constructor(props) {
         super(props);
+        const carId=this.props.carId;
+        let comments=require('./jsonData/Comments.json');
+        comments=comments.filter(comment=>comment.CarId==carId);
         const defCommentsCount = 5;
         const commentsCount=comments.length
         let commentsOnPage = defCommentsCount;
@@ -210,11 +175,11 @@ export class ShowPaginationComments extends React.Component {
         }
         this.handlePageChange=this.handlePageChange.bind(this)
         let pageNum = 0;
-        for (var i = 0; i < commentsCount; i+=commentsOnPage) {
+        for (var i = 0; i < comments.length; i+=commentsOnPage) {
             this.pages.push(<Pagination.Item name={pageNum} onClick={this.handlePageChange} >{pageNum+1}</Pagination.Item>)
             ++pageNum;
         }
-        this.state = {commentsOnPage: commentsOnPage, commentsCount: comments.length, currentPage: 0,lastPage:(pageNum-1)}
+        this.state = {commentsOnPage: commentsOnPage, commentsCount: comments.length, currentPage: 0,lastPage:(pageNum-1),comments:comments}
 
     }
     handlePageChange(event){
@@ -271,12 +236,11 @@ export class ShowPaginationComments extends React.Component {
                 </Pagination>
                     </Coll>
                 </Row>
-                {comments.slice(this.state.currentPage*this.state.commentsOnPage,(this.state.currentPage+1)*this.state.commentsOnPage).map((comments, index) => {
+                {this.state.comments.slice(this.state.currentPage*this.state.commentsOnPage,(this.state.currentPage+1)*this.state.commentsOnPage).map((comment, index) => {
                     return(
-                        <Row className={"my-2"}> <Comment userName={comments.userName} date={comments.date}
-                                                          title={comments.title}/></Row>)
+                        <Row className={"my-2"}> <Comment userName={comment.Customer.name+" "+comment.Customer.surname} CreateDate={comment.CreateDate}
+                                                          Title={comment.Title} Text={comment.Text} Mark={comment.Mark}/></Row>)
                 })}
-
                 <Row className={"mb-0 mt-2 pt-2"}>
                     <Coll className={"mx-auto mb-0"} xs={"auto"} sm={"auto"} md={"auto"} lg={"auto"} xl={"auto"}>
                         <Pagination>
