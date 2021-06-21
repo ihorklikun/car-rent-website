@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Coll from "react-bootstrap/Col";
 import CarCard from "./CarCard";
-import http from "../../http-common";
+import http from "../../../http-common";
 
 const carsArray = [
     {id: 1,

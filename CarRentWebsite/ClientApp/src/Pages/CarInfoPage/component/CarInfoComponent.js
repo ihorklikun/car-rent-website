@@ -4,7 +4,7 @@ import Rating from '@material-ui/lab/Rating'
 import Container from 'react-bootstrap/Container'
 import Coll from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import http from '../../http-common'
+import http from '../../../http-common'
 import 'react-bootstrap/'
 import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";

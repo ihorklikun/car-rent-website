@@ -8,7 +8,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { textFilter,dateFilter,numberFilter } from 'react-bootstrap-table2-filter';
 import Card from "react-bootstrap/Card";
 import Coll from "react-bootstrap/Col";
-import http from "../../http-common";
+import http from "../../../http-common";
 const rents=[
     {
     id:0,
