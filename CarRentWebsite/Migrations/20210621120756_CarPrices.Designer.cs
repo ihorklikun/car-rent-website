@@ -4,14 +4,16 @@ using CarRentWebsite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRentWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210621120756_CarPrices")]
+    partial class CarPrices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,12 +147,6 @@ namespace CarRentWebsite.Migrations
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("KilometersDriven")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
@@ -185,80 +181,6 @@ namespace CarRentWebsite.Migrations
                     b.HasIndex("TransmissionId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BrandId = 1,
-                            CarClassId = 2,
-                            CarStatusId = 1,
-                            CarTypeId = 1,
-                            Description = "Car description...",
-                            EngineId = 2,
-                            FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 959, DateTimeKind.Local).AddTicks(2253),
-                            RegisterNumber = "BO7104RT",
-                            SeatsCount = 4,
-                            TransmissionId = 1,
-                            TrunkSize = 40
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BrandId = 3,
-                            CarClassId = 4,
-                            CarStatusId = 1,
-                            CarTypeId = 2,
-                            Description = "Car description2...",
-                            EngineId = 3,
-                            FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 961, DateTimeKind.Local).AddTicks(4786),
-                            RegisterNumber = "AA7104MT",
-                            SeatsCount = 4,
-                            TransmissionId = 2,
-                            TrunkSize = 60
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BrandId = 1,
-                            CarClassId = 5,
-                            CarStatusId = 1,
-                            CarTypeId = 3,
-                            Description = "Car description2...",
-                            EngineId = 4,
-                            FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 961, DateTimeKind.Local).AddTicks(4824),
-                            RegisterNumber = "AE5544KE",
-                            SeatsCount = 4,
-                            TransmissionId = 3,
-                            TrunkSize = 80
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BrandId = 1,
-                            CarClassId = 5,
-                            CarStatusId = 1,
-                            CarTypeId = 3,
-                            Description = "Car description2...",
-                            EngineId = 4,
-                            FuelId = 1,
-                            ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 21, 12, 49, 7, 961, DateTimeKind.Local).AddTicks(4831),
-                            RegisterNumber = "AE5544KE",
-                            SeatsCount = 4,
-                            TransmissionId = 3,
-                            TrunkSize = 60
-                        });
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.CarClass", b =>

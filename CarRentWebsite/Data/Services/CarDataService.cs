@@ -35,6 +35,8 @@ namespace CarRentWebsite.Data.Services
                     x => x.Fuel,
                     x => x.Engine,
                     x => x.Transmission,
+                    x => x.Location,
+                    x => x.Location.City,
                     x => x.CarStatus,
                     x => x.CarType,
                     x => x.CarClass
@@ -49,10 +51,12 @@ namespace CarRentWebsite.Data.Services
                     x => x.Fuel,
                     x => x.Engine,
                     x => x.Transmission,
+                    x => x.Location,
+                    x => x.Location.City,
                     x => x.CarStatus,
                     x => x.CarType,
                     x => x.CarClass,
-                    x => x.PriceCoefficients,
+                    x => x.CarPrices,
                     x => x.Rents,
                     x => x.Reviews,
                     x => x.ConditionReports

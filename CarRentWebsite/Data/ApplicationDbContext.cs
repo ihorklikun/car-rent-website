@@ -17,11 +17,29 @@ namespace CarRentWebsite.Data
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<ConditionReport>()
+                .HasOne<ConditionMark>(x => x.InteriorCondition)
+                .WithMany(c => c.InteriorConditionReports)
+                .HasForeignKey(p => p.InteriorConditionId)
+                .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ConditionReport>()
+                .HasOne<ConditionMark>(x => x.LpcCondition)
+                .WithMany(c => c.LpcConditionReports)
+                .HasForeignKey(p => p.LpcConditionId)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            builder.Entity<Car>()
+                .HasOne<Location>(x => x.Location)
+                .WithMany(c => c.Cars)
+                .HasForeignKey(x => x.LocationId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
             builder.Seed();
         }
 
@@ -39,7 +57,7 @@ namespace CarRentWebsite.Data
         public DbSet<CarServiceReport> CarServiceReports { get; set; }
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<Country> Countries { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<ConditionMark> ConditionMarks { get; set; }
         public DbSet<ConditionReport> ConditionReports { get; set; }
         public DbSet<Fuel> Fuels { get; set; }
@@ -50,6 +68,6 @@ namespace CarRentWebsite.Data
         public DbSet<RentAddedOption> RentAddedOptions { get; set; }
         public DbSet<RentAdditionalOption> RentAdditionalOptions { get; set; }
         public DbSet<RentStatus> RentStatuses { get; set; }
-        public DbSet<PriceCoefficient> PriceCoefficients { get; set; }
+        public DbSet<CarPrice> PriceCoefficients { get; set; }
     }
 }
