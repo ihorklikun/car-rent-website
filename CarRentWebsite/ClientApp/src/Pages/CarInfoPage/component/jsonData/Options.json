@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "Name": "Gps meter",
+    "Price": 20
+  },
+  {
+    "id": 1,
+    "Name": "Gps meter",
+    "Price": 30
+  },
+  {
+    "id": 2,
+    "Name": "Gps meter",
+    "Price": 10
+  },
+  {
+    "id": 3,
+    "Name": "Gps meter",
+    "Price": 25
+  },
+  {
+    "id": 4,
+    "Name": "Gps meter",
+    "Price": 55
+  },
+  {
+    "id": 5,
+    "Name": "Gps meter",
+    "Price": 125
+  },
+  {
+    "id": 6,
+    "Name": "Gps meter",
+    "Price": 235
+  },
+  {
+    "id": 7,
+    "Name": "Gps meter",
+    "Price": 5
+  }
+]

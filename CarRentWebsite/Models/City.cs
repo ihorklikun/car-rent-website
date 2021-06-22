@@ -6,13 +6,13 @@ namespace CarRentWebsite.Models
     {
         public City()
         {
-            //Locations = new HashSet<Location>();
+            Locations = new HashSet<Location>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        //public ICollection<Location> Locations { get; set; }
+        public ICollection<Location> Locations { get; set; }
     }
 }

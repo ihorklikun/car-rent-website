@@ -14,7 +14,7 @@ namespace CarRentWebsite.Models
             Rents = new HashSet<Rent>();
             ConditionReports = new HashSet<ConditionReport>();
             Reviews = new HashSet<Review>();
-            PriceCoefficients = new HashSet<PriceCoefficient>();
+            CarPrices = new HashSet<CarPrice>();
         }
 
         public int Id { get; set; }
@@ -54,13 +54,16 @@ namespace CarRentWebsite.Models
         public int CarClassId { get; set; }
         public CarClass CarClass { get; set; }
 
-        //public int LocationId { get; set; }
-        //public Location Location { get; set; }
+        public int LocationId { get; set; }
+        public Location Location { get; set; }
 
+        public string Model { get; set; }
+        public int KilometersDriven { get; set; }
+        
 
         public ICollection<Rent> Rents { get; set; }
         public ICollection<ConditionReport> ConditionReports { get; set; }
         public ICollection<Review> Reviews { get; set; }
-        public ICollection<PriceCoefficient> PriceCoefficients { get; set; }
+        public ICollection<CarPrice> CarPrices { get; set; }
     }
 }

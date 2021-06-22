@@ -23,14 +23,14 @@ namespace CarRentWebsite.Controllers
 
         // GET: api/PriceCoefficients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PriceCoefficient>>> GetPriceCoeficients()
+        public async Task<ActionResult<IEnumerable<CarPrice>>> GetPriceCoeficients()
         {
             return await _context.PriceCoefficients .ToListAsync();
         }
 
         // GET: api/PriceCoefficients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PriceCoefficient>> GetPriceCoefficient(int id)
+        public async Task<ActionResult<CarPrice>> GetPriceCoefficient(int id)
         {
             var priceCoefficient = await _context.PriceCoefficients .FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace CarRentWebsite.Controllers
         // PUT: api/PriceCoefficients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPriceCoefficient(int id, PriceCoefficient priceCoefficient)
+        public async Task<IActionResult> PutPriceCoefficient(int id, CarPrice priceCoefficient)
         {
             if (id != priceCoefficient.Id)
             {
@@ -76,7 +76,7 @@ namespace CarRentWebsite.Controllers
         // POST: api/PriceCoefficients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PriceCoefficient>> PostPriceCoefficient(PriceCoefficient priceCoefficient)
+        public async Task<ActionResult<CarPrice>> PostPriceCoefficient(CarPrice priceCoefficient)
         {
             _context.PriceCoefficients .Add(priceCoefficient);
             await _context.SaveChangesAsync();
