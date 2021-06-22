@@ -37,7 +37,7 @@ function BookingCarPage() {
 
   var personInfo = localStorage.getItem('person')
   var UserData = JSON.parse(personInfo)
-  console.log(UserData)
+  //console.log(UserData)
 
   const initialRentState = {
     beginDate: '2021-06-19',
@@ -63,7 +63,7 @@ function BookingCarPage() {
   const [carRes, setCarRes] = useState(DataService.getCarById(rent.carId))
 
   let price = rent?.price ?? 'price'
-  console.log(carRes)
+  //console.log(carRes)
   //-----------------------------------
   const baseUrl = `http://localhost:25094/api`
 
@@ -106,7 +106,10 @@ function BookingCarPage() {
 
   const RecalculatePrice = () => {
     let start = new Date(rent.beginDate)
+    console.log('first ' + start)
+
     let end = new Date(rent.endDate)
+    console.log('second ' + end)
 
     let days = Math.floor(end / 8.64e7) - Math.floor(start / 8.64e7)
 
@@ -129,17 +132,22 @@ function BookingCarPage() {
     rent.pricePerDay = dayPrice
     rent.pricePerDay.daysCount = days
 
-    if (days == 0) days = 1
+    if (days <= 0) days = 1
 
     price = days * dayPrice.price
+    if (isNaN(price)) {
+      price = rent.pricePerDay
+    }
+
     rent.price = days * dayPrice.price
-    alert(price)
+    //alert(price)
     //price = rent.price
     console.log(rent)
   }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
+    RecalculatePrice()
     setRent({ ...rent, [name]: value })
   }
 
@@ -293,7 +301,7 @@ function BookingCarPage() {
                   <h4>{rent.starsCount}</h4>
                 </Col>
               </Row>
-              <h5 className='headerText'>Total {price} </h5>
+              <h5 className='headerText'>Total {rent.price ?? 'price'}</h5>
             </Col>
             <Col>
               <Row>
