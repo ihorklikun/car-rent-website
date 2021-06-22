@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarRentWebsite.Migrations
 {
-    public partial class mrg1 : Migration
+    public partial class mgr1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -824,10 +824,10 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "BrandId", "CarClassId", "CarStatusId", "CarTypeId", "Description", "EngineId", "FuelId", "ImageUrl", "KilometersDriven", "LocationId", "Model", "RegisterDate", "RegisterNumber", "SeatsCount", "TransmissionId", "TrunkSize" },
                 values: new object[,]
                 {
-                    { 3, 1, 5, 1, 3, "Car description2...", 4, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 300032, 2, "525", new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5148), "AE5544KE", 4, 3, 80 },
-                    { 2, 3, 4, 1, 2, "Car description2...", 3, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 3234, 4, "X4", new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5106), "AA7104MT", 4, 2, 60 },
-                    { 4, 1, 5, 1, 3, "Car description2...", 4, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 3343, 4, "325", new DateTime(2021, 6, 21, 22, 19, 13, 400, DateTimeKind.Local).AddTicks(5155), "AE5544KE", 4, 3, 60 },
-                    { 1, 1, 2, 1, 1, "Car description...", 2, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 324234, 1, "X5", new DateTime(2021, 6, 21, 22, 19, 13, 398, DateTimeKind.Local).AddTicks(1702), "BO7104RT", 4, 1, 40 }
+                    { 3, 1, 5, 1, 3, "Car description2...", 4, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 300032, 2, "525", new DateTime(2021, 6, 22, 10, 38, 43, 997, DateTimeKind.Local).AddTicks(1281), "AE5544KE", 4, 3, 80 },
+                    { 2, 3, 4, 1, 2, "Car description2...", 3, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 3234, 4, "X4", new DateTime(2021, 6, 22, 10, 38, 43, 997, DateTimeKind.Local).AddTicks(1246), "AA7104MT", 4, 2, 60 },
+                    { 4, 1, 5, 1, 3, "Car description2...", 4, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 3343, 4, "325", new DateTime(2021, 6, 22, 10, 38, 43, 997, DateTimeKind.Local).AddTicks(1287), "AE5544KE", 4, 3, 60 },
+                    { 1, 1, 2, 1, 1, "Car description...", 2, 1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU", 324234, 1, "X5", new DateTime(2021, 6, 22, 10, 38, 43, 994, DateTimeKind.Local).AddTicks(6838), "BO7104RT", 4, 1, 40 }
                 });
 
             migrationBuilder.InsertData(
