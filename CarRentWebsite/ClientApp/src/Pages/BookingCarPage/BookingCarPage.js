@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import { useHistory, useLocation } from 'react-router-dom'
 import DataService from './services/DataService'
 import axios from 'axios'
-import CheckboxesComponent from './component/Checkboxes'
+//import CheckboxesComponent from './component/Checkboxes'
 
 const ModalWrapper = styled.div`
   display: block;
@@ -16,7 +16,7 @@ const ModalWrapper = styled.div`
   margin-right: auto;
   margin-top: 4%;
   margin-bottom: 4%;
-  width: 90%;
+  width: 75%;
   height: 90%;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
@@ -37,7 +37,7 @@ function BookingCarPage() {
 
   var personInfo = localStorage.getItem('person')
   var UserData = JSON.parse(personInfo)
-  //console.log(UserData)
+  console.log(UserData)
 
   const initialRentState = {
     beginDate: '2021-06-19',
@@ -45,6 +45,7 @@ function BookingCarPage() {
     beginTime: '19:51:00',
     endTime: '19:51:00',
     price: 100,
+    pricePerDay: 1,
     promocode: 10,
     rentStatusId: 1,
     customerId: UserData.id,
@@ -61,6 +62,7 @@ function BookingCarPage() {
 
   const [carRes, setCarRes] = useState(DataService.getCarById(rent.carId))
 
+  let price = rent?.price ?? 'price'
   console.log(carRes)
   //-----------------------------------
   const baseUrl = `http://localhost:25094/api`
@@ -90,7 +92,7 @@ function BookingCarPage() {
       .get(`${baseUrl}/RentAdditionalOptions/`)
       .then((responce) => {
         var data = responce.data
-        console.log(data)
+        //console.log(data)
         if (data != null) {
           setOptions(data)
         }
@@ -99,17 +101,41 @@ function BookingCarPage() {
         setOptions(null)
         console.log(e)
       })
-    console.log(options)
+    //console.log(options)
   }, [setOptions])
 
   const RecalculatePrice = () => {
-    let firstData = new Data(rent.beginDate)
-    let weekday = firstData.getDay()
-    alert(weekday)
+    let start = new Date(rent.beginDate)
+    let end = new Date(rent.endDate)
 
-    let dif = rent.endDate - rent.beginDate
-    console.log(rent.price)
-    //alert(newRating)
+    let days = Math.floor(end / 8.64e7) - Math.floor(start / 8.64e7)
+
+    console.log('days ' + days)
+
+    //console.log(car)
+
+    let prices = car?.carPrices
+    //console.log(prices)
+
+    let dayPrice = prices[0]
+
+    prices.forEach((element) => {
+      if (days > element.daysCount) {
+        dayPrice = element
+        return false
+      }
+    })
+
+    rent.pricePerDay = dayPrice
+    rent.pricePerDay.daysCount = days
+
+    if (days == 0) days = 1
+
+    price = days * dayPrice.price
+    rent.price = days * dayPrice.price
+    alert(price)
+    //price = rent.price
+    console.log(rent)
   }
 
   const handleInputChange = (event) => {
@@ -117,10 +143,35 @@ function BookingCarPage() {
     setRent({ ...rent, [name]: value })
   }
 
+  const saveRent = () => {
+    const rentJson = {
+      beginDate: rent.beginDate + 'T' + rent.beginTime + 'Z',
+      endDate: rent.endDate + 'T' + rent.endTime + 'Z',
+      price: rent.price,
+      rentStatusId: 1,
+      customerId: rent.customerId,
+      carId: rent.carId,
+      additionalOptions: rent.additionalOptions,
+    }
+
+    console.log(rentJson)
+
+    /*axios
+      .post(`${baseUrl}/Rents`, rentJson)
+      .then((responce) => {
+        var data = responce.data
+        console.log(data)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+      */
+  }
+
   const newRent = () => {
     //setTutorial(initialTutorialState)
-    const rentJson = {}
-    console.log(rent)
+    //console.log(rent)
+    saveRent()
     //GoToUserPage()
   }
 
@@ -242,7 +293,7 @@ function BookingCarPage() {
                   <h4>{rent.starsCount}</h4>
                 </Col>
               </Row>
-              <h5 className='headerText'>Total {rent.price}$ </h5>
+              <h5 className='headerText'>Total {price} </h5>
             </Col>
             <Col>
               <Row>
