@@ -24,7 +24,7 @@ namespace CarRentWebsite.Models
         public int CarId { get; set; }
         public Car Car { get; set; }
 
-        //public int ManagerId { get; set; }
+        public string ManagerId { get; set; }
         public Manager Manager { get; set; }
 
 

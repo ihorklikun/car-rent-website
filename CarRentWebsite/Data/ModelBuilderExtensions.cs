@@ -11,6 +11,30 @@ namespace CarRentWebsite.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            #region Role
+            modelBuilder.Entity<Role>().HasData(
+                new Role
+                {
+                    Id = 1,
+                    Name = "Customer"
+                },
+                new Role
+                {
+                    Id = 2,
+                    Name = "Manager"
+                },
+                new Role
+                {
+                    Id = 3,
+                    Name = "Admin"
+                },
+                new Role
+                {
+                    Id = 4,
+                    Name = "ServiceWorker"
+                }
+            );
+            #endregion
 
             #region CarStatus
             modelBuilder.Entity<CarStatus>().HasData(

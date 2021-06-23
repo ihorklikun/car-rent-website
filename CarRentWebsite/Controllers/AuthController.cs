@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRentWebsite.Data;
+using CarRentWebsite.Data.Repositories.Abstract;
 using CarRentWebsite.Data.Services.Abstract;
+using CarRentWebsite.Models;
+using CarRentWebsite.Models.Users;
 using CarRentWebsite.Options;
 using CarRentWebsite.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +16,14 @@ namespace CarRentWebsite.Controllers
 {
     public class AuthController : ControllerBase
     {
+        private readonly IUserRepository _userRepository;
         private readonly IAuthService _authService;
         private readonly ApplicationDbContext _context;
 
-        public AuthController(ApplicationDbContext context, IAuthService authService)
+        public AuthController(ApplicationDbContext context, IAuthService authService, IUserRepository userRepository)
         {
             this._authService = authService;
+            _userRepository = userRepository;
             _context = context;
         }
 
@@ -48,23 +53,21 @@ namespace CarRentWebsite.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            //var emailUniq = userRepository.isEmailUniq(model.Email);
-            //if (!emailUniq) return BadRequest(new { email = "user with this email already exists" });
-            //var usernameUniq = userRepository.IsUsernameUniq(model.Username);
-            if (!usernameUniq) return BadRequest(new { username = "user with this email already exists" });
-
+            var emailUniq = _userRepository.IsEmailUniq(model.Email);
+            if (!emailUniq) return BadRequest(new { email = "user with this email already exists" });
+           
             var id = Guid.NewGuid().ToString();
-            var user = new User
+            var user = new Customer
             {
                 Id = id,
-                Username = model.Username,
                 Email = model.Email,
-                Password = authService.HashPassword(model.Password)
+                Password = _authService.HashPassword(model.Password),
+                RoleId = 1
             };
-            userRepository.Add(user);
-            userRepository.Commit();
+            _userRepository.Add(user);
+            //_userRepository.Commit();
 
-            return authService.GetAuthData(id);
+            return _authService.GetAuthData(id);
         }
 
     }

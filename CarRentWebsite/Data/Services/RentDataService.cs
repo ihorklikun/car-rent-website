@@ -3,8 +3,10 @@ using CarRentWebsite.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
-using CarRentWebsite.Data.Services.Abstact;
+using CarRentWebsite.Data.Repositories.Abstract;
+using CarRentWebsite.Data.Services.Abstract;
 
 namespace CarRentWebsite.Data.Services
 {
@@ -17,8 +19,6 @@ namespace CarRentWebsite.Data.Services
             _repository = repository;
         }
 
-        public bool Exist(object id) => _repository.Exist(id);
-
         public async Task<Rent> Create(Rent entity)
         {
             return await _repository.Add(entity);
@@ -27,6 +27,11 @@ namespace CarRentWebsite.Data.Services
         public async Task Delete(object id)
         {
             await _repository.Delete(id);
+        }
+
+        public bool Exist(Expression<Func<Rent, bool>> predicate)
+        {
+           return _repository.Exist(predicate);
         }
 
         public async Task<IEnumerable<Rent>> Get()

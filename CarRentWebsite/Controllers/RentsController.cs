@@ -10,7 +10,7 @@ using CarRentWebsite.Data;
 using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels.Rent;
 using CarRentWebsite.Data.Services;
-using CarRentWebsite.Data.Services.Abstact;
+using CarRentWebsite.Data.Services.Abstract;
 
 namespace CarRentWebsite.Controllers
 {
@@ -103,7 +103,7 @@ namespace CarRentWebsite.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRent(int id)
         {
-            if (_service.Exist(id))
+            if (_service.Exist(x => x.Id == id))
             {
                 return NotFound();
             }
@@ -113,7 +113,7 @@ namespace CarRentWebsite.Controllers
 
         private bool RentExists(int id)
         {
-            return _service.Exist(id);
+            return _service.Exist(x => x.Id == id);
         }
     }
 }

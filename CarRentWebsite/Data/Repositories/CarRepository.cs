@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using CarRentWebsite.Data.Repositories.Abstract;
 
 namespace CarRentWebsite.Data.Repositories
 {
@@ -32,7 +33,6 @@ namespace CarRentWebsite.Data.Repositories
             return await query.ToListAsync();
 
         }
-
 
         public async Task<Car> GetById(object id, params Expression<Func<Car, object>>[] includes)
         {
@@ -77,9 +77,9 @@ namespace CarRentWebsite.Data.Repositories
             return entityToUpdate;
         }
 
-        public bool Exist(object id)
+        public bool Exist(Expression<Func<Car, bool>> predicate)
         {
-            return dbSet.Any(entity => entity.Id == (int)id);
+            return dbSet.Any(predicate);
         }
     }
 }

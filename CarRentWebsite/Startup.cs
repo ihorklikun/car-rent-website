@@ -6,8 +6,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using CarRentWebsite.Data;
 using CarRentWebsite.Data.Repositories;
+using CarRentWebsite.Data.Repositories.Abstract;
 using CarRentWebsite.Data.Services;
-using CarRentWebsite.Data.Services.Abstact;
 using CarRentWebsite.Data.Services.Abstract;
 using CarRentWebsite.Models;
 using CarRentWebsite.Models.Users;
@@ -80,6 +80,7 @@ namespace CarRentWebsite
             services.AddRazorPages();
             //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IRepository<Car>,CarRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRepository<Rent>, RentRepository>();
             services.AddScoped(typeof(IDataService<Car>), typeof(CarDataService));
             services.AddScoped(typeof(IDataService<Rent>), typeof(RentDataService));
