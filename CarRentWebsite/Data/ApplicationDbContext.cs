@@ -11,11 +11,10 @@ using CarRentWebsite.Models.Users;
 
 namespace CarRentWebsite.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class ApplicationDbContext:DbContext
     {
-        public ApplicationDbContext(
-            DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
         }
 
@@ -30,6 +29,8 @@ namespace CarRentWebsite.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<ServiceWorker> ServiceWorkers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         public DbSet<Brand> Brands { get; set; }
 
         public DbSet<Engine> Engines { get; set; }

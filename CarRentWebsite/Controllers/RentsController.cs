@@ -10,6 +10,7 @@ using CarRentWebsite.Data;
 using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels.Rent;
 using CarRentWebsite.Data.Services;
+using CarRentWebsite.Data.Services.Abstact;
 
 namespace CarRentWebsite.Controllers
 {
