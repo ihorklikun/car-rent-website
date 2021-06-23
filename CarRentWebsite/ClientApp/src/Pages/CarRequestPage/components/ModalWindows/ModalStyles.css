@@ -1,0 +1,11 @@
+.dataTextModal {
+  /* display: table; */
+  margin: 0.5em auto 0.5em auto;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+  margin-left: 10%;
+  margin-right: 10%;
+}
