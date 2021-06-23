@@ -13,7 +13,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
-import Container from '@material-ui/core/Container';
+import Container from '@material-ui/core/Container'
 
 const columns = [
   {
@@ -61,7 +61,14 @@ function createData(firstName, lastName, email, position) {
   return { firstName, lastName, email, position }
 }
 
-const rows = [createData('Ivan', 'Ivanov', 'Ivan.Ivanov@gmail.com', 'manager')]
+const rows = [
+  createData('Ivan', 'Ivanov', 'Ivan.Ivanov@gmail.com', 'manager'),
+  createData('Petro', 'Petrov', 'Petro.Petrov@gmail.com', 'user'),
+  createData('Stepan', 'Stepanov', 'Stepan.Stepanov@gmail.com', 'worker'),
+  createData('Olexiy', 'Olexiev', 'Olexiy.Olexiev@gmail.com', 'user'),
+  createData('Fomka', 'Fomkovin', 'Fomka.Fomkovin@gmail.com', 'user'),
+  createData('Furry', 'Furriev', 'Furry.Furriev@gmail.com', 'worker'),
+]
 
 const ModalWrapper = styled.div`
   display: block;
