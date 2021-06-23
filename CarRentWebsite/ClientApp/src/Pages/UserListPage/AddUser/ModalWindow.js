@@ -58,7 +58,7 @@ const CloseModalButton = styled(MdClose)`
   z-index: 10;
 `
 
-export const AddUserModalWindow = ({ showModal, setShowModal }) => {
+export const AddUserModalWindow = ({ showModal, setShowModal, addUser }) => {
   const modalRef = useRef()
 
   const animation = useSpring({
@@ -69,10 +69,25 @@ export const AddUserModalWindow = ({ showModal, setShowModal }) => {
     transform: showModal ? `translateY(0%)` : `translateY(-100%)`,
   })
 
+  /*
+  const [form, setForm] = useState({
+    firstName: 'test',
+    lastName: 'test',
+    position: 'test',
+    email: 'test',
+    password: 'test',
+  })
+  */
+
+  const addUserModal = (form) => {
+    addUser(form)
+  }
+
   const closeModal = (e) => {
     if (modalRef.current === e.target) {
       setShowModal(false)
     }
+    //addUser(form)
   }
 
   const keyPress = useCallback(
@@ -118,7 +133,7 @@ export const AddUserModalWindow = ({ showModal, setShowModal }) => {
           <animated.div style={animation}>
             <ModalWrapper showModal={showModal}>
               <ModalContent>
-                <AddUserForm />
+                <AddUserForm addUserModal={addUserModal} />
               </ModalContent>
               <CloseModalButton
                 aria-label='Close modal'

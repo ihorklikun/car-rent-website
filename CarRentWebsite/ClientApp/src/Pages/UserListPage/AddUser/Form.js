@@ -20,11 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function AddUserForm(props) {
-  const classes = useStyles()
-
-  const person = props.user
-
+function AddUserForm({ addUserModal }) {
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -58,7 +54,7 @@ function AddUserForm(props) {
           '\npassword: ' +
           form.password
       )
-      //addUser(form)
+      addUserModal(form)
     }
   }
 

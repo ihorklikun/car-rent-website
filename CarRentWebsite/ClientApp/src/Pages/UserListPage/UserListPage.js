@@ -111,11 +111,20 @@ function UserListPage() {
     setShowModal((prev) => !prev)
   }
 
+  const [newUser, setNewUser] = useState({
+    firstName: '',
+    lastName: '',
+    position: '',
+    email: '',
+    password: '',
+  })
+
   const addUser = (form) => {
     setNewUser(form)
-    //rows.push(
-    //  createData(form.firstName, form.lastName, form.position, form.email)
-    //)
+    rows.push(
+      createData(form.firstName, form.lastName, form.email, form.position)
+    )
+    alert('new user added')
     console.log(
       'Parameters were got' +
         '\n password: ' +
@@ -130,14 +139,6 @@ function UserListPage() {
         newUser.password
     )
   }
-
-  const [newUser, setNewUser] = useState({
-    firstName: '',
-    lastName: '',
-    position: '',
-    email: '',
-    password: '',
-  })
 
   const classes = useStyles()
   const [page, setPage] = React.useState(0)
@@ -209,7 +210,11 @@ function UserListPage() {
           Add user
         </Button>
         <br />
-        <AddUserModalWindow showModal={showModal} setShowModal={setShowModal} />
+        <AddUserModalWindow
+          showModal={showModal}
+          setShowModal={setShowModal}
+          addUser={addUser}
+        />
       </ModalContent>
     </ModalWrapper>
   )
