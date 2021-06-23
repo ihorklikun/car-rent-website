@@ -45,6 +45,10 @@
   width: 100%;
 }
 
+.dataTextLeft {
+  text-align: left;
+}
+
 .dataText {
   /* display: table; */
   margin: 0.5em auto 0.5em auto;
