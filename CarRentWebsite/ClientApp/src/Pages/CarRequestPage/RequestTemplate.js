@@ -4,7 +4,7 @@ import { AiFillCar } from 'react-icons/ai'
 import Button from 'react-bootstrap/Button'
 import { Row, Col } from 'react-bootstrap'
 
-function RequestTemplate(params) {
+function RequestTemplate({ car }) {
   return (
     <Row className='text-center templateStyle'>
       <Col md className='style1'>
@@ -39,7 +39,6 @@ function RequestTemplate(params) {
             Process
           </Button>
         </Row>
-        
       </Col>
     </Row>
   )

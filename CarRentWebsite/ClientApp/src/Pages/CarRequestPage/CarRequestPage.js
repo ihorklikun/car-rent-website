@@ -11,14 +11,26 @@ function CarRequestPage() {
     requests: null,
     inProgress: null,
   })
-  // useEffect(()=>{
-  //     saveData({isLoading: true});
-  //     const apiUrl = 'https://www.smashingmagazine.com/2020/06/rest-api-react-fetch-axios/';
-  //     axios.get(apiUrl).then((reply)=>{
-  //         const receivedData = reply.data;
-  //         saveData({isLoading: false, requests: receivedData, inProgress: receivedData});
-  //     });
-  // }, [saveData]);
+  const baseUrl = `http://localhost:25094/api`
+
+  const [cars, setCars] = useState(null)
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}/Cars/`)
+      .then((responce) => {
+        var data = responce.data
+        console.log(data)
+        if (data != null) {
+          setCars(data)
+        }
+      })
+      .catch((e) => {
+        setCars(null)
+        //console.log(e)
+      })
+  }, [setCars])
+
   if (data.isLoading === true)
     return (
       <Container className='text-center'>
