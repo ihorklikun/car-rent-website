@@ -180,7 +180,7 @@ function BookingCarPage() {
     //setTutorial(initialTutorialState)
     //console.log(rent)
     saveRent()
-    //GoToUserPage()
+    GoToUserPage()
   }
 
   const handleIdChange = (e) => {
