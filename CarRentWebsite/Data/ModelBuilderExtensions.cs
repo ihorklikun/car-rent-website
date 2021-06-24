@@ -11,6 +11,56 @@ namespace CarRentWebsite.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+
+            #region RentAdditionalOption
+            modelBuilder.Entity<RentAdditionalOption>().HasData(
+                new RentAdditionalOption
+                {
+                    Id = 1,
+                    Name = "Child Chair",
+                    Price = 50
+                },
+                new RentAdditionalOption
+                {
+                    Id = 2,
+                    Name = "Gps",
+                    Price = 25
+                },
+                new RentAdditionalOption
+                {
+                    Id = 3,
+                    Name = "Phone Holder",
+                    Price = 10
+                }
+            );
+            #endregion
+
+            #region RentStatus
+            modelBuilder.Entity<RentStatus>().HasData(
+                new CarStatus
+                {
+                    Id = 1,
+                    Name = "Created"
+                },
+                new CarStatus
+                {
+                    Id = 2,
+                    Name = "Accepted"
+                },
+                new CarStatus
+                {
+                    Id = 3,
+                    Name = "Started"
+                },
+                new CarStatus
+                {
+                    Id = 4,
+                    Name = "Finished"
+                }
+            );
+            #endregion
+
+
             #region Role
             modelBuilder.Entity<Role>().HasData(
                 new Role

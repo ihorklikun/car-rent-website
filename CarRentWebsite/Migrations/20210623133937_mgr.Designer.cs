@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210623080725_mgr")]
+    [Migration("20210623133937_mgr")]
     partial class mgr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,7 +199,7 @@ namespace CarRentWebsite.Migrations
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
                             KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 380, DateTimeKind.Local).AddTicks(4948),
+                            RegisterDate = new DateTime(2021, 6, 23, 16, 39, 37, 55, DateTimeKind.Local).AddTicks(2092),
                             RegisterNumber = "BO7104RT",
                             SeatsCount = 4,
                             TransmissionId = 1,
@@ -217,7 +217,7 @@ namespace CarRentWebsite.Migrations
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
                             KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9926),
+                            RegisterDate = new DateTime(2021, 6, 23, 16, 39, 37, 57, DateTimeKind.Local).AddTicks(3565),
                             RegisterNumber = "AA7104MT",
                             SeatsCount = 4,
                             TransmissionId = 2,
@@ -235,7 +235,7 @@ namespace CarRentWebsite.Migrations
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
                             KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9970),
+                            RegisterDate = new DateTime(2021, 6, 23, 16, 39, 37, 57, DateTimeKind.Local).AddTicks(3598),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -253,7 +253,7 @@ namespace CarRentWebsite.Migrations
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
                             KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9977),
+                            RegisterDate = new DateTime(2021, 6, 23, 16, 39, 37, 57, DateTimeKind.Local).AddTicks(3605),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -926,6 +926,26 @@ namespace CarRentWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RentAdditionalOptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Child Chair",
+                            Price = 50.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Gps",
+                            Price = 25.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Phone Holder",
+                            Price = 10.0
+                        });
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.RentStatus", b =>
@@ -941,6 +961,28 @@ namespace CarRentWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RentStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Created"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Accepted"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Started"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Finished"
+                        });
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Review", b =>

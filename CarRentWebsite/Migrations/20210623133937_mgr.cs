@@ -527,6 +527,7 @@ namespace CarRentWebsite.Migrations
                 values: new object[,]
                 {
                     { 11, "Minivan" },
+                    { 18, "Compact SUV" },
                     { 17, "Pickup truck" },
                     { 16, "Mid-size pickup truck" },
                     { 15, "Mini pickup truck" },
@@ -534,11 +535,10 @@ namespace CarRentWebsite.Migrations
                     { 13, "Mid-size SUV" },
                     { 12, "Mini SUV" },
                     { 10, "Compact minivan" },
-                    { 5, "Entry-level car" },
-                    { 8, "Hatchback" },
                     { 7, "Mid-size car" },
+                    { 8, "Hatchback" },
                     { 6, "Full-size car" },
-                    { 18, "Compact SUV" },
+                    { 5, "Entry-level car" },
                     { 4, "Mid-size car" },
                     { 3, "Compact car" },
                     { 2, "Subcompact car" },
@@ -552,8 +552,8 @@ namespace CarRentWebsite.Migrations
                 values: new object[,]
                 {
                     { 3, "Repair" },
-                    { 2, "Rent" },
-                    { 1, "Idle" }
+                    { 1, "Idle" },
+                    { 2, "Rent" }
                 });
 
             migrationBuilder.InsertData(
@@ -561,9 +561,9 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Econom" },
+                    { 3, "Luxury" },
                     { 2, "Business" },
-                    { 3, "Luxury" }
+                    { 1, "Econom" }
                 });
 
             migrationBuilder.InsertData(
@@ -592,8 +592,8 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "FuelCapacity", "Name", "Power", "Torque", "WinCode" },
                 values: new object[,]
                 {
-                    { 4, 6, "Engine4", 120, 45, "9034hh5" },
-                    { 3, 6, "Engine3", 120, 45, "1123456" }
+                    { 1, 6, "Engine1", 120, 45, "ASD45ufa95" },
+                    { 2, 6, "Engine2", 120, 45, "ASttrra95" }
                 });
 
             migrationBuilder.InsertData(
@@ -601,8 +601,8 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "FuelCapacity", "Name", "Power", "Torque", "WinCode" },
                 values: new object[,]
                 {
-                    { 1, 6, "Engine1", 120, 45, "ASD45ufa95" },
-                    { 2, 6, "Engine2", 120, 45, "ASttrra95" }
+                    { 3, 6, "Engine3", 120, 45, "1123456" },
+                    { 4, 6, "Engine4", 120, 45, "9034hh5" }
                 });
 
             migrationBuilder.InsertData(
@@ -610,11 +610,32 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Petrol" },
-                    { 2, "Diesel" },
+                    { 5, "Propane" },
                     { 3, "Electric" },
                     { 4, "Hybrid" },
-                    { 5, "Propane" }
+                    { 1, "Petrol" },
+                    { 2, "Diesel" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RentAdditionalOptions",
+                columns: new[] { "Id", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, "Child Chair", 50.0 },
+                    { 2, "Gps", 25.0 },
+                    { 3, "Phone Holder", 10.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RentStatuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 4, "Finished" },
+                    { 1, "Created" },
+                    { 2, "Accepted" },
+                    { 3, "Started" }
                 });
 
             migrationBuilder.InsertData(
@@ -633,9 +654,9 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 2, "MT" },
                     { 3, "AM" },
                     { 1, "AT" },
-                    { 2, "MT" },
                     { 4, "CVT" }
                 });
 
@@ -644,10 +665,10 @@ namespace CarRentWebsite.Migrations
                 columns: new[] { "Id", "BrandId", "CarClassId", "CarStatusId", "CarTypeId", "Description", "EngineId", "FuelId", "ImageUrl", "KilometersDriven", "Model", "RegisterDate", "RegisterNumber", "SeatsCount", "TransmissionId", "TrunkSize" },
                 values: new object[,]
                 {
-                    { 1, 1, 2, 1, 1, "Car description...", 2, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 11, 7, 25, 380, DateTimeKind.Local).AddTicks(4948), "BO7104RT", 4, 1, 40 },
-                    { 2, 3, 4, 1, 2, "Car description2...", 3, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9926), "AA7104MT", 4, 2, 60 },
-                    { 3, 1, 5, 1, 3, "Car description2...", 4, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9970), "AE5544KE", 4, 3, 80 },
-                    { 4, 1, 5, 1, 3, "Car description2...", 4, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9977), "AE5544KE", 4, 3, 60 }
+                    { 1, 1, 2, 1, 1, "Car description...", 2, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 16, 39, 37, 55, DateTimeKind.Local).AddTicks(2092), "BO7104RT", 4, 1, 40 },
+                    { 2, 3, 4, 1, 2, "Car description2...", 3, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 16, 39, 37, 57, DateTimeKind.Local).AddTicks(3565), "AA7104MT", 4, 2, 60 },
+                    { 3, 1, 5, 1, 3, "Car description2...", 4, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 16, 39, 37, 57, DateTimeKind.Local).AddTicks(3598), "AE5544KE", 4, 3, 80 },
+                    { 4, 1, 5, 1, 3, "Car description2...", 4, 1, "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg", 0, null, new DateTime(2021, 6, 23, 16, 39, 37, 57, DateTimeKind.Local).AddTicks(3605), "AE5544KE", 4, 3, 60 }
                 });
 
             migrationBuilder.InsertData(
