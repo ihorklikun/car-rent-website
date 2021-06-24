@@ -463,7 +463,6 @@ export default class AddNewCar extends Component{
                             </Row>
                             <Row className={"d-flex flex-row"} >
                                 <Col className={"mr-auto d-flex justify-content-start my-1 "} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"}>
-                                    <Button variant={"secondary"}>Create Initial Report </Button>
                                     <Button variant={"secondary"} className={"mx-1"} onClick={this.handleShowImages}>Add Car Images</Button>
                                 </Col>
                                 <Col className={"ml-auto mr-0 d-flex justify-content-end my-1"}  xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"}  >

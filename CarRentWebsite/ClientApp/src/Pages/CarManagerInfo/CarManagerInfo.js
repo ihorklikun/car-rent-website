@@ -41,7 +41,7 @@ export default class CarManagerInfo extends Component{
                 this.setState(state=>({
                     car: data,
                     brand: data.brand.name,
-                    model: data.registerNumber,
+                    model: data.model,
                     winCode: data.engine.winCode
                 }))
                 console.log(this.state);

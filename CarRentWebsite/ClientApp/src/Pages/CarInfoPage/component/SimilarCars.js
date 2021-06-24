@@ -103,7 +103,7 @@ export default  class SimilarCars extends React.Component{
                             return (
                                 <Coll xxl={2} xl={3} lg={4} md={4} sm={5} xs={6} className={"mx-2 px-0"}>
                                     <CarCard Id={carCard.id} Title={carCard.brand.name}
-                                             Description={carCard.description} Price={carCard.Price}/>
+                                             Description={carCard.description} Price={"20"}/>
                                 </Coll>
                             )
                         })}
