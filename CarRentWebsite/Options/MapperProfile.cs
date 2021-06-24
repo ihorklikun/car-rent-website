@@ -11,6 +11,7 @@ using CarRentWebsite.ViewModels.Engine;
 using CarRentWebsite.ViewModels.RentStatus;
 using CarRentWebsite.ViewModels.Rent;
 using CarRentWebsite.ViewModels.Transmission;
+using CarRentWebsite.ViewModels.Review;
 
 namespace CarRentWebsite.Options
 {
@@ -55,9 +56,12 @@ namespace CarRentWebsite.Options
 
             CreateMap<Rent, RentViewModel>().MaxDepth(2);
             CreateMap<RentViewModel, Rent>().MaxDepth(2);
-
+            
             CreateMap<Rent, CreateRentViewModel>().MaxDepth(2);
             CreateMap<CreateRentViewModel, Rent>().MaxDepth(2);
+
+            CreateMap<Review, ReviewViewModel>().MaxDepth(2);
+            CreateMap<ReviewViewModel, Review>().MaxDepth(2);
 
 
             CreateMap<RentAdditionalOption, CreateRentAdditionalOptionViewModel>().MaxDepth(2);

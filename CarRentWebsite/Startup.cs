@@ -26,6 +26,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace CarRentWebsite
 {
@@ -75,6 +76,11 @@ namespace CarRentWebsite
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    //options.SerializerSettings.ContractResolver = new DefaultContractResolver 
+                    //{
+                    //    NamingStrategy = new CamelCaseNamingStrategy()
+                    //};
+                    //options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
                     options.SerializerSettings.Converters.Add(new NetTopologySuite.IO.Converters.GeometryConverter());
                 });
             services.AddRazorPages();
