@@ -38,14 +38,14 @@ function AppUserPage(props){
             // }).catch(e=>{
             //     console.log(e);
             // });
-            var personInfo = localStorage.getItem("person");
+            var personInfo = localStorage.getItem("currentUser");
             var data =  JSON.parse(personInfo);
             console.log(personInfo);
             setUserInfo(data);
     }, [setUserInfo]);
 
     useEffect(()=>{
-        if(userInfo?.Role?.RoleId == 1){
+        if(userInfo?.roleId == 1){
             // http.get("").then((responce)=>{
             //     const data = responce.data;
             //     setUserRentInfo(data);
@@ -65,7 +65,7 @@ function AppUserPage(props){
     }
 
     function getContent () {
-        if(userInfo?.Role?.RoleId == 1){
+        if(userInfo?.roleId == 1){
             return (
             <Container fluid>
                 <h1 className = "header">Rented cars</h1>
@@ -75,7 +75,7 @@ function AppUserPage(props){
             </Container>
             );
         }
-        else if(userInfo?.Role?.RoleId == 0){
+        else if(userInfo?.roleId == 0){
             return <Container fluid>
                     <Button variant="secondary" id ="buttonStyle" onClick = {() =>history.push({
                         pathname: '/manager/cars'
@@ -85,7 +85,7 @@ function AppUserPage(props){
                     })}>Rents page</Button>
             </Container>
         }
-        else if(userInfo?.Role?.RoleId == 2){
+        else if(userInfo?.roleId == 2){
             return <Container>
                     <Button variant="secondary" id ="buttonStyle" onClick = {()=>history.push({
                         pathname: '/service'
@@ -104,9 +104,9 @@ function AppUserPage(props){
                 </Col>
                 <Col md={9} className = 'my-auto'>
                     <div className = ' h-100'>
-                        <h3 className ="textStyle">Name: {userInfo?.Surname ?? "" + ' ' + userInfo?.Name ?? ""}</h3>
-                        <h3 className = "textStyle">Email: {userInfo?.Email ?? ""}</h3>
-                        <h3 className="textStyle">Position: {userInfo?.Role?.Name ?? ""}</h3>
+                        <h3 className ="textStyle">Name: {userInfo.name + ' ' + userInfo.surname}</h3>
+                        <h3 className = "textStyle">Email: {userInfo.email }</h3>
+                        <h3 className="textStyle">Position: {userInfo.roleName }</h3>
                     </div>
                 </Col>
             </Row>

@@ -61,8 +61,8 @@ export default function NaviBar() {
 
     function handleProfileClick(){
         history.push({
-            pathname: '/user/'+person.id,
-            state: {personId: person.id}
+            pathname: '/user/' + person.id,
+            state: { personId: person.id}
         });
     }
     useEffect(()=>{
