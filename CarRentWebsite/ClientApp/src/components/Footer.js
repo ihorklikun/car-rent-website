@@ -18,7 +18,12 @@ const Footer = () => (
     }}
   >
     <Row>
-      <Col lg={2}>
+      <Col
+        lg={2}
+        style={{
+          width: '25%',
+        }}
+      >
         <center>
           <a href='/'>
             <img
@@ -33,11 +38,15 @@ const Footer = () => (
           <label>All rights reserved © 2021</label>
         </center>
       </Col>
-      <Col lg={2}>
+      <Col
+        lg={2}
+        style={{
+          width: '25%',
+        }}
+      >
         <div
           style={{
             margin: '20px 10px',
-            top: '90%',
           }}
         >
           <label>Navigation:</label>
@@ -50,7 +59,12 @@ const Footer = () => (
           </div>
         </div>
       </Col>
-      <Col lg={4}>
+      <Col
+        lg={4}
+        style={{
+          width: '25%',
+        }}
+      >
         <div style={{ margin: '15px 10px' }}>
           <label>Social media:</label>
           <div>
@@ -121,7 +135,12 @@ const Footer = () => (
         </div>
       </Col>
 
-      <Col lg={4}>
+      <Col
+        lg={4}
+        style={{
+          width: '25%',
+        }}
+      >
         <div style={{ float: 'left', margin: '12px 10px' }}>
           <label>Contact us: </label>
           <br />
