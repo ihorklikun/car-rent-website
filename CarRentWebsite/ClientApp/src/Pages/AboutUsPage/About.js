@@ -14,7 +14,7 @@ import photoIvan from './Images/Ivan.png';
 import photoIgor from './Images/Igor.png';
 import photoValentyn from './Images/Valentyn.jpg';
 import photoAndriy from './Images/Andriy.jpg';
-
+import photoTaras from './Images/Taras.jpg'
 export default class About extends Component {
     render() {
         return (
@@ -121,7 +121,7 @@ export default class About extends Component {
                                             <Card.Img
                                                 style={{padding:"20px"}}
                                                 variant="top"
-                                                src=""
+                                                src={photoTaras}
                                             />
                                             <Card.Body>
                                                 <Card.Title>{this.props.Title}</Card.Title>

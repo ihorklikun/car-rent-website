@@ -326,7 +326,7 @@ export default class AddNewCar extends Component{
                                             )}
                                             <option onClick={this.handleShowBrand} selected={true}>add new...</option>
                                         </FormControl>
-                                        <NewBrandModal show={this.state.brandModalShow} onHide={this.handleHideBrand}></NewBrandModal>
+                                        <NewBrandModal show={this.state.brandModalShow} brands={this.state.brands} onHide={this.handleHideBrand}></NewBrandModal>
                                     </FormGroup>
                                 </Col>
                                 <Col>
