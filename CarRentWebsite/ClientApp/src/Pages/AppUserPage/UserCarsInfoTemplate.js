@@ -24,13 +24,13 @@ function UserCarsInfoTemplate(props){
                 <p className = "dataText text-left">{begDate ?? "Rent start date"} </p>
                 <h5 className = "headerText">Rent end date</h5>
                 <p className = "dataText text-left">{endDate ?? "Rent rent date"} </p>
-                <h5 className = "headerText">Price</h5>
+                <h5 className = "headerText " style={{backgroundColor: "#a4eb34"}}>Price</h5>
                 <p className = "dataText text-left">{(data?.price + " $")?? "Price"}</p>
             </Col>
             <Col md>
                 <h5 className ="headerText">Additional oprtions</h5>
                 <div className = "text-left">
-                        {data.additionalOptions.map((option)=>(<p key={option.id}>{option.name + " " +option.price}</p>))}
+                        {data.additionalOptions.map((option)=>(<p className="dataText text-left" key={option.id}>{option.name + " - " +option.price +"$"}</p>))}
                 </div>
             </Col>
         </Row>

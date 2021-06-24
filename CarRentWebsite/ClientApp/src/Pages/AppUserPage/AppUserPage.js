@@ -18,7 +18,7 @@ var rent = [{
     "id": 0,
     "beginDate": "2021-06-20T13:12:54.424Z",
     "endDate": "2021-06-25T13:12:54.424Z",
-    "price": 0,
+    "price": 300,
     "rentStatus": {
       "id": 0,
       "name": "string"
@@ -86,8 +86,8 @@ var rent = [{
     "additionalOptions": [
       {
         "id": 0,
-        "name": "string",
-        "price": 0
+        "name": "Child seat",
+        "price": 20
       }
     ]
   }];
