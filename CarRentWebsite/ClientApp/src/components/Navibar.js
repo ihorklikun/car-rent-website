@@ -45,7 +45,7 @@ export default function NaviBar() {
 
     function handleSignIn() {
        
-        authenticationService.login("new@example.com", "string")
+        authenticationService.login("user@example.com", "string")
         var personData = localStorage.getItem("currentUser");
         var data = JSON.parse(personData);
         if (personData !== null) {

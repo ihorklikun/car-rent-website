@@ -26,14 +26,13 @@ namespace CarRentWebsite.Controllers
         {
             _mapper = mapper;
             _context = context;
-            //_service = service;
         }
 
         // GET: api/user/5
         [HttpGet("rents/user/{id}")]
         public async Task<ActionResult<RentViewModel>> GetRent(string id)
         {
-            var rents = await _context.Rents.Include(x=>x.Car.Location)
+            var rents = await _context.Rents.Include(x=>x.Car.Location.City)
                 .Include(x=>x.AdditionalOptions)
                 .Include(x=>x.RentStatus)
                 .Where(x=>x.CustomerId == id).ToListAsync();

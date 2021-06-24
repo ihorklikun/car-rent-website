@@ -7,9 +7,9 @@ function UserCarsInfoTemplate(props){
     return(
             <Row className = "text-center templateStyle">
             <Col md>
-                <h3 id = "carNameStyle">{data?.name ?? ""}</h3>
+                <h3 id = "carNameStyle">{data?.model ?? ""}</h3>
                 <AiFillCar size = '100px'/>
-                <h4 className = "headerText number">Number</h4>
+                <h4 className="headerText number">{data?.registerNumber ?? ""}</h4>
             </Col>
             <Col md >
                 <h5 className ="headerText">Car rent place</h5>
@@ -20,11 +20,11 @@ function UserCarsInfoTemplate(props){
             </Col>
             <Col md>
                 <h5 className = "headerText">Rent start date</h5>
-                <p className = "dataText text-left">{data?.BeginDate ?? "Rent start date"} </p>
+                <p className = "dataText text-left">{data?.beginDate ?? "Rent start date"} </p>
                 <h5 className = "headerText">Rent end date</h5>
-                <p className = "dataText text-left">{data?.EndDate ?? "Rent rent date"} </p>
+                <p className = "dataText text-left">{data?.endDate ?? "Rent rent date"} </p>
                 <h5 className = "headerText">Price</h5>
-                <p className = "dataText text-left">{data?.Price?? "Price"}</p>
+                <p className = "dataText text-left">{data?.price?? "Price"}</p>
             </Col>
         </Row>
     );
