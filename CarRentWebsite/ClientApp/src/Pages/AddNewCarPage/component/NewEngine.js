@@ -40,11 +40,27 @@ export default class NewEngineModal extends Component{
         }
     }
     handleSubmit(event){
-        if(!((this.state.name)&&(this.state.name!=""))){
-            if(!this.state.engines.some(engine=>engine.name.toUpperCase() ==this.state.name.toUpperCase())) {
-                http.post('./Brands',{
-                    name:this.state.name,
-                    cars:[]
+        if(!((this.state.name)&&(this.state.name!=""))) {
+            this.setState(state=>({nameError:"enter Name"}))
+        } if(!((this.state.fuel)&&(this.state.fuel!=0))){
+            this.setState(state=>({fuelError:"enter Engine Fuel Capacity"}))
+        } if(!((this.state.torque)&&(this.state.torque!=0))) {
+            this.setState(state=>({torqueError: "enter Engine Torque"}))
+        } if(!((this.state.power)&&(this.state.power!=0))){
+            this.setState(state=>({powerError: "enter Engine Power"}))
+        }  if(!((this.state.winCode)&&(this.state.winCode!=""))){
+            this.setState(state=>({winCodeError: "enter win Code"}))
+        }
+        if((this.state.nameError==NaN)&&(this.state.fuelError==NaN)&&(this.state.torqueError==NaN)&&(this.state.powerError==NaN)&&(this.state.winCodeError))
+        {
+            if (!this.state.engines.some(engine => engine.name.toUpperCase() == this.state.name.toUpperCase())) {
+                http.post('./Engines', {
+                    name: this.state.name,
+                    fuelCapacity:this.state.fuel,
+                    power:this.state.power,
+                    torque:this.state.torque,
+                    winCode:this.state.winCode,
+                    cars: []
                 }).then(function (response) {
                     console.log(response);
                 }).catch(function (error) {
@@ -52,13 +68,9 @@ export default class NewEngineModal extends Component{
                 });
                 console.log(this.state.brands);
                 this.props.onHide();
-            }else{
-                this.setState(state=>({nameError:"Engine with enter name already exist"}))
+            } else {
+                this.setState(state => ({nameError: "Engine with enter name already exist"}))
             }
-
-        }else {
-            this.setState(state=>({nameError:"enter Name"}))
-
         }
     }
     render() {

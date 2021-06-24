@@ -195,38 +195,102 @@ export default class AddNewCar extends Component{
     }
     handleHideFuel(){
     this.setState(state=>({fuelModalShow:false}));
+        http.get("./Fuels/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                fuels:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
     }
     handleShowBrand(){
         this.setState(state=>({brandModalShow:true}));
     }
     handleHideBrand(){
         this.setState(state=>({brandModalShow:false}));
+        http.get("./Brands/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                brands:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
+
     }
     handleShowStatus(){
         this.setState(state=>({statusModalShow:true}));
     }
     handleHideStatus(){
         this.setState(state=>({statusModalShow:false}));
+        http.get("./CarStatus/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                status:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
     }handleShowType(){
         this.setState(state=>({typeModalShow:true}));
     }
     handleHideType(){
         this.setState(state=>({typeModalShow:false}));
+        http.get("./CarTypes/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                types:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
     }handleShowEngine(){
         this.setState(state=>({engineModalShow:true}));
     }
     handleHideEngine(){
         this.setState(state=>({engineModalShow:false}));
+        http.get("./Engines/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                engines:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
     }handleShowTransmission(){
         this.setState(state=>({transmissionModalShow:true}));
     }
     handleHideTransmission(){
         this.setState(state=>({transmissionModalShow:false}));
+        http.get("./Transmissions/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                transmissions:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
     }handleShowClass(){
         this.setState(state=>({classModalShow:true}));
     }
     handleHideClass(){
         this.setState(state=>({classModalShow:false}));
+        http.get("./CarClasses/").then((responce)=>{
+            const data = responce.data;
+            this.setState(state=>({
+                classes:data
+            }))
+        }).catch(error=>{
+            this.setState(state=>({car:null}))
+            console.log(error);
+        });
     }
     componentDidMount() {
         http.get("./Brands/").then((responce)=>{
@@ -302,6 +366,9 @@ export default class AddNewCar extends Component{
         console.log(this.state)
     }
     handleOnSubmit(){
+
+
+
     }
     render() {
         return(
