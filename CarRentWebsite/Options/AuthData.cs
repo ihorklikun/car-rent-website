@@ -12,5 +12,7 @@ namespace CarRentWebsite.Options
         public string Token { get; set; }
         public long TokenExpirationTime { get; set; }
         public string Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
     }
 }

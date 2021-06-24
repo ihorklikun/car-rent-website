@@ -45,7 +45,11 @@ namespace CarRentWebsite.Controllers
                 return BadRequest(new { password = "invalid password" });
             }
 
-            return _authService.GetAuthData(user.Id);
+            var authData = _authService.GetAuthData(user.Id);
+            authData.Name = user.Name;
+            authData.Surname = user.Surname;
+
+            return authData;
         }
 
         [HttpPost("register")]
