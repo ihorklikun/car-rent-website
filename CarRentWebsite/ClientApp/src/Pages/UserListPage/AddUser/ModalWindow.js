@@ -7,12 +7,13 @@ import AddUserForm from './Form'
 
 const Background = styled.div`
   width: 100%;
-  height: 100%;
+  height: 135%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20%;
 `
 
 const ModalWrapper = styled.div`

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210623094438_mgr1")]
+    [Migration("20210624192336_mgr1")]
     partial class mgr1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -250,7 +250,7 @@ namespace CarRentWebsite.Migrations
                             KilometersDriven = 324234,
                             LocationId = 1,
                             Model = "AMG G3",
-                            RegisterDate = new DateTime(2021, 6, 23, 12, 44, 37, 651, DateTimeKind.Local).AddTicks(7835),
+                            RegisterDate = new DateTime(2021, 6, 24, 22, 23, 35, 727, DateTimeKind.Local).AddTicks(3392),
                             RegisterNumber = "BO7104RT",
                             SeatsCount = 4,
                             TransmissionId = 1,
@@ -270,7 +270,7 @@ namespace CarRentWebsite.Migrations
                             KilometersDriven = 3234,
                             LocationId = 4,
                             Model = "Model S",
-                            RegisterDate = new DateTime(2021, 6, 23, 12, 44, 37, 654, DateTimeKind.Local).AddTicks(2672),
+                            RegisterDate = new DateTime(2021, 6, 24, 22, 23, 35, 730, DateTimeKind.Local).AddTicks(3038),
                             RegisterNumber = "AA7104MT",
                             SeatsCount = 4,
                             TransmissionId = 2,
@@ -290,7 +290,7 @@ namespace CarRentWebsite.Migrations
                             KilometersDriven = 300032,
                             LocationId = 2,
                             Model = "525",
-                            RegisterDate = new DateTime(2021, 6, 23, 12, 44, 37, 654, DateTimeKind.Local).AddTicks(2709),
+                            RegisterDate = new DateTime(2021, 6, 24, 22, 23, 35, 730, DateTimeKind.Local).AddTicks(3079),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -310,7 +310,7 @@ namespace CarRentWebsite.Migrations
                             KilometersDriven = 3343,
                             LocationId = 4,
                             Model = "325",
-                            RegisterDate = new DateTime(2021, 6, 23, 12, 44, 37, 654, DateTimeKind.Local).AddTicks(2716),
+                            RegisterDate = new DateTime(2021, 6, 24, 22, 23, 35, 730, DateTimeKind.Local).AddTicks(3086),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
