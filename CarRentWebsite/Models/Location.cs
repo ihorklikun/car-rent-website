@@ -1,23 +1,21 @@
-﻿using NetTopologySuite.Geometries;
+﻿using System.Collections.Generic;
+using NetTopologySuite.Geometries;
 
 namespace CarRentWebsite.Models
 {
     public class Location
     {
+        public Location()
+        {
+            Cars = new HashSet<Car>();
+        }
         public int Id { get; set; }
         
-        public LocationPoint Coordinate { get; set; }
-        
-        public int CountryId { get; set; }
-
-        public Country Country { get; set; }
-        
         public int CityId { get; set; }
-        
         public City City { get; set; }
         
         public string Street { get; set; }
-        
         public string Building { get; set; }
+        public ICollection<Car> Cars { get; set; }
     }
 }

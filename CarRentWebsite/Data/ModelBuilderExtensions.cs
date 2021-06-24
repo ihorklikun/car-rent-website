@@ -60,7 +60,6 @@ namespace CarRentWebsite.Data
             );
             #endregion
 
-
             #region Role
             modelBuilder.Entity<Role>().HasData(
                 new Role
@@ -392,65 +391,37 @@ namespace CarRentWebsite.Data
             );
             #endregion
 
-            #region Country
-            modelBuilder.Entity<Country>().HasData(
-                new Country
+            #region Location
+            modelBuilder.Entity<Location>().HasData(
+                new Location
                 {
                     Id = 1,
-                    Name = "Ukraine"
+                    Building = "7a",
+                    Street = "Veresneva Street",
+                    CityId = 4
                 },
-                new Country
+                new Location
                 {
                     Id = 2,
-                    Name = "Poland"
+                    Building = "17",
+                    Street = "Bandera Street",
+                    CityId = 2
                 },
-                new Country
+                new Location
                 {
                     Id = 3,
-                    Name = "Germany"
+                    Building = "46",
+                    Street = "Heroes Avenue",
+                    CityId = 1
+                },
+                new Location
+                {
+                    Id = 4,
+                    Building = "34",
+                    Street = "Antonov Street",
+                    CityId = 3
                 }
             );
-            #endregion
-
-            #region Location
-            //modelBuilder.Entity<Location>().HasData(
-            //    new Location
-            //    {
-            //        Id = 1,
-            //        Building = "7a",
-            //        Street = "Veresneva Street",
-            //        CityId = 4,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(50.507593, 30.388593)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 2,
-            //        Building = "17",
-            //        Street = "Bandera Street",
-            //        CityId = 2,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(49.834799, 24.008853)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 3,
-            //        Building = "46",
-            //        Street = "Heroes Avenue",
-            //        CityId = 1,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(48.408784, 35.075180)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 4,
-            //        Building = "34",
-            //        Street = "Antonov Street",
-            //        CityId = 3,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(51.834799, 24.008853)
-            //    }
-            //);
             #endregion
 
             modelBuilder.Entity<Car>().HasData(
@@ -458,13 +429,15 @@ namespace CarRentWebsite.Data
                 {
                     Id = 1,
                     BrandId = 1,
+                    Model = "model1",
+                    KilometersDriven = 1111,
                     CarClassId = 2,
                     CarStatusId = 1,
                     CarTypeId = 1,
                     EngineId = 2,
                     Description = "Car description...",
                     SeatsCount = 4,
-                    //LocationId = 1,
+                    LocationId = 1,
                     FuelId = 1,
                     TransmissionId = 1,
                     RegisterDate = DateTime.Now,
@@ -477,13 +450,15 @@ namespace CarRentWebsite.Data
                 {
                     Id = 2,
                     BrandId = 3,
+                    Model = "model2",
+                    KilometersDriven = 2222,
                     CarClassId = 4,
                     CarStatusId = 1,
                     CarTypeId = 2,
                     EngineId = 3,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    //LocationId = 4,
+                    LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 2,
                     RegisterDate = DateTime.Now,
@@ -496,6 +471,8 @@ namespace CarRentWebsite.Data
                 new Car
                 {
                     Id = 3,
+                    Model = "model3",
+                    KilometersDriven = 3333,
                     BrandId = 1,
                     CarClassId = 5,
                     CarStatusId = 1,
@@ -503,7 +480,7 @@ namespace CarRentWebsite.Data
                     EngineId = 4,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    //LocationId = 2,
+                    LocationId = 2,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,
@@ -516,13 +493,15 @@ namespace CarRentWebsite.Data
                 {
                     Id = 4,
                     BrandId = 1,
+                    Model = "model4",
+                    KilometersDriven = 4444,
                     CarClassId = 5,
                     CarStatusId = 1,
                     CarTypeId = 3,
                     EngineId = 4,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    //LocationId = 4,
+                    LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,

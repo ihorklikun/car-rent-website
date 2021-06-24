@@ -57,8 +57,8 @@ namespace CarRentWebsite.Models
         public string Model { get; set; }
         public int KilometersDriven { get; set; }
 
-        //public int LocationId { get; set; }
-        //public Location Location { get; set; }
+        public int LocationId { get; set; }
+        public Location Location { get; set; }
 
 
         public ICollection<Rent> Rents { get; set; }

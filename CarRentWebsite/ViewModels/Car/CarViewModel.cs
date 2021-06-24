@@ -44,5 +44,6 @@ namespace CarRentWebsite.ViewModels.Car
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }
         public ICollection<ReviewViewModel> Reviews { get; set; }
+        public LocationViewModel Location { get; set; }
     }
 }
