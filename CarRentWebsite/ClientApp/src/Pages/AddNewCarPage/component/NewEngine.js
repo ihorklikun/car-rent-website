@@ -1,10 +1,11 @@
 import React, {Component, isValidElement} from "react";
 import {Button, Col,Row, Form, FormControl, FormGroup, Modal} from "react-bootstrap";
+import http from "../../../http-common";
 
 export default class NewEngineModal extends Component{
     constructor(props) {
         super(props);
-        this.state={name:NaN,winCode:NaN,power:NaN,torque:NaN,fuel:NaN};
+        this.state={name:NaN,winCode:NaN,power:NaN,torque:NaN,fuel:NaN,nameError:NaN,winCodeError:NaN,powerError:NaN,torqueError:NaN,fuelError:NaN};
         this.handleSubmit=this.handleSubmit.bind(this)
         this.handleChanges=this.handleChanges.bind(this)
     }
@@ -15,23 +16,23 @@ export default class NewEngineModal extends Component{
         if ((event.target)){
             switch (name) {
                 case 'name': {
-                    this.setState(state => ({name: value}))
+                    this.setState(state => ({name: value,nameError:NaN}))
                 }
                 break;
                 case 'wincode': {
-                    this.setState(state => ({winCode: value}))
+                    this.setState(state => ({winCode: value,winCodeError:NaN}))
                 }
                 break
                 case 'power': {
-                    this.setState(state => ({power: value}))
+                    this.setState(state => ({power: value, powerError:NaN}))
                 }
                 break;
                 case 'torque': {
-                    this.setState(state => ({torque: value}))
+                    this.setState(state => ({torque: value,torqueError:NaN}))
                 }
                 break;
                 case 'fuel': {
-                    this.setState(state => ({fuel: value}))
+                    this.setState(state => ({fuel: value,fuelError:NaN}))
                 }
                 break
 
@@ -39,7 +40,26 @@ export default class NewEngineModal extends Component{
         }
     }
     handleSubmit(event){
-        console.log(this.state);
+        if(!((this.state.name)&&(this.state.name!=""))){
+            if(!this.state.engines.some(engine=>engine.name.toUpperCase() ==this.state.name.toUpperCase())) {
+                http.post('./Brands',{
+                    name:this.state.name,
+                    cars:[]
+                }).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    alert(error);
+                });
+                console.log(this.state.brands);
+                this.props.onHide();
+            }else{
+                this.setState(state=>({nameError:"Engine with enter name already exist"}))
+            }
+
+        }else {
+            this.setState(state=>({nameError:"enter Name"}))
+
+        }
     }
     render() {
         return(
@@ -55,13 +75,19 @@ export default class NewEngineModal extends Component{
                                     <Form.Label>
                                         Engine Name
                                     </Form.Label>
-                                    <FormControl name={'name'} type={"text"} placeholder={"Name"} onChange={this.handleChanges}></FormControl>
+                                    <FormControl name={'name'} type={"text"} placeholder={"Name"} isInvalid={!!this.state.nameError} onChange={this.handleChanges}></FormControl>
+                                    <FormControl.Feedback type={"invalid"}>
+                                        {this.state.nameError}
+                                    </FormControl.Feedback>
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
                                     <Form.Label>WinCode</Form.Label>
-                                    <FormControl name={'wincode'} type={"text"} placeholder={"WinCode"}></FormControl>
+                                    <FormControl name={'wincode'} type={"text"} isInvalid={!!this.state.winCodeError} placeholder={"WinCode"}></FormControl>
+                                    <FormControl.Feedback type={"invalid"}>
+                                        {this.state.winCodeError}
+                                    </FormControl.Feedback>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -69,7 +95,10 @@ export default class NewEngineModal extends Component{
                                 <Col>
                                 <FormGroup>
                                     <Form.Label>Power</Form.Label>
-                                    <FormControl name={'power'} type={"number"} min={0} step={10} ></FormControl>
+                                    <FormControl name={'power'} type={"number"} isInvalid={!!this.state.powerError} min={0} step={10} ></FormControl>
+                                    <FormControl.Feedback type={"invalid"}>
+                                        {this.state.powerError}
+                                    </FormControl.Feedback>
                                 </FormGroup>
                                 </Col>
                             </Row>
@@ -77,7 +106,10 @@ export default class NewEngineModal extends Component{
                                 <Col>
                                 <FormGroup>
                                     <Form.Label>Torque</Form.Label>
-                                    <FormControl name={'torque'} type={"number"} min={0} step={10}></FormControl>
+                                    <FormControl name={'torque'} type={"number"} isInvalid={!!this.state.torqueError} min={0} step={10}></FormControl>
+                                    <FormControl.Feedback type={"invalid"}>
+                                        {this.state.torqueError}
+                                    </FormControl.Feedback>
                                 </FormGroup>
                                 </Col>
                             </Row>
@@ -85,7 +117,10 @@ export default class NewEngineModal extends Component{
                                 <Col>
                                 <FormGroup>
                                     <Form.Label>Fuel Capacity </Form.Label>
-                                    <FormControl name={'fuel'} type={"number"} min={0} step={0.1}></FormControl>
+                                    <FormControl name={'fuel'} type={"number"} isInvalid={!!this.state.fuelError} min={0} step={0.1}></FormControl>
+                                    <FormControl.Feedback type={"invalid"}>
+                                        {this.state.fuelError}
+                                    </FormControl.Feedback>
                                 </FormGroup>
                                 </Col>
                             </Row>

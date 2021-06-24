@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import './AppUserPageStyle.css';
 import {RiUserLine} from 'react-icons/ri';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-import UserCarsInfoTemplate from '../../components/UserCarsInfoTemplate'
+import UserCarsInfoTemplate from './UserCarsInfoTemplate'
 import http from '../../http-common';
 import {useHistory, useLocation } from "react-router-dom";
 // var personInfo = {
@@ -14,6 +14,83 @@ import {useHistory, useLocation } from "react-router-dom";
 //       "Name": "Manager"
 //     }
 //   };
+var rent = [{
+    "id": 0,
+    "beginDate": "2021-06-20T13:12:54.424Z",
+    "endDate": "2021-06-25T13:12:54.424Z",
+    "price": 0,
+    "rentStatus": {
+      "id": 0,
+      "name": "string"
+    },
+    "car": {
+      "id": 0,
+      "registerNumber": "AA 2021 BC",
+      "registerDate": "2021-06-23",
+      "description": "string",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjOLV4oC85vIevarurD4-EoGNKKyqKVY74w&usqp=CAU",
+      "seatsCount": 0,
+      "trunkSize": 0,
+      "model": "S63",
+      "kilometersDriven": 0,
+      "brand": {
+        "id": 0,
+        "name": "Mersedes"
+      },
+      "location": {
+        "id": 0,
+        "cityId": 0,
+        "city": {
+          "id": 0,
+          "name": "string"
+        },
+        "street": "string",
+        "building": "string"
+      },
+      "fuel": {
+        "id": 0,
+        "name": "string"
+      },
+      "engine": {
+        "id": 0,
+        "name": "string",
+        "fuelCapacity": 0,
+        "power": 0,
+        "torque": 0,
+        "winCode": "string"
+      },
+      "transmission": {
+        "id": 0,
+        "name": "string"
+      },
+      "carStatus": {
+        "id": 0,
+        "name": "string"
+      },
+      "carType": {
+        "id": 0,
+        "name": "string"
+      },
+      "carClass": {
+        "id": 0,
+        "name": "string"
+      },
+      "carPrices": [
+        {
+          "id": 0,
+          "daysCount": 0,
+          "price": 0
+        }
+      ]
+    },
+    "additionalOptions": [
+      {
+        "id": 0,
+        "name": "string",
+        "price": 0
+      }
+    ]
+  }];
 var json = [{
      "Price": "1800",
      "BeginDate": "2020-01-01",
@@ -40,30 +117,47 @@ function AppUserPage(props){
             // });
             var personInfo = localStorage.getItem("person");
             var data =  JSON.parse(personInfo);
-            console.log(personInfo);
+            //console.log(personInfo);
             setUserInfo(data);
     }, [setUserInfo]);
 
     useEffect(()=>{
         if(userInfo?.Role?.RoleId == 1){
-            // http.get("").then((responce)=>{
+            // http.get("/Rents").then((responce)=>{
             //     const data = responce.data;
             //     setUserRentInfo(data);
             // }).catch(e=>{
             //     console.log(e);
             // });
-            setUserRentInfo(json);
+            setUserRentInfo(rent);
         }
     });
 
     const getActiveRents = ()=>{
         if(userRentInfo != null){
-            return userRentInfo.map((unit)=>(<UserCarsInfoTemplate data={unit}/>))
+            return userRentInfo.map((unit)=>{
+                    var dateEnd = new Date(unit.endDate);
+                    var date = new Date();
+                    if(dateEnd > date)
+                     return (<UserCarsInfoTemplate data={unit} key={unit.id}/>);
+                    else return null})
         }else{
             return <Container/>;
         }
     }
-
+    const getRentsHistory = ()=>{
+        if(userRentInfo != null){
+            return userRentInfo.map((unit)=>{
+            var dateEnd = new Date(unit.endDate);
+            var date = new Date();
+            if(dateEnd < date)
+             return (<UserCarsInfoTemplate data={unit} key={unit.id}/>);
+            else return null;
+        })
+        }else{
+            return <Container/>;
+        }
+    }
     function getContent () {
         if(userInfo?.Role?.RoleId == 1){
             return (
@@ -71,7 +165,7 @@ function AppUserPage(props){
                 <h1 className = "header">Rented cars</h1>
                 {getActiveRents()}
                 <h1 className = "header">Rents history</h1>
-                <UserCarsInfoTemplate/>
+                {getRentsHistory()}
             </Container>
             );
         }
@@ -98,7 +192,7 @@ function AppUserPage(props){
     }
     if(userInfo!= null)
     return(
-        <Container className = 'col-md-8 col-sm-12 mt-5 text-center'>
+        <Container className="text-center">
             <h1 className = "header">User info </h1>
             <Container>
                 <Row className = 'pageStyle'>
@@ -113,8 +207,8 @@ function AppUserPage(props){
                     </div>
                 </Col>
             </Row>
+            
             </Container>
-        
         {getContent()}
         {/* <h1 className = "header">Rented cars</h1>
             {getActiveRents()}

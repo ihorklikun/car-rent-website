@@ -187,7 +187,7 @@ export default class CarBaseInfo extends React.Component{
                 <Container fluid={true} className={"px-lg-3 px-md-3 px-sm-1 px-xl-5 px-xxl-5 pt-3 mx-0 bg-light "}>
                     <Row>
                         <Coll>
-                            <CarFullName brand={this.state.car.brand.name} model={this.state.car.registerNumber}/>
+                            <CarFullName brand={this.state.car.brand.name} model={this.state.car.model}/>
                         </Coll>
                     </Row>
                     <Row>
@@ -232,7 +232,7 @@ export default class CarBaseInfo extends React.Component{
         }else {return  <Container fluid={true} className={"px-lg-3 px-md-3 px-sm-1 px-xl-5 px-xxl-5 pt-3 mx-0 bg-light "}>
             <Row>
                 <Coll>
-                    <CarFullName brand={"Mercedes-Benz"} model={"BO7104RT"}/>
+                    <CarFullName brand={"Mercedes-Benz"} model={"X5"}/>
                 </Coll>
             </Row>
             <Row>

@@ -82,7 +82,6 @@ namespace CarRentWebsite
                     Version = "v1",
                     Title = "Car Rent API",
                     Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://example.com/terms"),
                     License = new OpenApiLicense
                     {
                         Name = "Use under LICX",
