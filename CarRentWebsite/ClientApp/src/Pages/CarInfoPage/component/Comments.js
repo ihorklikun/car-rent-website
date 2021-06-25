@@ -206,7 +206,7 @@ export class ShowPaginationComments extends React.Component {
         http.get("./Reviews/").then((responce)=>{
             const data = responce.data;
             console.log(data.filter(data=>data.car.id==this.state.carId));
-            const carComments = data;//filter(data=>data.car.id==this.state.carId);
+            const carComments = data.filter(data=>data.car.id==this.state.carId);
             this.pages=[];
             let pageNum=0;
             for (var i = 0; i < carComments.length; i+=this.state.commentsOnPage) {
