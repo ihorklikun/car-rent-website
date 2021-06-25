@@ -40,13 +40,16 @@ export default function NaviBar() {
     const [person, setPerson] = useState(null);
     const [show, setShow] = useState(false);
     const [userId, setUserId] = useState(0);
+    
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     let history = useHistory();
-
-    function handleSignIn() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword]= useState("");
+    async function handleSignIn() {
        
-        authenticationService.login("user@example.com", "string")
+        //authenticationService.login("user@example.com", "string");
+        await authenticationService.login(email, password);
         var personData = localStorage.getItem("currentUser");
         var data = JSON.parse(personData);
         if (personData !== null) {
@@ -125,12 +128,12 @@ export default function NaviBar() {
                     <Form>
                         <Form.Group controlId="fromBasicEmail">
                             <Form.Label>Email Address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" value ={email} onChange={(e)=>{setEmail(e.target.value)}}/>
                             <Form.Text className="text-muted">We`ll never share your email with anyone else.</Form.Text>
                         </Form.Group>
                         <Form.Group controlId="fromBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" />
+                            <Form.Control type="password" placeholder="Enter password" value ={password} onChange={(e)=>{setPassword(e.target.value)}}/>
                         </Form.Group>
                         <Form.Group controlId="fromBasicCheckbox">
                             <Form.Check type="checkbox" label="Remember me" />

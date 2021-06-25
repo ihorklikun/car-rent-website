@@ -182,7 +182,7 @@ function AppUserPage(props) {
                 </Container>
             );
         }
-        else if (userInfo?.roleId == 0) {
+        else if (userInfo?.roleId == 2) {
             return <Container fluid>
                 <Button variant="secondary" id="buttonStyle" onClick={() => history.push({
                     pathname: '/manager/cars'
@@ -195,7 +195,7 @@ function AppUserPage(props) {
                 })}>Users page</Button>
             </Container>
         }
-        else if (userInfo?.roleId == 2) {
+        else if (userInfo?.roleId == 4) {
             return <Container>
                 <Button variant="secondary" id="buttonStyle" onClick={() => history.push({
                     pathname: '/service'
