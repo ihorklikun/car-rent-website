@@ -39,7 +39,7 @@ function AppUserPage(props) {
         })
       //setUserRentInfo(rent);
     }
-  }, )//[setUserInfo]
+  }, [setUserInfo])//
 
   useEffect(() => {
     //if (userInfo.roleId == 1) {
