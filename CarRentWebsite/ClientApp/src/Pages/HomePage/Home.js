@@ -181,10 +181,10 @@ export default class Home extends Component {
                   return 0;
             }
             else if(this.state.sort == "High-to-low"){
-                return b.price - a.price
+                return b.carPrices[3].price - a.carPrices[3].price
             }
             else if(this.state.sort == "Low-to-high"){
-                return a.price - b.price
+                return a.carPrices[3].price - b.carPrices[3].price
             }
         })
         console.log(sortedBooks);
@@ -195,7 +195,7 @@ export default class Home extends Component {
 
         if(+this.state.selectedMaxPrice >= 0 && +this.state.selectedMinPrice >= 0 &&
             this.state.selectedMaxPrice && this.state.selectedMinPrice){
-            sortedBooks = sortedBooks.filter(e => ((+e.price <= +this.state.selectedMaxPrice) && (+e.price >= +this.state.selectedMinPrice)));
+            sortedBooks = sortedBooks.filter(e => ((+e.carPrices[3].price <= +this.state.selectedMaxPrice) && (+e.carPrices[3].price >= +this.state.selectedMinPrice)));
         }
 
         if(+this.state.brands.length > 0){
