@@ -17,6 +17,6 @@ namespace CarRentWebsite.Models
         public string Name { get; set; }
 
         public ICollection<ConditionReport> LpcConditionReports { get; set; }
-        public virtual ICollection<ConditionReport> InteriorConditionReports { get; set; }
+        public ICollection<ConditionReport> InteriorConditionReports { get; set; }
     }
 }

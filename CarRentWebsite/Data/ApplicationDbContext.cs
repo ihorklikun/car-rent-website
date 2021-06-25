@@ -32,18 +32,18 @@ namespace CarRentWebsite.Data
                 .WithMany(c => c.LpcConditionReports)
                 .HasForeignKey(p => p.LpcConditionId)
                 .OnDelete(DeleteBehavior.NoAction);
-            
+
             builder.Entity<Car>()
                 .HasOne<Location>(x => x.Location)
                 .WithMany(c => c.Cars)
                 .HasForeignKey(x => x.LocationId)
                 .OnDelete(DeleteBehavior.Cascade);
-                
+
             builder.Seed();
         }
 
 
-        
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<ServiceWorker> ServiceWorkers { get; set; }

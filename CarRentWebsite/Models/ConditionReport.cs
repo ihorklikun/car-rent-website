@@ -32,7 +32,7 @@ namespace CarRentWebsite.Models
         public ConditionMark InteriorCondition { get; set; }
 
         public int LpcConditionId { get; set; }
-        public virtual ConditionMark LpcCondition { get; set; }
+        public ConditionMark LpcCondition { get; set; }
 
         public ICollection<CarServiceReport> CarServiceReports { get; set; }
     }

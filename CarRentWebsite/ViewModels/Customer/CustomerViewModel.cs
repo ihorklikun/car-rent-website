@@ -11,5 +11,9 @@ namespace CarRentWebsite.ViewModels.Customer
         public ICollection<RentViewModel> Rents { get; set; }
         //public ICollection<Review> Reviews { get; set; }
 
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string CustomerInfo { get; set; }
     }
 }

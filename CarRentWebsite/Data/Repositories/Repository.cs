@@ -35,16 +35,7 @@ namespace CarRentWebsite.Data.Repositories
         
         public virtual async Task<TEntity> GetById(object id, params Expression<Func<TEntity, object>>[] includes)
         {
-           
-            var entity = dbSet.Find(id);
-            IQueryable<TEntity> query = (IQueryable<TEntity>)entity;
-            if (includes != null)
-            {
-                query = includes.Aggregate(query,
-                          (current, include) => current.Include(include));
-            }
-
-            return await query.SingleOrDefaultAsync();
+            return await dbSet.FindAsync(id);
         }
 
         public virtual async Task<TEntity> Add(TEntity entity)

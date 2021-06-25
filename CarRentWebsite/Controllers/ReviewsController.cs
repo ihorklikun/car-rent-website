@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.Data.Repositories.Abstract;
+using AutoMapper;
+using CarRentWebsite.ViewModels.Review;
+using CarRentWebsite.Data.Repositories;
 
 namespace CarRentWebsite.Controllers
 {
@@ -14,48 +18,73 @@ namespace CarRentWebsite.Controllers
     [ApiController]
     public class ReviewsController : ControllerBase
     {
+        private readonly IRepository<Review> _repository;
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ReviewsController(ApplicationDbContext context)
+        public ReviewsController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
+            _repository = new Repository<Review>(context);
         }
 
         // GET: api/Reviews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        public async Task<ActionResult<IEnumerable<ReviewViewModel>>> GetReviews()
         {
-            return await _context.Reviews.ToListAsync();
+            var reviews = await _repository.GetAll(
+                x => x.Car,
+                x => x.Customer
+            );
+            var reviewViewModels = _mapper.Map< IEnumerable<Review>, IEnumerable<ReviewViewModel>>(reviews);
+            return Ok(reviewViewModels);
         }
 
         // GET: api/Reviews/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Review>> GetReview(int id)
+        public async Task<ActionResult<ReviewViewModel>> GetReview(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviews = await _repository.GetAll(
+                x => x.Car,
+                x => x.Customer
+            );
+
+            var review = reviews.FirstOrDefault(x => x.Id == id);
 
             if (review == null)
             {
                 return NotFound();
             }
 
-            return review;
+            var reviewViewModel = _mapper.Map<Review, ReviewViewModel>(review);
+            
+            return Ok(reviewViewModel);
         }
 
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReview(int id, Review review)
+        public async Task<ActionResult<ReviewViewModel>> PutReview(int id, UpdateReviewViewModel review)
         {
             if (id != review.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(review).State = EntityState.Modified;
-
+            var updateReview = _mapper.Map<UpdateReviewViewModel, Review>(review);
             try
             {
+                var reviewToUpdate = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == id);
+                reviewToUpdate.CreateDate = updateReview.CreateDate;
+                reviewToUpdate.Title = updateReview.Title;
+                reviewToUpdate.Text = updateReview.Text;
+                reviewToUpdate.Mark = updateReview.Mark;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -69,40 +98,44 @@ namespace CarRentWebsite.Controllers
                     throw;
                 }
             }
+            updateReview = await _repository.GetById(updateReview.Id);
 
-            return NoContent();
+            var updateReviewViewModel = _mapper.Map<Review, ReviewViewModel>(updateReview);
+            return Ok(updateReviewViewModel);
         }
 
         // POST: api/Reviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Review>> PostReview(Review review)
+        public async Task<ActionResult<ReviewViewModel>> PostReview(CreateReviewViewModel review)
         {
-            _context.Reviews.Add(review);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var createReview = _mapper.Map<CreateReviewViewModel, Review>(review);
+            var createdReview = await _repository.GetById((await _repository.Add(createReview)).Id);
+            var createdReviewViewModel = _mapper.Map<Review, ReviewViewModel>(createdReview);
 
-            return CreatedAtAction("GetReview", new { id = review.Id }, review);
+            return Ok(createdReviewViewModel);
         }
 
         // DELETE: api/Reviews/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReview(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
-            if (review == null)
+            if (!ReviewExists(id))
             {
-                return NotFound();
+                return NoContent();
             }
-
-            _context.Reviews.Remove(review);
-            await _context.SaveChangesAsync();
+            await _repository.Delete(id);
 
             return NoContent();
         }
 
         private bool ReviewExists(int id)
         {
-            return _context.Reviews.Any(e => e.Id == id);
+            return _repository.Exist(e => e.Id == id);
         }
     }
 }

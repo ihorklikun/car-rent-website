@@ -48,7 +48,7 @@ namespace CarRentWebsite.Controllers
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CarViewModel>> GetCar(int id)
+        public async Task<ActionResult<DetailsCarViewModel>> GetCar(int id)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace CarRentWebsite.Controllers
                 return NotFound();
             }
 
-            var carViewModel = _mapper.Map<Car, CarViewModel>(car);
+            var carViewModel = _mapper.Map<Car, DetailsCarViewModel>(car);
             
             return Ok(carViewModel);
         }

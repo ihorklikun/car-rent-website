@@ -1,4 +1,5 @@
 ﻿using CarRentWebsite.ViewModels.Engine;
+using CarRentWebsite.ViewModels.Review;
 using CarRentWebsite.ViewModels.Transmission;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,14 @@ using System.Threading.Tasks;
 
 namespace CarRentWebsite.ViewModels.Car
 {
-    public class UpdateCarViewModel
+    public class DetailsCarViewModel
     {
+        public DetailsCarViewModel()
+        {
+            Reviews = new HashSet<ReviewViewModel>();
+
+        }
+
         public int Id { get; set; }
 
         public string RegisterNumber { get; set; }
@@ -24,13 +31,22 @@ namespace CarRentWebsite.ViewModels.Car
         public string Model { get; set; }
         public int KilometersDriven { get; set; }
 
+        [DisplayFormat(DataFormatString = "0.##")]
+        public double AverageMark
+        {
+            get
+            {
+                return Reviews.Count > 0 ? Reviews.Average(x => x.Mark) : 0;
+            }
+        }
         public BrandViewModel Brand { get; set; }
         public FuelViewModel Fuel { get; set; }
+        public LocationViewModel Location { get; set; }
         public EngineViewModel Engine { get; set; }
         public TransmissionViewModel Transmission { get; set; }
-        public LocationViewModel Location { get; set; }
         public CarStatusViewModel CarStatus { get; set; }
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }
+        public ICollection<ReviewViewModel> Reviews { get; set; }
     }
 }

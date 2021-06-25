@@ -6,6 +6,7 @@ using CarRentWebsite.ViewModels.CarPrice;
 using CarRentWebsite.ViewModels.Engine;
 using CarRentWebsite.ViewModels.Review;
 using CarRentWebsite.ViewModels.Transmission;
+using Newtonsoft.Json;
 
 namespace CarRentWebsite.ViewModels.Car
 {
@@ -31,22 +32,31 @@ namespace CarRentWebsite.ViewModels.Car
         public int TrunkSize { get; set; }
         public string Model { get; set; }
         public int KilometersDriven { get; set; }
+
+
         public double AverageMark 
         {
             get
             {
-                return Reviews.Count > 0 ? Reviews.Average(x => x.Mark) : 0;
+                if (Reviews.Count <= 0)
+                {
+                    return 0d;
+                }
+                var average = Reviews.Average(x => x.Mark);
+                average = Math.Truncate(average * 10) / 10;
+                return average;
             } 
         }
         public BrandViewModel Brand { get; set; }
         public FuelViewModel Fuel { get; set; }
+        public LocationViewModel Location { get; set; }
         public EngineViewModel Engine { get; set; }
         public TransmissionViewModel Transmission { get; set; }
         public CarStatusViewModel CarStatus { get; set; }
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }
+        [JsonIgnore]
         public ICollection<ReviewViewModel> Reviews { get; set; }
-        public LocationViewModel Location { get; set; }
-        public ICollection<CarPriceViewModel> CarPrices { get; set; }
+      
     }
 }

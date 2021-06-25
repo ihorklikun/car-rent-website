@@ -24,6 +24,7 @@ namespace CarRentWebsite.ViewModels.Car
         public int BrandId { get; set; }
         public int FuelId { get; set; }
         public int EngineId { get; set; }
+        public int LocationId { get; set; }
         public int TransmissionId { get; set; }
         public int CarStatusId { get; set; }
         public int CarTypeId { get; set; }

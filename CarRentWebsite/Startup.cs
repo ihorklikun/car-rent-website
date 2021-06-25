@@ -84,7 +84,7 @@ namespace CarRentWebsite
                     options.SerializerSettings.Converters.Add(new NetTopologySuite.IO.Converters.GeometryConverter());
                 });
             services.AddRazorPages();
-            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IRepository<Car>,CarRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRepository<Rent>, RentRepository>();

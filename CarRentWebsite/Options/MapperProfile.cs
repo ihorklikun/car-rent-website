@@ -15,6 +15,9 @@ using CarRentWebsite.ViewModels.Transmission;
 using CarRentWebsite.ViewModels.CarPrice;
 using CarRentWebsite.ViewModels.City;
 using CarRentWebsite.ViewModels.Review;
+using CarRentWebsite.ViewModels.City;
+using CarRentWebsite.Models.Users;
+using CarRentWebsite.ViewModels.Customer;
 
 namespace CarRentWebsite.Options
 {
@@ -55,6 +58,9 @@ namespace CarRentWebsite.Options
             CreateMap<Car, CarViewModel>().MaxDepth(2);
             CreateMap<CarViewModel, Car>().MaxDepth(2);
             
+            CreateMap<Car, DetailsCarViewModel>().MaxDepth(2);
+            CreateMap<DetailsCarViewModel, Car>().MaxDepth(2);
+            
             CreateMap<Car, CreateCarViewModel>().MaxDepth(2);
             CreateMap<CreateCarViewModel, Car>().MaxDepth(2);
             
@@ -63,22 +69,27 @@ namespace CarRentWebsite.Options
             
             CreateMap<Fuel, FuelViewModel>().MaxDepth(2);
             CreateMap<FuelViewModel, Fuel>().MaxDepth(2);
-
+            
+            CreateMap<City, CityViewModel>().MaxDepth(2);
+            CreateMap<CityViewModel, City>().MaxDepth(2);
+            
+            CreateMap<Location, LocationViewModel>().MaxDepth(2);
+            CreateMap<LocationViewModel, Location>().MaxDepth(2);
+            
+            CreateMap<Customer, CustomerViewModel>().MaxDepth(2);
+            CreateMap<CustomerViewModel, Customer>().MaxDepth(2);
 
             CreateMap<Rent, RentViewModel>().MaxDepth(2);
             CreateMap<RentViewModel, Rent>().MaxDepth(2);
             
-            CreateMap<Rent, CreateRentViewModel>().MaxDepth(2);
-            CreateMap<CreateRentViewModel, Rent>().MaxDepth(2);
-
             CreateMap<Review, ReviewViewModel>().MaxDepth(2);
             CreateMap<ReviewViewModel, Review>().MaxDepth(2);
 
-            CreateMap<Location, LocationViewModel>().MaxDepth(2);
-            CreateMap<LocationViewModel, Location>().MaxDepth(2);
-
-            CreateMap<City, CityViewModel>().MaxDepth(2);
-            CreateMap<CityViewModel, City>().MaxDepth(2);
+            CreateMap<Review, UpdateReviewViewModel>().MaxDepth(2);
+            CreateMap<UpdateReviewViewModel, Review>().MaxDepth(2);
+            
+            CreateMap<Review, CreateReviewViewModel>().MaxDepth(2);
+            CreateMap<CreateReviewViewModel, Review>().MaxDepth(2);
 
 
             CreateMap<RentAdditionalOption, CreateRentAdditionalOptionViewModel>().MaxDepth(2);
