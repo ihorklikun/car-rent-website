@@ -1,17 +1,17 @@
 ﻿using NetTopologySuite.Geometries;
+using System.Collections.Generic;
 
 namespace CarRentWebsite.Models
 {
     public class Location
     {
-        public int Id { get; set; }
-        
-        public LocationPoint Coordinate { get; set; }
-        
-        public int CountryId { get; set; }
+        public Location()
+        {
+            Cars = new HashSet<Car>();
+        }
 
-        public Country Country { get; set; }
-        
+        public int Id { get; set; }
+               
         public int CityId { get; set; }
         
         public City City { get; set; }
@@ -19,5 +19,7 @@ namespace CarRentWebsite.Models
         public string Street { get; set; }
         
         public string Building { get; set; }
+
+        public ICollection<Car> Cars { get; set; }
     }
 }

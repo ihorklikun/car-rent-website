@@ -28,6 +28,7 @@ namespace CarRentWebsite.ViewModels.Car
         public FuelViewModel Fuel { get; set; }
         public EngineViewModel Engine { get; set; }
         public TransmissionViewModel Transmission { get; set; }
+        public LocationViewModel Location { get; set; }
         public CarStatusViewModel CarStatus { get; set; }
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }

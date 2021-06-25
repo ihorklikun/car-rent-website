@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210623080725_mgr")]
-    partial class mgr
+    [Migration("20210624203758_mgr1")]
+    partial class mgr1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -150,6 +150,9 @@ namespace CarRentWebsite.Migrations
                     b.Property<int>("KilometersDriven")
                         .HasColumnType("int");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
@@ -182,6 +185,8 @@ namespace CarRentWebsite.Migrations
 
                     b.HasIndex("FuelId");
 
+                    b.HasIndex("LocationId");
+
                     b.HasIndex("TransmissionId");
 
                     b.ToTable("Cars");
@@ -198,8 +203,10 @@ namespace CarRentWebsite.Migrations
                             EngineId = 2,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 380, DateTimeKind.Local).AddTicks(4948),
+                            KilometersDriven = 4500,
+                            LocationId = 1,
+                            Model = "X5",
+                            RegisterDate = new DateTime(2021, 6, 24, 23, 37, 57, 148, DateTimeKind.Local).AddTicks(6094),
                             RegisterNumber = "BO7104RT",
                             SeatsCount = 4,
                             TransmissionId = 1,
@@ -216,8 +223,10 @@ namespace CarRentWebsite.Migrations
                             EngineId = 3,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9926),
+                            KilometersDriven = 4500,
+                            LocationId = 4,
+                            Model = "X6",
+                            RegisterDate = new DateTime(2021, 6, 24, 23, 37, 57, 153, DateTimeKind.Local).AddTicks(2591),
                             RegisterNumber = "AA7104MT",
                             SeatsCount = 4,
                             TransmissionId = 2,
@@ -230,12 +239,14 @@ namespace CarRentWebsite.Migrations
                             CarClassId = 5,
                             CarStatusId = 1,
                             CarTypeId = 3,
-                            Description = "Car description2...",
+                            Description = "Car description3...",
                             EngineId = 4,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9970),
+                            KilometersDriven = 4500,
+                            LocationId = 2,
+                            Model = "Model name",
+                            RegisterDate = new DateTime(2021, 6, 24, 23, 37, 57, 153, DateTimeKind.Local).AddTicks(2714),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -248,12 +259,14 @@ namespace CarRentWebsite.Migrations
                             CarClassId = 5,
                             CarStatusId = 1,
                             CarTypeId = 3,
-                            Description = "Car description2...",
+                            Description = "Car description4...",
                             EngineId = 4,
                             FuelId = 1,
                             ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg",
-                            KilometersDriven = 0,
-                            RegisterDate = new DateTime(2021, 6, 23, 11, 7, 25, 382, DateTimeKind.Local).AddTicks(9977),
+                            KilometersDriven = 4500,
+                            LocationId = 4,
+                            Model = "Model name2",
+                            RegisterDate = new DateTime(2021, 6, 24, 23, 37, 57, 153, DateTimeKind.Local).AddTicks(2725),
                             RegisterNumber = "AE5544KE",
                             SeatsCount = 4,
                             TransmissionId = 3,
@@ -557,6 +570,9 @@ namespace CarRentWebsite.Migrations
                     b.Property<bool>("IsCritical")
                         .HasColumnType("bit");
 
+                    b.Property<int>("LpcConditionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ManagerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -566,41 +582,11 @@ namespace CarRentWebsite.Migrations
 
                     b.HasIndex("InteriorConditionId");
 
+                    b.HasIndex("LpcConditionId");
+
                     b.HasIndex("ManagerId");
 
                     b.ToTable("ConditionReports");
-                });
-
-            modelBuilder.Entity("CarRentWebsite.Models.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Ukraine"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Poland"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Germany"
-                        });
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Engine", b =>
@@ -707,6 +693,59 @@ namespace CarRentWebsite.Migrations
                         {
                             Id = 5,
                             Name = "Propane"
+                        });
+                });
+
+            modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Building")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Location");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Building = "7a",
+                            CityId = 4,
+                            Street = "Veresneva Street"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Building = "17",
+                            CityId = 2,
+                            Street = "Bandera Street"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Building = "46",
+                            CityId = 1,
+                            Street = "Heroes Avenue"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Building = "34",
+                            CityId = 3,
+                            Street = "Antonov Street"
                         });
                 });
 
@@ -1145,6 +1184,12 @@ namespace CarRentWebsite.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CarRentWebsite.Models.Location", "Location")
+                        .WithMany("Cars")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CarRentWebsite.Models.Transmission", "Transmission")
                         .WithMany("Cars")
                         .HasForeignKey("TransmissionId")
@@ -1162,6 +1207,8 @@ namespace CarRentWebsite.Migrations
                     b.Navigation("Engine");
 
                     b.Navigation("Fuel");
+
+                    b.Navigation("Location");
 
                     b.Navigation("Transmission");
                 });
@@ -1200,9 +1247,15 @@ namespace CarRentWebsite.Migrations
                         .IsRequired();
 
                     b.HasOne("CarRentWebsite.Models.ConditionMark", "InteriorCondition")
-                        .WithMany("LpcConditionReports")
+                        .WithMany("InteriorConditionReports")
                         .HasForeignKey("InteriorConditionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CarRentWebsite.Models.ConditionMark", "LpcCondition")
+                        .WithMany("LpcConditionReports")
+                        .HasForeignKey("LpcConditionId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("CarRentWebsite.Models.Users.Manager", "Manager")
@@ -1213,7 +1266,20 @@ namespace CarRentWebsite.Migrations
 
                     b.Navigation("InteriorCondition");
 
+                    b.Navigation("LpcCondition");
+
                     b.Navigation("Manager");
+                });
+
+            modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
+                {
+                    b.HasOne("CarRentWebsite.Models.City", "City")
+                        .WithMany("Locations")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.PriceCoefficient", b =>
@@ -1345,8 +1411,15 @@ namespace CarRentWebsite.Migrations
                     b.Navigation("Cars");
                 });
 
+            modelBuilder.Entity("CarRentWebsite.Models.City", b =>
+                {
+                    b.Navigation("Locations");
+                });
+
             modelBuilder.Entity("CarRentWebsite.Models.ConditionMark", b =>
                 {
+                    b.Navigation("InteriorConditionReports");
+
                     b.Navigation("LpcConditionReports");
                 });
 
@@ -1361,6 +1434,11 @@ namespace CarRentWebsite.Migrations
                 });
 
             modelBuilder.Entity("CarRentWebsite.Models.Fuel", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("CarRentWebsite.Models.Location", b =>
                 {
                     b.Navigation("Cars");
                 });

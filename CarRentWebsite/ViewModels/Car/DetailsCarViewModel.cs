@@ -1,17 +1,17 @@
-﻿using System;
+﻿using CarRentWebsite.ViewModels.Engine;
+using CarRentWebsite.ViewModels.Review;
+using CarRentWebsite.ViewModels.Transmission;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using CarRentWebsite.ViewModels.Engine;
-using CarRentWebsite.ViewModels.Review;
-using CarRentWebsite.ViewModels.Transmission;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace CarRentWebsite.ViewModels.Car
 {
-    public class CarViewModel
+    public class DetailsCarViewModel
     {
-        public CarViewModel()
+        public DetailsCarViewModel()
         {
             Reviews = new HashSet<ReviewViewModel>();
 
@@ -31,19 +31,13 @@ namespace CarRentWebsite.ViewModels.Car
         public string Model { get; set; }
         public int KilometersDriven { get; set; }
 
-
-        public double AverageMark 
+        [DisplayFormat(DataFormatString = "0.##")]
+        public double AverageMark
         {
             get
             {
-                if (Reviews.Count <= 0)
-                {
-                    return 0d;
-                }
-                var average = Reviews.Average(x => x.Mark);
-                average = Math.Truncate(average * 10) / 10;
-                return average;
-            } 
+                return Reviews.Count > 0 ? Reviews.Average(x => x.Mark) : 0;
+            }
         }
         public BrandViewModel Brand { get; set; }
         public FuelViewModel Fuel { get; set; }
@@ -53,7 +47,6 @@ namespace CarRentWebsite.ViewModels.Car
         public CarStatusViewModel CarStatus { get; set; }
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }
-        [JsonIgnore]
         public ICollection<ReviewViewModel> Reviews { get; set; }
     }
 }

@@ -25,5 +25,20 @@ namespace CarRentWebsite.Data.Repositories
 
             return await query.FirstOrDefaultAsync(e => e.Id == (int)id);
         }
+
+        public override async Task<Rent> Add(Rent entity)
+        {
+            List<RentAdditionalOption> list = new List<RentAdditionalOption>();
+            foreach (var additionalOption in entity.AdditionalOptions)
+            {
+                list.Add(context.RentAdditionalOptions.FirstOrDefault(x => x.Id == additionalOption.Id));
+            }
+            entity.AdditionalOptions.Clear();
+            entity.AdditionalOptions = list;
+
+            await dbSet.AddAsync(entity);
+            await context.SaveChangesAsync();
+            return entity;
+        }
     }
 }

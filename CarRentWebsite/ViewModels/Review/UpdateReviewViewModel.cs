@@ -1,13 +1,11 @@
-﻿using CarRentWebsite.ViewModels.Car;
-using CarRentWebsite.ViewModels.Customer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarRentWebsite.ViewModels.Review
 {
-    public class ReviewViewModel
+    public class UpdateReviewViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -15,8 +13,8 @@ namespace CarRentWebsite.ViewModels.Review
         public int Mark { get; set; }
         public DateTime CreateDate { get; set; }
 
-        public CarViewModel Car { get; set; }
+        public int CarId { get; set; }
 
-        public CustomerViewModel Customer { get; set; }
+        public string CustomerId { get; set; }
     }
 }

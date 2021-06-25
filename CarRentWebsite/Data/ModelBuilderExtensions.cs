@@ -342,67 +342,40 @@ namespace CarRentWebsite.Data
             );
             #endregion
 
-            #region Country
-            modelBuilder.Entity<Country>().HasData(
-                new Country
+            #region Location
+            modelBuilder.Entity<Location>().HasData(
+                new Location
                 {
                     Id = 1,
-                    Name = "Ukraine"
+                    Building = "7a",
+                    Street = "Veresneva Street",
+                    CityId = 4
                 },
-                new Country
+                new Location
                 {
                     Id = 2,
-                    Name = "Poland"
+                    Building = "17",
+                    Street = "Bandera Street",
+                    CityId = 2
                 },
-                new Country
+                new Location
                 {
                     Id = 3,
-                    Name = "Germany"
+                    Building = "46",
+                    Street = "Heroes Avenue",
+                    CityId = 1
+                },
+                new Location
+                {
+                    Id = 4,
+                    Building = "34",
+                    Street = "Antonov Street",
+                    CityId = 3
                 }
             );
             #endregion
 
-            #region Location
-            //modelBuilder.Entity<Location>().HasData(
-            //    new Location
-            //    {
-            //        Id = 1,
-            //        Building = "7a",
-            //        Street = "Veresneva Street",
-            //        CityId = 4,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(50.507593, 30.388593)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 2,
-            //        Building = "17",
-            //        Street = "Bandera Street",
-            //        CityId = 2,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(49.834799, 24.008853)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 3,
-            //        Building = "46",
-            //        Street = "Heroes Avenue",
-            //        CityId = 1,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(48.408784, 35.075180)
-            //    },
-            //    new Location
-            //    {
-            //        Id = 4,
-            //        Building = "34",
-            //        Street = "Antonov Street",
-            //        CityId = 3,
-            //        CountryId = 1,
-            //        Coordinate = new LocationPoint(51.834799, 24.008853)
-            //    }
-            //);
-            #endregion
-
+            #region Cars
             modelBuilder.Entity<Car>().HasData(
                 new Car
                 {
@@ -412,9 +385,11 @@ namespace CarRentWebsite.Data
                     CarStatusId = 1,
                     CarTypeId = 1,
                     EngineId = 2,
+                    Model = "X5",
+                    KilometersDriven = 4500,
                     Description = "Car description...",
                     SeatsCount = 4,
-                    //LocationId = 1,
+                    LocationId = 1,
                     FuelId = 1,
                     TransmissionId = 1,
                     RegisterDate = DateTime.Now,
@@ -429,11 +404,13 @@ namespace CarRentWebsite.Data
                     BrandId = 3,
                     CarClassId = 4,
                     CarStatusId = 1,
+                    Model = "X6",
+                    KilometersDriven = 4500,
                     CarTypeId = 2,
                     EngineId = 3,
                     Description = "Car description2...",
                     SeatsCount = 4,
-                    //LocationId = 4,
+                    LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 2,
                     RegisterDate = DateTime.Now,
@@ -449,11 +426,13 @@ namespace CarRentWebsite.Data
                     BrandId = 1,
                     CarClassId = 5,
                     CarStatusId = 1,
+                    Model = "Model name",
+                    KilometersDriven = 4500,
                     CarTypeId = 3,
                     EngineId = 4,
-                    Description = "Car description2...",
+                    Description = "Car description3...",
                     SeatsCount = 4,
-                    //LocationId = 2,
+                    LocationId = 2,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,
@@ -469,10 +448,12 @@ namespace CarRentWebsite.Data
                     CarClassId = 5,
                     CarStatusId = 1,
                     CarTypeId = 3,
+                    Model = "Model name2",
+                    KilometersDriven = 4500,
                     EngineId = 4,
-                    Description = "Car description2...",
+                    Description = "Car description4...",
                     SeatsCount = 4,
-                    //LocationId = 4,
+                    LocationId = 4,
                     FuelId = 1,
                     TransmissionId = 3,
                     RegisterDate = DateTime.Now,
@@ -481,6 +462,103 @@ namespace CarRentWebsite.Data
                     ImageUrl = "https://lh3.googleusercontent.com/proxy/r31nMzFvIBFXtAETyk6TaTrPpwO0eNWSDyQa1UGXCb9XkHa2vbDGczQu8J1vXfjv5v663TVdd-mh-kVtOqvRkcNRmFMBbykg"
                 }
             );
+            #endregion
+
+            //#region Reviews
+            //modelBuilder.Entity<Review>().HasData(
+            //    new Review 
+            //    {
+            //        Id = 1,
+            //        CarId = 1,
+            //        Title = "Title1",
+            //        Text = "Text of review............",
+            //        Mark = 4,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 2,
+            //        CarId = 1,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 3,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 3,
+            //        CarId = 1,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 5,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 4,
+            //        CarId = 1,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 4,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 5,
+            //        CarId = 3,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 4,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 6,
+            //        CarId = 3,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 5,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 7,
+            //        CarId = 2,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 4,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 8,
+            //        CarId = 2,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 2,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    },
+            //    new Review 
+            //    {
+            //        Id = 9,
+            //        CarId = 2,
+            //        Title = "Title1",
+            //        Text = "Text of review",
+            //        Mark = 3,
+            //        CreateDate = DateTime.Now,
+            //        CustomerId = "3feb5988-781d-42b1-8855-63bb2cfdb093"
+            //    }
+            //);
+            //#endregion
+
             #region PriceCoeficients
             modelBuilder.Entity<PriceCoefficient>().HasData(
                 new PriceCoefficient
