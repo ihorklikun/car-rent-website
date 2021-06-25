@@ -7,6 +7,7 @@ using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels;
 using CarRentWebsite.ViewModels.AdditionalOption;
 using CarRentWebsite.ViewModels.Car;
+using CarRentWebsite.ViewModels.City;
 using CarRentWebsite.ViewModels.Engine;
 using CarRentWebsite.ViewModels.RentStatus;
 using CarRentWebsite.ViewModels.Rent;

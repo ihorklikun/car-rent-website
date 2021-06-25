@@ -1,30 +1,37 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import {AiFillCar} from "react-icons/ai";
+import { AiFillCar } from "react-icons/ai";
 import './TemplateStyle.css';
-function UserCarsInfoTemplate(props){
+function UserCarsInfoTemplate(props) {
     const data = props.data;
-    return(
-            <Row className = "text-center templateStyle">
+    if (data == null)
+        return (<Container></Container>);
+
+    var begDate = new Date(data?.beginDate);
+    begDate = begDate.toLocaleDateString("en-GB");
+    var endDate = new Date(data?.endDate);
+    endDate = endDate.toLocaleDateString("en-GB");
+    return (
+        <Row className="text-center templateStyle">
             <Col md>
-                <h3 id = "carNameStyle">{data?.name ?? ""}</h3>
-                <AiFillCar size = '100px'/>
-                <h4 className = "headerText number">Number</h4>
-            </Col>
-            <Col md >
-                <h5 className ="headerText">Car rent place</h5>
-                <p className ="dataText text-left">Place will be here</p>
-                <h5 className = "headerText">Car return place</h5>
-                <p className="dataText text-left">place will be here</p>
-                {/* <Button variant = "warning" className = "buttonStyle">Request for parts</Button> */}
+                <h3 id="carNameStyle">{data.car?.brand?.name + ' ' + data.car?.model ?? "car name and brand"}</h3>
+                {/* <AiFillCar size = '100px'/> */}
+                <img size="100px" src={data.car?.imageUrl ?? ""}></img>
+                <h4 className="headerText number">{data.car?.registerNumber ?? "rn"}</h4>
             </Col>
             <Col md>
-                <h5 className = "headerText">Rent start date</h5>
-                <p className = "dataText text-left">{data?.BeginDate ?? "Rent start date"} </p>
-                <h5 className = "headerText">Rent end date</h5>
-                <p className = "dataText text-left">{data?.EndDate ?? "Rent rent date"} </p>
-                <h5 className = "headerText">Price</h5>
-                <p className = "dataText text-left">{data?.Price?? "Price"}</p>
+                <h5 className="headerText">Rent start date</h5>
+                <p className="dataText text-left">{begDate ?? "Rent start date"} </p>
+                <h5 className="headerText">Rent end date</h5>
+                <p className="dataText text-left">{endDate ?? "Rent rent date"} </p>
+                <h5 className="headerText">Price</h5>
+                <p className="dataText text-left">{(data?.price + " $") ?? "Price"}</p>
+            </Col>
+            <Col md>
+                <h5 className="headerText">Additional oprtions</h5>
+                <div className="text-left">
+                    {data.additionalOptions.map((option) => (<p key={option.id}>{option.name + " " + option.price}</p>))}
+                </div>
             </Col>
         </Row>
     );

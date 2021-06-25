@@ -32,7 +32,8 @@ namespace CarRentWebsite.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var user = _context.ApplicationUsers.FirstOrDefault(u => u.Email == model.Email);
+            var user = _context.ApplicationUsers.Include(x=>x.Role)
+                .FirstOrDefault(u => u.Email == model.Email);
 
             if (user == null)
             {
@@ -45,7 +46,14 @@ namespace CarRentWebsite.Controllers
                 return BadRequest(new { password = "invalid password" });
             }
 
-            return _authService.GetAuthData(user.Id);
+            var authData = _authService.GetAuthData(user.Id);
+            authData.Name = user.Name;
+            authData.Surname = user.Surname;
+            authData.RoleId = user.RoleId;
+            authData.RoleName = user.Role.Name;
+            authData.Email = user.Email;
+
+            return authData;
         }
 
         [HttpPost("register")]

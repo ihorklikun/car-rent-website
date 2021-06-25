@@ -57,7 +57,6 @@ namespace CarRentWebsite.Data
         public DbSet<CarServiceReport> CarServiceReports { get; set; }
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<City> Cities { get; set; }
-        
         public DbSet<ConditionMark> ConditionMarks { get; set; }
         public DbSet<ConditionReport> ConditionReports { get; set; }
         public DbSet<Fuel> Fuels { get; set; }

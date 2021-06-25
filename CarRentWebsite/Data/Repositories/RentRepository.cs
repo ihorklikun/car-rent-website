@@ -25,7 +25,6 @@ namespace CarRentWebsite.Data.Repositories
 
             return await query.FirstOrDefaultAsync(e => e.Id == (int)id);
         }
-
         public override async Task<Rent> Add(Rent entity)
         {
             List<RentAdditionalOption> list = new List<RentAdditionalOption>();
