@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.ViewModels;
 
 namespace CarRentWebsite.Controllers
 {
@@ -15,17 +17,20 @@ namespace CarRentWebsite.Controllers
     public class FuelsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public FuelsController(ApplicationDbContext context)
+        public FuelsController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Fuels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Fuel>>> GetFuels()
+        public async Task<ActionResult<IEnumerable<FuelViewModel>>> GetFuels()
         {
-            return await _context.Fuels.ToListAsync();
+            var fuels = await _context.Fuels.ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<Fuel>, IEnumerable<FuelViewModel>>(fuels));
         }
 
         // GET: api/Fuels/5

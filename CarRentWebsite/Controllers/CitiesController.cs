@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.ViewModels.City;
 
 namespace CarRentWebsite.Controllers
 {
@@ -16,17 +18,20 @@ namespace CarRentWebsite.Controllers
     public class CitiesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CitiesController(ApplicationDbContext context)
+        public CitiesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Cities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<City>>> GetCities()
+        public async Task<ActionResult<IEnumerable<CityViewModel>>> GetCities()
         {
-            return await _context.Cities.ToListAsync();
+            var cities = await _context.Cities.ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<City>, IEnumerable<CityViewModel>>(cities));
         }
 
         // GET: api/Cities/5

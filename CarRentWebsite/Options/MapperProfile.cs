@@ -79,6 +79,9 @@ namespace CarRentWebsite.Options
             CreateMap<Customer, CustomerViewModel>().MaxDepth(2);
             CreateMap<CustomerViewModel, Customer>().MaxDepth(2);
 
+            CreateMap<Customer, CustomerRewiewViewModel>().MaxDepth(2);
+            CreateMap<CustomerRewiewViewModel, Customer>().MaxDepth(2);
+
             CreateMap<Rent, RentViewModel>().MaxDepth(2);
             CreateMap<RentViewModel, Rent>().MaxDepth(2);
 

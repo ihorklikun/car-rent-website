@@ -13,7 +13,7 @@ export default class CarCard extends Component {
             <Card.Img
                 style={{padding:"20px"}}
                 variant="top"
-                src="https://static.vecteezy.com/system/resources/previews/001/193/929/original/vintage-car-png.png"
+                    src = {this.props.ImageUrl}
             />
             <Card.Body>
                 <Card.Title>{this.props.Title}</Card.Title>
