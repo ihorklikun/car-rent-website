@@ -219,6 +219,7 @@ function BookingCarPage() {
   }
 
   function GoToUserPage() {
+    //window.location.reload();
     history.push({
       pathname: '/user/' + UserData?.id, // userId must be here
       state: { personId: UserData?.id }, // here too

@@ -276,7 +276,7 @@ export class ShowPaginationComments extends React.Component {
                 {
                     this.state.comments.slice(this.state.currentPage*this.state.commentsOnPage,(this.state.currentPage+1)*this.state.commentsOnPage).map((comment, index) => {
                     return(
-                        <Row className={"my-2"}> <Comment userName={comment.customer.name + " " + comment.customer.surname} CreateDate={(new Date(comment.createDate)).toLocaleDateString()}
+                        <Row className={"my-2"}> <Comment userName={comment.customer?.name + " " + comment.customer?.surname} CreateDate={(new Date(comment.createDate)).toLocaleDateString()}
                                                           Title={comment.title} Text={comment.text} Mark={comment.mark}/></Row>
                     )
                     }

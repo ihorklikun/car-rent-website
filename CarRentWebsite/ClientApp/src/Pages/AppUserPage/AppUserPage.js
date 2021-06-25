@@ -27,7 +27,7 @@ function AppUserPage(props) {
     //console.log(personInfo);
     setUserInfo(data)
 
-    if (data.roleId == 1) {
+    if (data?.roleId == 1) {
       http
         .get('http://localhost:25094/rents/user/' + data.id)
         .then((responce) => {
@@ -39,7 +39,7 @@ function AppUserPage(props) {
         })
       //setUserRentInfo(rent);
     }
-  }, [setUserInfo])
+  }, )//[setUserInfo]
 
   useEffect(() => {
     //if (userInfo.roleId == 1) {
