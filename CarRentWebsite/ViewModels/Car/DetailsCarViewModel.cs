@@ -1,4 +1,5 @@
-﻿using CarRentWebsite.ViewModels.Engine;
+﻿using CarRentWebsite.ViewModels.CarPrice;
+using CarRentWebsite.ViewModels.Engine;
 using CarRentWebsite.ViewModels.Review;
 using CarRentWebsite.ViewModels.Transmission;
 using System;
@@ -14,7 +15,7 @@ namespace CarRentWebsite.ViewModels.Car
         public DetailsCarViewModel()
         {
             Reviews = new HashSet<ReviewViewModel>();
-
+            CarPrices = new HashSet<CarPriceViewModel>();
         }
 
         public int Id { get; set; }
@@ -36,7 +37,10 @@ namespace CarRentWebsite.ViewModels.Car
         {
             get
             {
-                return Reviews.Count > 0 ? Reviews.Average(x => x.Mark) : 0;
+                double average = 0d;
+                if(Reviews.Count > 0)
+                   average = Reviews.Average(x => x.Mark);
+                return average;
             }
         }
         public BrandViewModel Brand { get; set; }
@@ -48,5 +52,6 @@ namespace CarRentWebsite.ViewModels.Car
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }
         public ICollection<ReviewViewModel> Reviews { get; set; }
+        public ICollection<CarPriceViewModel> CarPrices { get; set; }
     }
 }

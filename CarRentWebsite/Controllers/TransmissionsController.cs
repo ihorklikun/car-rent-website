@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.ViewModels.Transmission;
 
 namespace CarRentWebsite.Controllers
 {
@@ -15,19 +17,22 @@ namespace CarRentWebsite.Controllers
     public class TransmissionsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
-        public TransmissionsController(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+        public TransmissionsController(ApplicationDbContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
         // GET: api/Transmissions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Transmission>>> GetTransmitions()
+        public async Task<ActionResult<IEnumerable<TransmissionViewModel>>> GetTransmitions()
         {
-            return await _context.Transmissions.ToListAsync();
+            var transmission = await _context.Transmissions.ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<Transmission>, IEnumerable<TransmissionViewModel>>(transmission));
         }
 
+        
         // GET: api/Transmissions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Transmission>> GetTransmission(int id)

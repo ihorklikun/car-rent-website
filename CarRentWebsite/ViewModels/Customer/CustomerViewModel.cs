@@ -8,8 +8,12 @@ namespace CarRentWebsite.ViewModels.Customer
 {
     public class CustomerViewModel
     {
+        public CustomerViewModel()
+        {
+            Rents = new HashSet<RentViewModel>();
+        }
+
         public ICollection<RentViewModel> Rents { get; set; }
-        //public ICollection<Review> Reviews { get; set; }
 
         public string Id { get; set; }
         public string Name { get; set; }

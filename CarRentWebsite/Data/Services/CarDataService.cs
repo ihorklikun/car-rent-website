@@ -45,7 +45,9 @@ namespace CarRentWebsite.Data.Services
                     x => x.Location.City,
                     x => x.CarStatus,
                     x => x.CarType,
-                    x => x.CarClass
+                    x => x.CarClass,
+                    x => x.CarPrices,
+                    x => x.Reviews
                 );
             return cars;
         }
@@ -54,18 +56,17 @@ namespace CarRentWebsite.Data.Services
         {
             var car = await _repository.GetById(id,
                     x => x.Brand,
+                    x => x.CarClass,
+                    x => x.CarPrices,
+                    x => x.CarStatus,
+                    x => x.CarType,
                     x => x.Fuel,
                     x => x.Engine,
                     x => x.Transmission,
                     x => x.Location,
                     x => x.Location.City,
-                    x => x.CarStatus,
-                    x => x.CarType,
-                    x => x.CarClass,
-                    x => x.CarPrices,
                     x => x.Rents,
-                    x => x.Reviews,
-                    x => x.ConditionReports
+                    x => x.Reviews
                 );
             return car;
         }
