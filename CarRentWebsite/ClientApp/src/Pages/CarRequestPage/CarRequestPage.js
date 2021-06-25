@@ -14,23 +14,23 @@ function CarRequestPage() {
   })
   const baseUrl = `http://localhost:25094/api`
 
-  const [cars, setCars] = useState(null)
+  const [rents, setRents] = useState(null)
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/Cars/`)
+      .get(`${baseUrl}/Rents/`)
       .then((responce) => {
         var data = responce.data
         console.log(data)
         if (data != null) {
-          setCars(data)
+          setRents(data)
         }
       })
       .catch((e) => {
-        setCars(null)
+        setRents(null)
         //console.log(e)
       })
-  }, [setCars])
+  }, [setRents])
 
   if (data.isLoading === true)
     return (
@@ -48,8 +48,8 @@ function CarRequestPage() {
             <h1>REQUESTS</h1>
 
             <Container>
-              {cars?.map((car, index) => (
-                <RequestTemplate car={car} />
+              {rents?.map((rent, index) => (
+                <RequestTemplate rent={rent} />
               ))}
             </Container>
 
@@ -57,8 +57,8 @@ function CarRequestPage() {
             <h1>IN PROGRESS</h1>
 
             <Container>
-              {cars?.map((car, index) => (
-                <InProgressTemplate car={car} />
+              {rents?.map((rent, index) => (
+                <InProgressTemplate rent={rent} />
               ))}
             </Container>
             {/* {data.inProgress.map((unit) => (<RequestTemplate {...unit} />))} */}

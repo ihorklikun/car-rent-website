@@ -29,7 +29,7 @@ const ModalContent = styled.div`
   }
 `
 
-function RequestTemplate({ car }) {
+function RequestTemplate({ rent }) {
   const [returnModal, setReturnModal] = useState(false)
   /*
    const [showModal, setShowModal] = useState(false)
@@ -38,6 +38,8 @@ function RequestTemplate({ car }) {
     setShowModal((prev) => !prev)
   }
 */
+
+  console.log(rent)
   const [infoModal, setInfoModal] = useState(false)
   const [userInfoModal, setUserInfoModal] = useState(false)
 
@@ -62,34 +64,32 @@ function RequestTemplate({ car }) {
     //console.log(options)
   }, [setOptions])
 
-  var personInfo = localStorage.getItem('person')
+  var personInfo = localStorage.getItem('currentUser')
   var UserData = JSON.parse(personInfo)
-  //console.log(UserData)
+  console.log(UserData)
 
   return (
     <Container className='text-center templateStyle'>
       <Row>
         <Col md className='style1'>
           <h4 className='headerText'>
-            {car?.brand.name ?? 'brand'} {car?.model ?? 'model'}
+            {rent?.car?.brand?.name ?? 'brand'} {rent?.car?.model ?? 'model'}
           </h4>
           <img
             className='ImageStyle'
             variant='top'
-            src={car?.imageUrl ?? 'Car image'}
+            src={rent?.car?.imageUrl ?? 'Car image'}
           />
         </Col>
         <Col md className='style2'>
           <h5 className='headerText'>Car supply place</h5>
           <p className='dataText text-left'>
-            {car?.location.city.name ?? 'location'}
+            {rent?.car?.location?.city?.name ?? 'location'}
           </p>
-          <h5 className='headerText'>Place of return of the car</h5>
-          <p className='dataText text-left'>place will be here</p>
           <h5 className='headerText'>User</h5>
           <Row>
             <Col md className='style2'>
-              <p className='dataText text-left'>{UserData?.Email}</p>
+              <p className='dataText text-left'>{UserData?.email ?? 'Email'}</p>
             </Col>
           </Row>
         </Col>
@@ -114,7 +114,7 @@ function RequestTemplate({ car }) {
               <CarInfoModal
                 show={infoModal}
                 onHide={() => setInfoModal(false)}
-                car={car}
+                car={rent?.car}
               />
             </ModalContent>
             <ModalContent>

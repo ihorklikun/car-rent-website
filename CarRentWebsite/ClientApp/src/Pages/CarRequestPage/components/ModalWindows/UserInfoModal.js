@@ -20,17 +20,17 @@ export const UserInfoModal = (props) => {
           <Row>
             <h5 className='headerText'>Name</h5>
 
-            <h4 className='dataTextModal'>{props.UserData?.Name}</h4>
+            <h4 className='dataTextModal'>{props.UserData?.name}</h4>
           </Row>
           <Row>
             <h5 className='headerText'>SurName</h5>
 
-            <h4 className='dataTextModal'>{props.UserData?.Surname}</h4>
+            <h4 className='dataTextModal'>{props.UserData?.surname}</h4>
           </Row>
           <Row>
             <h5 className='headerText'>Email</h5>
 
-            <h4 className='dataTextModal'>{props.UserData?.Email}</h4>
+            <h4 className='dataTextModal'>{props.UserData?.email}</h4>
           </Row>
         </Col>
       </Modal.Body>
