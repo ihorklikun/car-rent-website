@@ -38,26 +38,37 @@ function BookingCarPage() {
   var UserData = JSON.parse(personInfo)
   //console.log(UserData)
 
+  var today = new Date()
+  var time =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+
+  var today = new Date()
+  var dd = String(today.getDate()).padStart(2, '0')
+  var mm = String(today.getMonth() + 1).padStart(2, '0') //January is 0!
+  var yyyy = today.getFullYear()
+  today = mm + '/' + dd + '/' + yyyy
+  //console.log(today)
+
   const initialRentState = {
-    beginDate: '2021-06-19',
-    endDate: '2021-06-19',
-    beginTime: '19:51:00',
-    endTime: '19:51:00',
+    beginDate: today,
+    endDate: today,
+    beginTime: time,
+    endTime: time,
     price: 100,
-    pricePerDay: 1,
-    promocode: 10,
+    pricePerDay: 100,
+    daysCount: 1,
     rentStatusId: 1,
     customerId: UserData?.id,
-    starsCount: 4,
+    starsCount: 5,
     carId: document.URL.substring(document.URL.lastIndexOf('/') + 1),
     additionalOptions: [],
   }
 
   const [rent, setRent] = useState(initialRentState)
 
-  const [carRes, setCarRes] = useState(DataService.getCarById(rent.carId))
+  console.log(rent)
 
-  let price = rent?.price ?? 'price'
+  //let price = rent?.price ?? 'price'
   //console.log(carRes)
   //-----------------------------------
   const baseUrl = `http://localhost:25094/api`
@@ -69,7 +80,7 @@ function BookingCarPage() {
       .get(`${baseUrl}/Cars/${rent.carId}`)
       .then((responce) => {
         var data = responce.data
-        //console.log(data.model)
+        //console.log(data)
         if (data != null) {
           setCar(data)
         }
@@ -100,6 +111,7 @@ function BookingCarPage() {
   }, [setOptions])
 
   const RecalculatePrice = () => {
+    alert('test')
     let start = new Date(rent.beginDate)
     console.log('first ' + start)
 
@@ -108,33 +120,55 @@ function BookingCarPage() {
 
     let days = Math.floor(end / 8.64e7) - Math.floor(start / 8.64e7)
 
+    //if (days == 0) days = 30
+
+    console.log(rent)
     console.log('days ' + days)
 
-    //console.log(car)
+    if (days < 0) {
+      alert(
+        'quantity of days must be more than 0!\n please set correct data and try one more time'
+      )
+      return
+    }
 
-    let prices = car?.carPrices
-    //console.log(prices)
+    var prices = car?.carPrices ?? [{ daysCount: 1, price: 1 }]
 
-    let dayPrice = prices[0]
+    /*
+    var prices = [
+      { daysCount: 1, price: 70 },
+      { daysCount: 4, price: 50 },
+    ]
+    */
 
-    prices.forEach((element) => {
-      if (days > element.daysCount) {
-        dayPrice = element
-        return false
-      }
-    })
+    console.log(prices[0].daysCount == 1)
+    let dayPrice
+
+    if (prices[0].price == 1) {
+      alert('Cant rean value about price per day from data base\n try later :)')
+      dayPrice = 100
+      return
+    } else {
+      dayPrice = prices[0]
+
+      prices.forEach((element) => {
+        if (days > element.daysCount) {
+          dayPrice = element
+          return false
+        }
+      })
+    }
 
     rent.pricePerDay = dayPrice
-    rent.pricePerDay.daysCount = days
+    rent.daysCount = days
 
     if (days <= 0) days = 1
 
-    price = days * dayPrice.price
-    if (isNaN(price)) {
-      price = rent.pricePerDay
-    }
-
     rent.price = days * dayPrice.price
+
+    if (isNaN(rent.price)) {
+      rent.price = rent.pricePerDay
+    }
     //alert(price)
     //price = rent.price
     console.log(rent)
@@ -142,8 +176,8 @@ function BookingCarPage() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
-    RecalculatePrice()
     setRent({ ...rent, [name]: value })
+    if (name == 'endDate') RecalculatePrice()
   }
 
   const saveRent = () => {
@@ -179,13 +213,6 @@ function BookingCarPage() {
     //console.log(rent)
     saveRent()
     GoToUserPage()
-    /*
-    else {
-      alert(
-        'Seomethisng went wrong\nPlease check all input data\nand try again'
-      )
-    }
-    */
   }
 
   function GoToUserPage() {
@@ -225,8 +252,7 @@ function BookingCarPage() {
                   id='beginDate'
                   name='beginDate'
                   value={rent.beginDate}
-                  min='2020-01-01'
-                  max='2100-12-31'
+                  min={initialRentState.beginDate}
                   onChange={handleInputChange}
                 />
               </Col>
@@ -235,10 +261,9 @@ function BookingCarPage() {
                   className='dataText text-left'
                   type='time'
                   id='beginTime'
-                  value={rent.beginTime}
                   name='beginTime'
-                  min='09:00'
-                  max='18:00'
+                  value={rent.beginTime}
+                  min={initialRentState.beginTime}
                   onChange={handleInputChange}
                 />
               </Col>
@@ -252,8 +277,7 @@ function BookingCarPage() {
                   id='endDate'
                   name='endDate'
                   value={rent.endDate}
-                  min='2020-01-01'
-                  max='2100-12-31'
+                  min={initialRentState.endDate}
                   onChange={handleInputChange}
                 />
               </Col>
@@ -263,16 +287,15 @@ function BookingCarPage() {
                   type='time'
                   id='endTime'
                   name='endTime'
-                  value={rent.endTime}
-                  min='09:00'
-                  max='18:00'
+                  value={rent.beginTime}
+                  min={initialRentState.beginTime}
                   onChange={handleInputChange}
                 />
               </Col>
             </Row>
             <h5 className='headerText'>Additional options</h5>
             <Container className='CheckBoxStyle'>
-              {options?.map((option, index) => (
+              {options?.map((option) => (
                 <div>
                   <label>
                     <input
@@ -302,20 +325,37 @@ function BookingCarPage() {
                 <Col>
                   <ReactStars
                     count={5}
-                    value={rent.starsCount}
+                    value={car?.averageMark}
                     size={24}
                     isHalf={true}
                     activeColor='#ffd700'
-                    onChange={handleInputChange}
+                    edit={false}
                   />
                 </Col>
                 <Col>
-                  <h4>{rent.starsCount}</h4>
+                  <h4>{car?.averageMark}</h4>
                 </Col>
               </Row>
-              <h5 className='headerText'>Total {rent.price ?? 'price'}</h5>
+              <h5 className='headerText'>
+                Total
+                {rent?.price ?? 'price'}
+              </h5>
             </Col>
-            <Col>
+          </Col>
+        </Row>
+        <Row>
+          <Button className='BookingButton' variant='warning' onClick={newRent}>
+            BOOK
+          </Button>
+        </Row>
+      </ModalWrapper>
+    )
+}
+
+export default BookingCarPage
+
+/*
+<Col>
               <Row>
                 <Col>
                   <input
@@ -332,31 +372,4 @@ function BookingCarPage() {
                 </Col>
               </Row>
             </Col>
-          </Col>
-        </Row>
-        <Row>
-          <Button className='BookingButton' variant='warning' onClick={newRent}>
-            BOOK
-          </Button>
-        </Row>
-      </ModalWrapper>
-    )
-}
-
-export default BookingCarPage
-
-/*
-
-<ReactStars
-                  count={5}
-                  onChange={(rating) => {
-                    setStarsCount(rating)
-                  }}
-                  size={24}
-                  isHalf={true}
-                  emptyIcon={<i className='far fa-star'></i>}
-                  halfIcon={<i className='fa  fa-star-half-alt'></i>}
-                  fullIcon={<i className='fa fa-star'></i>}
-                  activeColor='#ffd700'
-                />
-*/
+            */
