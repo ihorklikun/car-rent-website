@@ -219,7 +219,6 @@ export default class AddNewCar extends Component{
             this.setState(state=>({car:null}))
             console.log(error);
         });
-
     }
     handleShowStatus(){
         this.setState(state=>({statusModalShow:true}));
@@ -402,6 +401,7 @@ export default class AddNewCar extends Component{
                                             Model
                                         </Form.Label>
                                         <FormControl name={"sModel"} type={"text"} placeholder={"Model"} onChange={this.handleOnChange}>
+
                                         </FormControl>
                                     </FormGroup>
                                 </Col>
@@ -410,7 +410,10 @@ export default class AddNewCar extends Component{
                                         <Form.Label >
                                             Registration Number
                                         </Form.Label>
-                                        <FormControl name={"sNumber"} type={"text"} placeholder={"Registration"} onChange={this.handleOnChange}></FormControl>
+                                        <FormControl name={"sNumber"} type={"text"} placeholder={"Registration"} isInvalid={this.state.sNumber} onChange={this.handleOnChange}></FormControl>
+                                        <FormControl.Feedback type={"invalid"}>
+                                            {this.state.nameError}
+                                        </FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -421,6 +424,9 @@ export default class AddNewCar extends Component{
                                             Seats Count
                                         </Form.Label>
                                         <FormControl name={"sSeats"} min={0} type={"number"} placeholder={"Seats"} onChange={this.handleOnChange}/>
+                                        <FormControl.Feedback type={"invalid"}>
+                                            {this.state.nameError}
+                                        </FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
                                 <Col>
@@ -429,6 +435,9 @@ export default class AddNewCar extends Component{
                                             ManufacturedDate
                                         </Form.Label>
                                         <FormControl name={"sDate"} type={"date"} placeholder={"Date"} onChange={this.handleOnChange}/>
+                                        <FormControl.Feedback type={"invalid"}>
+                                            {this.state.nameError}
+                                        </FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
                                 <Col>
@@ -437,6 +446,9 @@ export default class AddNewCar extends Component{
                                             Trunk Size
                                         </Form.Label>
                                         <FormControl name={"sTrunk"} min={0} type={"number"} placeholder={"Chose"} onChange={this.handleOnChange}/>
+                                        <FormControl.Feedback type={"invalid"}>
+                                            {this.state.nameError}
+                                        </FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
                             </Row>

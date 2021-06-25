@@ -10,24 +10,26 @@ import FiveStarsMark, {EditableFiveStarsMark} from "./FiveStarsMark";
 import {Collapse, Form, FormControl, InputGroup} from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
 import Image from "react-bootstrap/Image";
+import http from '../../../http-common'
 import triggerBrowserReflow from "react-bootstrap/triggerBrowserReflow";
 
 
 export function Comment(props){
     return (
-        <Card className={"px-1"}>
+        <Coll>
+        <Card fluid={true} className={"d-flex px-1"} >
             <Card.Header className={"px-sm-1 mx-0"}>
-            <Row className={"d-flex pl-2  "}   >
-                <Coll className={"mr-1 px-0 ml-lg-3 ml-xl-3 ml-md-2 ml-sm-2 "} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"} >
-                    <Image className={"rounded-circle px-0 mx-0 " } src={user} style={{minWidth:"3rem", maxWidth:"4rem"}}  alt={"UserIco"} roundedCircle={true}/></Coll>
-                <Coll className={"mr-auto  ml-0 p-0 "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
-                    <h5>{props.userName}</h5>
-                    <p>{props.CreateDate}</p>
-                </Coll>
-                <Coll className={"ml-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
-                    <FiveStarsMark mark={props.Mark} starSize={"large"}></FiveStarsMark>
-                </Coll>
-            </Row>
+                <Row fluid={true} className={"d-flex pl-2  "}   >
+                    <Coll className={"mr-1 px-0 ml-lg-3 ml-xl-3 ml-md-2 ml-sm-2 "} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"} >
+                        <Image className={"rounded-circle px-0 mx-0 " } src={user} style={{minWidth:"3rem", maxWidth:"4rem"}}  alt={"UserIco"} roundedCircle={true}/></Coll>
+                    <Coll className={"mr-auto  ml-0 p-0 "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
+                        <h5>{props.userName}</h5>
+                        <p>{props.CreateDate}</p>
+                    </Coll>
+                    <Coll className={"ml-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
+                        <FiveStarsMark mark={props.Mark} starSize={"large"}></FiveStarsMark>
+                    </Coll>
+                </Row>
             </Card.Header>
             <Card.Body>
                 <Card.Title className={"text-body "}>
@@ -38,12 +40,13 @@ export function Comment(props){
                 </Card.Text>
             </Card.Body>
             <Card.Footer></Card.Footer>
-        </Card>);
+        </Card>
+        </Coll>);
 }
 export class CommentForm extends React.Component{
     constructor(props) {
         super(props);
-        this.state={collapsed:true,Title:"",Text:"",Mark:0,TitleError:null,CommentError:null};
+        this.state={carId:this.props.carId,collapsed:true,Title:"",Text:"",Mark:0,Date:new Date(),TitleError:null,CommentError:null};
         this.handleCollapseButtonClick=this.handleCollapseButtonClick.bind(this);
         this.handleChange=this.handleChange.bind(this);
         this.handleRatingChange=this.handleRatingChange.bind(this);
@@ -66,6 +69,24 @@ export class CommentForm extends React.Component{
             this.setState(state=>({
                 CommentError: "Comment must be entered"
             }));
+        }
+        if((this.state.Title)&&(this.state.Title!="")&&(this.state.Text)&&(this.state.Text!="")){
+            var personInfo = localStorage.getItem("currentUser");
+            var data = JSON.parse(personInfo);
+            http.post('./Reviews',{
+                title:this.state.Title,
+                text:this.state.Text,
+                mark:this.state.Mark,
+                carId:this.state.carId,
+                customerId:data.Id,
+                createDate:new Date()
+            }).then(function (response) {
+                window.location.reload();
+                console.log(response);
+            }).catch(function (error) {
+                alert(error);
+            });
+
         }
         const comment={CustomerId:0,Title: this.state.Title,Text:this.state.Text,Mark: this.state.Mark,CreateDate: new Date()};
         console.log(JSON.stringify(comment));
@@ -104,7 +125,7 @@ export class CommentForm extends React.Component{
                         <Coll className={"mr-1 px-0 ml-lg-3 ml-xl-3 ml-md-2 ml-sm-2"} xl={"auto"} lg={"auto"} md={"auto"} sm={"auto"} xs={"auto"} > <Image src={user} style={{minWidth:"3rem", maxWidth:"4rem"}}  alt={"UserIco"} roundedCircle={true}/></Coll>
                         <Coll className={"mr-auto  ml-0 p-0 align-self-end "}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto"} >
                             <h5>{this.props.userName}</h5>
-                            <p>{this.props.date}</p>
+                            <p>{this.state.Date.toLocaleDateString()}</p>
                         </Coll>
                         <Coll className={"ml-auto mr-0 pr-0"}  xl={"auto"} lg={"auto"} md={"auto"} xs={"auto"} sm={"auto" }  >
                             <EditableFiveStarsMark mark={5} name={"Mark"} starSize={"large"} onChange={this.handleRatingChange.bind(this)} ></EditableFiveStarsMark>
@@ -154,7 +175,7 @@ export class Comments extends React.Component{
             <Row lg={12} xs={12} sm={12} xl={12} md={12} xxl={12}>
                 <h3> Comments</h3>
             </Row>
-            <Row><CommentForm userName={"Melcor Eruson"} date={"10.06.2021"}/></Row>
+            <Row><CommentForm carId={this.state.carId} userName={"Melcor Eruson"} date={"10.06.2021"}/></Row>
             <ShowPaginationComments carId={this.state.carId} />
         </Container>
     )
@@ -179,9 +200,25 @@ export class ShowPaginationComments extends React.Component {
             this.pages.push(<Pagination.Item name={pageNum} onClick={this.handlePageChange} >{pageNum+1}</Pagination.Item>)
             ++pageNum;
         }
-        this.state = {commentsOnPage: commentsOnPage, commentsCount: comments.length, currentPage: 0,lastPage:(pageNum-1),comments:comments}
-
+        this.state = { carId:carId,commentsOnPage: commentsOnPage, commentsCount: comments.length, currentPage: 0,lastPage:(pageNum-1),comments:comments}
     }
+    componentDidMount() {
+        http.get("./Reviews/").then((responce)=>{
+            const data = responce.data;
+            console.log(data.filter(data=>data.car.id==this.state.carId));
+            const carComments = data.filter(data=>data.car.id==this.state.carId);
+            this.pages=[];
+            let pageNum=0;
+            for (var i = 0; i < carComments.length; i+=this.state.commentsOnPage) {
+                this.pages.push(<Pagination.Item name={pageNum} onClick={this.handlePageChange} >{pageNum+1}</Pagination.Item>)
+                ++pageNum;
+            }
+            this.setState(state=>({comments:carComments,commentsCount:carComments.length,lastPage:(pageNum-1)}));
+        }).catch(error=>{
+            console.log(error);
+        });
+    }
+
     handlePageChange(event){
         event.preventDefault();
         const target=event.target;
@@ -236,11 +273,15 @@ export class ShowPaginationComments extends React.Component {
                 </Pagination>
                     </Coll>
                 </Row>
-                {this.state.comments.slice(this.state.currentPage*this.state.commentsOnPage,(this.state.currentPage+1)*this.state.commentsOnPage).map((comment, index) => {
+                {
+                    this.state.comments.slice(this.state.currentPage*this.state.commentsOnPage,(this.state.currentPage+1)*this.state.commentsOnPage).map((comment, index) => {
                     return(
-                        <Row className={"my-2"}> <Comment userName={comment.Customer.name+" "+comment.Customer.surname} CreateDate={comment.CreateDate}
-                                                          Title={comment.Title} Text={comment.Text} Mark={comment.Mark}/></Row>)
-                })}
+                        <Row className={"my-2"}> <Comment userName={comment.customer.name + " " + comment.customer.surname} CreateDate={(new Date(comment.createDate)).toLocaleDateString()}
+                                                          Title={comment.title} Text={comment.text} Mark={comment.mark}/></Row>
+                    )
+                    }
+                    )
+                }
                 <Row className={"mb-0 mt-2 pt-2"}>
                     <Coll className={"mx-auto mb-0"} xs={"auto"} sm={"auto"} md={"auto"} lg={"auto"} xl={"auto"}>
                         <Pagination>

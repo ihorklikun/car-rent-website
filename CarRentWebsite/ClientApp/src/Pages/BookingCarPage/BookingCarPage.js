@@ -111,7 +111,7 @@ function BookingCarPage() {
   }, [setOptions])
 
   const RecalculatePrice = () => {
-    //alert('RecalculatePrice')
+    //alert('test')
     let start = new Date(rent.beginDate)
     console.log('first ' + start)
 
@@ -169,8 +169,9 @@ function BookingCarPage() {
     if (isNaN(rent.price)) {
       rent.price = rent.pricePerDay
     }
+
     alert(rent.price)
-    price = rent.price
+    //price = rent.price
     console.log(rent)
   }
 
@@ -181,14 +182,17 @@ function BookingCarPage() {
   }
 
   const saveRent = () => {
+    var arr = []
+    rent.additionalOptions.forEach((x) => arr.push({ id: x }))
+
     const rentJson = {
-      beginDate: rent.beginDate + 'T' + rent.beginTime + '.860Z',
-      endDate: rent.endDate + 'T' + rent.endTime + '.860Z',
+      beginDate: rent.beginDate + 'T' + rent.beginTime + 'Z',
+      endDate: rent.endDate + 'T' + rent.endTime + 'Z',
       price: rent.price,
       rentStatusId: 1,
       customerId: rent.customerId,
-      carId: 1, //rent.carId,
-      additionalOptions: rent.additionalOptions,
+      carId: parseInt(rent.carId),
+      additionalOptions: arr,
     }
 
     console.log(rentJson)
@@ -224,10 +228,10 @@ function BookingCarPage() {
 
   const handleIdChange = (e) => {
     let tempValue = e.target.value
-    if (!rent.additionalOptions.includes(tempValue)) {
-      rent.additionalOptions.push(tempValue)
+    if (!rent.additionalOptions.includes(parseInt(tempValue))) {
+      rent.additionalOptions.push(parseInt(tempValue))
     } else {
-      rent.additionalOptions.pop(tempValue)
+      rent.additionalOptions.pop(parseInt(tempValue))
     }
   }
 
