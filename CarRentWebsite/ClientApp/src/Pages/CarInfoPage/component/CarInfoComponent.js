@@ -26,6 +26,7 @@ import carClass from "./Resource/Images/Icons/carClass.png"
 import carType from "./Resource/Images/Icons/carType.png"
 import {Button} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import Pagination from "react-bootstrap/Pagination";
 const carImages=[{car:RavonR2_1},{car:RavonR2_2},{car:RavonR2_3},{car:RavonR2_4}]
 const costs=[{Time:"30 day+",Cost:"30"},{Time:"8 day+",Cost:"40"},{Time:"3-7 day",Cost:"50"},{Time:"1-2 day",Cost:"100"}]
 function CostCart(props){
@@ -71,15 +72,15 @@ export default class CarBaseInfo extends React.Component{
         const basecost=20;
         let cars=require('./jsonData/Car.json');
         let comments=require('./jsonData/Comments.json')
-        comments=comments.filter(comment=>comment.CarId==this.props.carId)
+        comments=comments.filter(comment=>comment.carId==this.props.carId)
         let mark=0;
         comments.map((comment,index)=>{
-            mark+=comment.Mark;
+            mark+=comment.mark;
         })
         mark=mark/comments.length;
         console.log(cars);
         const car=cars.find(car=>car.CarId==this.props.carId);
-        this.state={car:null,carId:this.props.carId,mark:mark,valute:"$",params:[
+        this.state={car:null,carImages:[],carId:this.props.carId,mark:mark,valute:"$",params:[
             {
                 name : "carClass",
                 icon : carClass,
@@ -165,10 +166,10 @@ export default class CarBaseInfo extends React.Component{
                             icon : trunkSize,
                             value: data.trunkSize
                         }]
+                    const images=[{car:data.imageUrl}]
                     this.setState(state=>({
-                        car:data,params:params
+                        car:data,params:params,carImages:images
                     }))
-
                 }else{
                     this.setState(state=>({
                         car:Array.from(data)
@@ -177,6 +178,23 @@ export default class CarBaseInfo extends React.Component{
                 console.log(data);
             }).catch(error=>{
                 this.setState(state=>({car:null}))
+                console.log(error);
+            });
+            http.get("./Reviews/").then((responce)=>{
+                const data = responce.data;
+                console.log(data.filter(data=>data.car.id==this.state.carId));
+                const carComments=data.filter(data=>data.car.id==this.state.carId);
+                let mark=5;
+                if(carComments.length>0){
+                     mark=0;
+                    carComments.map((comment,index)=>{
+                        mark+=comment.mark;
+                    })
+                    mark=mark/carComments.length;
+                }
+                this.setState(state=>({mark:mark}))
+
+            }).catch(error=>{
                 console.log(error);
             });
         }
@@ -197,7 +215,7 @@ export default class CarBaseInfo extends React.Component{
                     </Row>
                     <Row className={"pt-2"}>
                         <Coll xxl={4} xl={5} lg={6} md={7} sm={12} xs={12} className={" "}>
-                            <CarImageCarousel imgArray={carImages}></CarImageCarousel>
+                            <CarImageCarousel imgArray={this.state.carImages}></CarImageCarousel>
                         </Coll>
                         <Coll xxl={8} xl={7} lg={6} md={5} sm={12} xs={12}
                               className={"pl-lg-5 pl-md-5 pl-sm-5 pl-xs-5 "}>
