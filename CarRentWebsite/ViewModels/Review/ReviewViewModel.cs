@@ -14,7 +14,7 @@ namespace CarRentWebsite.ViewModels.Review
         public string Text { get; set; }
         public int Mark { get; set; }
         public DateTime CreateDate { get; set; }
-
+        public CarViewModel Car { get; set; }
         public CustomerRewiewViewModel Customer { get; set; }
     }
 }
