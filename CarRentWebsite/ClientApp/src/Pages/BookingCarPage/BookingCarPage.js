@@ -34,7 +34,7 @@ function BookingCarPage() {
   })
   let history = useHistory()
 
-  var personInfo = localStorage.getItem('person')
+  var personInfo = localStorage.getItem('currentUser')
   var UserData = JSON.parse(personInfo)
   //console.log(UserData)
 
@@ -47,14 +47,10 @@ function BookingCarPage() {
     pricePerDay: 1,
     promocode: 10,
     rentStatusId: 1,
-    customerId: UserData.id,
+    customerId: UserData?.id,
     starsCount: 4,
     carId: document.URL.substring(document.URL.lastIndexOf('/') + 1),
-    additionalOptions: [
-      {
-        id: 0,
-      },
-    ],
+    additionalOptions: [],
   }
 
   const [rent, setRent] = useState(initialRentState)
@@ -152,8 +148,8 @@ function BookingCarPage() {
 
   const saveRent = () => {
     const rentJson = {
-      beginDate: rent.beginDate + 'T' + rent.beginTime + 'Z',
-      endDate: rent.endDate + 'T' + rent.endTime + 'Z',
+      beginDate: rent.beginDate + 'T' + rent.beginTime + '.860Z',
+      endDate: rent.endDate + 'T' + rent.endTime + '.860Z',
       price: rent.price,
       rentStatusId: 1,
       customerId: rent.customerId,
@@ -162,17 +158,20 @@ function BookingCarPage() {
     }
 
     console.log(rentJson)
+    console.log(rent)
 
-    /*axios
+    axios
       .post(`${baseUrl}/Rents`, rentJson)
       .then((responce) => {
         var data = responce.data
         console.log(data)
+        //console.log(responce.)
       })
       .catch((e) => {
         console.log(e)
+        alert(e)
+        //return false
       })
-      */
   }
 
   const newRent = () => {
@@ -180,6 +179,20 @@ function BookingCarPage() {
     //console.log(rent)
     saveRent()
     GoToUserPage()
+    /*
+    else {
+      alert(
+        'Seomethisng went wrong\nPlease check all input data\nand try again'
+      )
+    }
+    */
+  }
+
+  function GoToUserPage() {
+    history.push({
+      pathname: '/user/' + UserData?.id, // userId must be here
+      state: { personId: UserData?.id }, // here too
+    })
   }
 
   const handleIdChange = (e) => {
@@ -328,13 +341,6 @@ function BookingCarPage() {
         </Row>
       </ModalWrapper>
     )
-
-  function GoToUserPage() {
-    history.push({
-      pathname: '/user/' + UserData.id, // userId must be here
-      state: { personId: UserData.id }, // here too
-    })
-  }
 }
 
 export default BookingCarPage
