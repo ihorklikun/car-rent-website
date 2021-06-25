@@ -19,7 +19,7 @@ export default class CarCardsDeck extends Component {
                                         Id={post.id}
                                         Title={post.model}
                                         Description={post.description}
-                                        Price={post.price}
+                                        Price={post.carPrices[3].price}
                                         ImageUrl={post.imageUrl}
                                         
                                     />

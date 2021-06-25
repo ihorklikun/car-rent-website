@@ -45,7 +45,8 @@ namespace CarRentWebsite.Data.Services
                     x => x.Location.City,
                     x => x.CarStatus,
                     x => x.CarType,
-                    x => x.CarClass
+                    x => x.CarClass,
+                    x => x.CarPrices
                 );
             return cars;
         }
