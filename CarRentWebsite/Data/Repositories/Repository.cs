@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using CarRentWebsite.Data.Repositories.Abstract;
 
 namespace CarRentWebsite.Data.Repositories
 {
@@ -31,8 +32,7 @@ namespace CarRentWebsite.Data.Repositories
             return await query.ToListAsync();
 
         }
-
-
+        
         public virtual async Task<TEntity> GetById(object id, params Expression<Func<TEntity, object>>[] includes)
         {
            
@@ -82,9 +82,9 @@ namespace CarRentWebsite.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public virtual bool Exist(object id)
+        public virtual bool Exist(Expression<Func<TEntity, bool>> predicate)
         {
-            return dbSet.Find(id) != null;
+            return dbSet.Any(predicate);
         }
     }
 }

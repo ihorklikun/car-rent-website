@@ -11,6 +11,7 @@ using CarRentWebsite.Models;
 using CarRentWebsite.ViewModels;
 using CarRentWebsite.ViewModels.Car;
 using CarRentWebsite.Data.Services;
+using CarRentWebsite.Data.Services.Abstract;
 
 namespace CarRentWebsite.Controllers
 {
@@ -83,7 +84,7 @@ namespace CarRentWebsite.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_service.Exist(id))
+                if (!_service.Exist(x => x.Id == id))
                 {
                     return NotFound();
                 }
@@ -118,7 +119,7 @@ namespace CarRentWebsite.Controllers
         public async Task<IActionResult> DeleteCar(int id)
         {
             
-            if (!_service.Exist(id))
+            if (!_service.Exist(x=>x.Id == id))
             {
                 return NotFound();
             }

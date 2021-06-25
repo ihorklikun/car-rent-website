@@ -11,7 +11,7 @@ namespace CarRentWebsite.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            
+
             #region RentAdditionalOption
             modelBuilder.Entity<RentAdditionalOption>().HasData(
                 new RentAdditionalOption
@@ -56,6 +56,31 @@ namespace CarRentWebsite.Data
                 {
                     Id = 4,
                     Name = "Finished"
+                }
+            );
+            #endregion
+
+            #region Role
+            modelBuilder.Entity<Role>().HasData(
+                new Role
+                {
+                    Id = 1,
+                    Name = "Customer"
+                },
+                new Role
+                {
+                    Id = 2,
+                    Name = "Manager"
+                },
+                new Role
+                {
+                    Id = 3,
+                    Name = "Admin"
+                },
+                new Role
+                {
+                    Id = 4,
+                    Name = "ServiceWorker"
                 }
             );
             #endregion
@@ -373,29 +398,28 @@ namespace CarRentWebsite.Data
                     Id = 1,
                     Building = "7a",
                     Street = "Veresneva Street",
-                    CityId = 4,
-                    
+                    CityId = 4
                 },
                 new Location
                 {
                     Id = 2,
                     Building = "17",
                     Street = "Bandera Street",
-                    CityId = 2,
+                    CityId = 2
                 },
                 new Location
                 {
                     Id = 3,
                     Building = "46",
                     Street = "Heroes Avenue",
-                    CityId = 1,
+                    CityId = 1
                 },
                 new Location
                 {
                     Id = 4,
                     Building = "34",
                     Street = "Antonov Street",
-                    CityId = 3,
+                    CityId = 3
                 }
             );
             #endregion
@@ -405,6 +429,8 @@ namespace CarRentWebsite.Data
                 {
                     Id = 1,
                     BrandId = 1,
+                    Model = "model1",
+                    KilometersDriven = 1111,
                     CarClassId = 2,
                     CarStatusId = 1,
                     CarTypeId = 1,
