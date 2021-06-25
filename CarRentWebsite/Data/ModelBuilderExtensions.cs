@@ -434,9 +434,6 @@ namespace CarRentWebsite.Data
                     CarStatusId = 1,
                     CarTypeId = 1,
                     EngineId = 2,
-                    Model = "X5",
-                    KilometersDriven = 4500,
-                    Description = "Car description...",
                     SeatsCount = 4,
                     LocationId = 1,
                     FuelId = 1,
@@ -455,8 +452,6 @@ namespace CarRentWebsite.Data
                     BrandId = 3,
                     CarClassId = 4,
                     CarStatusId = 1,
-                    Model = "X6",
-                    KilometersDriven = 4500,
                     CarTypeId = 2,
                     EngineId = 3,
                     Description = "Car description2...",
@@ -501,8 +496,6 @@ namespace CarRentWebsite.Data
                     CarClassId = 5,
                     CarStatusId = 1,
                     CarTypeId = 3,
-                    Model = "Model name2",
-                    KilometersDriven = 4500,
                     EngineId = 4,
                     Description = "Car description4...",
                     SeatsCount = 4,
@@ -615,8 +608,8 @@ namespace CarRentWebsite.Data
             //#endregion
 
             #region PriceCoeficients
-            modelBuilder.Entity<PriceCoefficient>().HasData(
-                new PriceCoefficient
+            modelBuilder.Entity<CarPrice>().HasData(
+                new CarPrice
                 {
                     Id =1,
                     CarId = 1,

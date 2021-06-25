@@ -55,6 +55,7 @@ namespace CarRentWebsite.ViewModels.Car
         public CarStatusViewModel CarStatus { get; set; }
         public CarTypeViewModel CarType { get; set; }
         public CarClassViewModel CarClass { get; set; }
+        public ICollection<CarPriceViewModel> CarPrices { get; set; }
         [JsonIgnore]
         public ICollection<ReviewViewModel> Reviews { get; set; }
       
