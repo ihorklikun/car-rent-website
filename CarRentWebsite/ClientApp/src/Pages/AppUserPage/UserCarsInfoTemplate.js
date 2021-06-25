@@ -30,7 +30,11 @@ function UserCarsInfoTemplate(props){
             <Col md>
                 <h5 className ="headerText">Additional oprtions</h5>
                 <div className = "text-left">
-                        {data.additionalOptions.map((option)=>(<p key={option.id}>{option.name + " " +option.price}</p>))}
+                        {data.additionalOptions.map((option)=>(<p key={option.id} className="text-left dataText">{option.name + " " +option.price + "$"}</p>))}
+                </div>
+                <h5 className ="headerText">Status</h5>
+                <div className = "text-left">
+                        <p className="dataText text-left">{data.rentStatus.name}</p>
                 </div>
             </Col>
         </Row>
