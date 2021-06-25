@@ -33,7 +33,7 @@ function CostCart(props){
     return(
      <Card bg={"secondary"} border={"dark"} className={"m-0"} style={{maxWidth: "8rem ", minWidth:"3rem"}}>
          <Card.Header className={"text-center px-0"}>
-             {props.Period}
+             {props.Period} days
          </Card.Header>
          <Card.Body className={"py-0 px-0"}>
              <p className={"text-center"}>{props.Cost}$/day</p>
@@ -80,7 +80,7 @@ export default class CarBaseInfo extends React.Component{
         mark=mark/comments.length;
         console.log(cars);
         const car=cars.find(car=>car.CarId==this.props.carId);
-        this.state={car:null,carImages:[],carId:this.props.carId,mark:mark,valute:"$",params:[
+        this.state={car:null,minPrice:30,carImages:[],carId:this.props.carId,mark:mark,valute:"$",params:[
             {
                 name : "carClass",
                 icon : carClass,
@@ -127,6 +127,12 @@ export default class CarBaseInfo extends React.Component{
             http.get("./Cars/" + this.state.carId).then((responce)=>{
                 const data = responce.data;
                 if(data != null){
+                    let minPrice=1000000000000000000000;
+                    data.carPrices.map((carPrice,index)=>{
+                        if(minPrice>carPrice.price){
+                            minPrice=carPrice.price;
+                        }
+                    })
                     const params=[
                         {
                             name : "carClass",
@@ -168,7 +174,7 @@ export default class CarBaseInfo extends React.Component{
                         }]
                     const images=[{car:data.imageUrl}]
                     this.setState(state=>({
-                        car:data,params:params,carImages:images
+                        car:data,params:params,carImages:images,minPrice:minPrice
                     }))
                 }else{
                     this.setState(state=>({
@@ -221,7 +227,7 @@ export default class CarBaseInfo extends React.Component{
                               className={"pl-lg-5 pl-md-5 pl-sm-5 pl-xs-5 "}>
                             <Row className={"pt-2"}>
                                 <Coll xxl={7} xl={7} lg={6} md={6} sm={5} xs={6} className={"pr-0"}>
-                                    <h3>from 30{this.state.valute}/day </h3>
+                                    <h3>from {this.state.minPrice}{this.state.valute}/day </h3>
                                 </Coll>
                                 <Coll className={"pl-0 pr-4"}>
                                     <Button block={true} variant={"warning"} size={"lg"} href={"/booking/"+this.state.carId}>Book a car </Button>
@@ -229,9 +235,9 @@ export default class CarBaseInfo extends React.Component{
                             </Row>
                             <Row lg={4} xxl={4} xl={4} md={4} sm={4} xs={4}
                                  className={"pt-3 g-lg-2 g-xxl-2 g-md-1 g-sm-1 px-0 justify-content-center "}>
-                                {costs.map((cost, index) => {
+                                {this.state.car.carPrices.map((cost, index) => {
                                     return (
-                                        <Coll><CostCart Period={cost.Time} Cost={cost.Cost}/></Coll>
+                                        <Coll><CostCart Period={cost.daysCount} Cost={cost.price}/></Coll>
                                     )
                                 })}
                             </Row>
@@ -266,7 +272,7 @@ export default class CarBaseInfo extends React.Component{
                       className={"pl-lg-5 pl-md-5 pl-sm-5 pl-xs-5 "}>
                     <Row className={"pt-2"}>
                         <Coll xxl={7} xl={7} lg={6} md={6} sm={5} xs={6} className={"pr-0"}>
-                            <h3>from 30{this.state.valute}/day </h3>
+                            <h3>from {this.state.minPrice}{this.state.valute}/day </h3>
                         </Coll>
                         <Coll className={"pl-0 pr-4"}>
                             <Button block={true} variant={"warning"} size={"lg"} href={"/booking/"+this.state.carId}>Book a car </Button>
