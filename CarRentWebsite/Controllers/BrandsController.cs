@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentWebsite.Data;
 using CarRentWebsite.Models;
+using CarRentWebsite.ViewModels;
 
 namespace CarRentWebsite.Controllers
 {
@@ -16,17 +18,21 @@ namespace CarRentWebsite.Controllers
     public class BrandsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public BrandsController(ApplicationDbContext context)
+        public BrandsController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Brands
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Brand>>> GetBrands()
+        public async Task<ActionResult<IEnumerable<BrandViewModel>>> GetBrands()
         {
-            return await _context.Brands.ToListAsync();
+            var brands = await _context.Brands.ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<Brand>, IEnumerable<BrandViewModel>>(brands));
+            
         }
 
         // GET: api/Brands/5

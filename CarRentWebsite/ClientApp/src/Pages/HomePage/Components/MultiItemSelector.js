@@ -16,9 +16,9 @@ export default class MultiItemSlector extends Component {
                         this.props.postArray.map((post, index)=>{
                             return(
                                 <label class="form-check">
-                                    <input type="checkbox" class="form-check-input" value={post.Id}  name="exampleCheck"/>
+                                    <input type="checkbox" class="form-check-input" value={post.id}  name="exampleCheck"/>
                                     <span class="form-check-label">
-                                        {post.Name}
+                                        {post.name}
                                     </span>
                                 </label>
                             )

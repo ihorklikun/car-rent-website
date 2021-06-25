@@ -10,31 +10,89 @@ import OneItemSelector from './Components/OneItemSelector'
 import RangeSelectorElement from './Components/RangeSelectorElement'
 import MultiItemSelector from './Components/MultiItemSelector'
 import CarCardsDeck from './Components/CarCardsDeck'
+import http from '../../http-common';
 
 export default class Home extends Component {
-    state = {
-        carBrandArray : [],
-        cityArray : [],
-        transmitionArray : [],
-        fuelArray : [],
-        carsArray: [],
-        sort:'',
-        city:'',
-        selectedMinPrice:'',
-        selectedMaxPrice:'',
-        brands: [],
-        transmitions: [],
-        fuelTypes: [],
-        selectedMinSeats:'',
-        selectedMaxSeats:''
-    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+               carBrandArray: [],
+                cityArray: [],
+                transmitionArray: [],
+                fuelArray: [],
+                carsArray: [],
+                sort: '',
+                city: '',
+                selectedMinPrice: '',
+                selectedMaxPrice: '',
+                brands: [],
+                transmitions: [],
+                fuelTypes: [],
+                selectedMinSeats: '',
+                selectedMaxSeats: ''
+        };
+    }
+
+    componentDidMount() {
+        http.get("http://localhost:25094/api/Cities").then((responce) => {
+            const data = responce.data;
+            this.setState({
+                cityArray: data
+            });
+        }).catch(e => {
+            console.log(e);
+        });
+
+        http.get("http://localhost:25094/api/Brands").then((responce) => {
+            const data = responce.data;
+            this.setState({
+                carBrandArray: data
+            });
+        }).catch(e => {
+            console.log(e);
+        });
+
+        http.get("http://localhost:25094/api/Fuels").then((responce) => {
+            const data = responce.data;
+            this.setState({
+                fuelArray: data
+            });
+        }).catch(e => {
+            console.log(e);
+        });
+
+        http.get("http://localhost:25094/api/Transmissions").then((responce) => {
+            const data = responce.data;
+            this.setState({
+                transmitionArray: data
+            });
+        }).catch(e => {
+            console.log(e);
+        });
+
+
+        http.get("http://localhost:25094/api/Cars").then((responce) => {
+            const data = responce.data;
+            //console.log(data);
+            this.setState({
+                carsArray: data
+                
+            });
+            //console.log(this.setState.carList);
+        }).catch(e => {
+            console.log(e);
+        });
+
+    }
 
     handleSort = (e) =>{
         this.setState({sort: e.target.value})
     }
 
     handleCitySelect = (e) =>{
-        this.setState({city: e.target.value})
+        this.setState({ city: e.target.value });
+        console.log(e.target.value);
     }
 
     handlePriceSelect = (e) =>{
@@ -111,63 +169,50 @@ export default class Home extends Component {
     }
 
     render() {
-        const carList = require('./jsonData/Car.json');
-        this.state.carsArray = carList
-
-        const fuelList = require('./jsonData/Fuel.json');
-        this.state.fuelArray = fuelList
-
-        const transmitionList = require('./jsonData/Tansmition.json');
-        this.state.transmitionArray = transmitionList
-
-        const brandList = require('./jsonData/Brand.json');
-        this.state.carBrandArray = brandList
-
-        const cityList = require('./jsonData/Location.json');
-        this.state.cityArray = cityList
-
+      
         let sortedBooks = this.state.carsArray.sort((a, b) =>{
             if(this.state.sort == "Name"){
-                if (a.Model > b.Model) {
+                if (a.model > b.model) {
                     return 1;
                   }
-                  if (a.Model < b.Model) {
+                  if (a.model < b.model) {
                     return -1;
                   }
                   return 0;
             }
             else if(this.state.sort == "High-to-low"){
-                return b.Price - a.Price
+                return b.price - a.price
             }
             else if(this.state.sort == "Low-to-high"){
-                return a.Price - b.Price
+                return a.price - b.price
             }
         })
+        console.log(sortedBooks);
 
-        if(this.state.city != 1 && this.state.city){
-            sortedBooks = sortedBooks.filter(e => e.LocationId === this.state.city);
+        if(this.state.city){
+            sortedBooks = sortedBooks.filter(e => e.location.city.id == this.state.city);
         }
 
         if(+this.state.selectedMaxPrice >= 0 && +this.state.selectedMinPrice >= 0 &&
             this.state.selectedMaxPrice && this.state.selectedMinPrice){
-            sortedBooks = sortedBooks.filter(e => ((+e.Price <= +this.state.selectedMaxPrice) && (+e.Price >= +this.state.selectedMinPrice)));
+            sortedBooks = sortedBooks.filter(e => ((+e.price <= +this.state.selectedMaxPrice) && (+e.price >= +this.state.selectedMinPrice)));
         }
 
         if(+this.state.brands.length > 0){
-            sortedBooks = sortedBooks.filter(e => this.state.brands.includes(e.BrandId));
+            sortedBooks = sortedBooks.filter(e => this.state.brands.includes(e.brand.id.toString()));
         }
 
-        if(+this.state.transmitions.length > 0){
-            sortedBooks = sortedBooks.filter(e => this.state.transmitions.includes(e.TransmitionId));
+        if (+this.state.transmitions.length > 0) {
+            sortedBooks = sortedBooks.filter(e => this.state.transmitions.includes(e.transmission.id.toString()));
         }
 
         if(+this.state.fuelTypes.length > 0){
-            sortedBooks = sortedBooks.filter(e => this.state.fuelTypes.includes(e.FuelId));
+            sortedBooks = sortedBooks.filter(e => this.state.fuelTypes.includes(e.fuel.id.toString()));
         }
 
         if(+this.state.selectedMaxSeats >= 0 && +this.state.selectedMinSeats >= 0 &&
             this.state.selectedMaxSeats && this.state.selectedMinSeats){
-            sortedBooks = sortedBooks.filter(e => ((+e.SeatsCount <= +this.state.selectedMaxSeats) && (+e.SeatsCount >= +this.state.selectedMinSeats)));
+            sortedBooks = sortedBooks.filter(e => ((+e.seatsCount <= +this.state.selectedMaxSeats) && (+e.seatsCount >= +this.state.selectedMinSeats)));
         }
 
         return (
