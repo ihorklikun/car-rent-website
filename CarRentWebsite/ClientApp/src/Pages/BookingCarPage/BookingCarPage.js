@@ -170,8 +170,8 @@ function BookingCarPage() {
       rent.price = rent.pricePerDay
     }
 
-    alert(rent.price)
-    //price = rent.price
+    alert('Total price is' + rent.price)
+    price = rent.price
     console.log(rent)
   }
 
@@ -216,7 +216,7 @@ function BookingCarPage() {
     //setTutorial(initialTutorialState)
     //console.log(rent)
     saveRent()
-    //GoToUserPage()
+    GoToUserPage()
   }
 
   function GoToUserPage() {
@@ -342,7 +342,7 @@ function BookingCarPage() {
               </Row>
               <h5 className='headerText'>
                 Total
-                {price ?? 'price'}
+                {/*rent?.price ?? 'price'*/}
               </h5>
             </Col>
           </Col>
