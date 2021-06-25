@@ -66,7 +66,7 @@ function BookingCarPage() {
 
   const [rent, setRent] = useState(initialRentState)
 
-  console.log(rent)
+  //console.log(rent)
 
   //let price = rent?.price ?? 'price'
   //console.log(carRes)
@@ -110,6 +110,10 @@ function BookingCarPage() {
     //console.log(options)
   }, [setOptions])
 
+  // useEffect(()=>{
+  //   RecalculatePrice();
+  // }, [setRent]);
+
   const RecalculatePrice = () => {
     alert('test')
     let start = new Date(rent.beginDate)
@@ -118,13 +122,15 @@ function BookingCarPage() {
     let end = new Date(rent.endDate)
     console.log('second ' + end)
 
-    let days = Math.floor(end / 8.64e7) - Math.floor(start / 8.64e7)
-
+    //let days = Math.floor(end / 8.64e7) - Math.floor(start / 8.64e7)
+    var Difference_In_Time = end.getTime() - start.getTime();
+ // To calculate the no. of days between two dates
+    var days = Difference_In_Time / (1000 * 3600 * 24);
+ 
     //if (days == 0) days = 30
 
-    console.log(rent)
+    //console.log(rent)
     console.log('days ' + days)
-
     if (days < 0) {
       alert(
         'quantity of days must be more than 0!\n please set correct data and try one more time'
@@ -132,22 +138,22 @@ function BookingCarPage() {
       return
     }
 
-    var prices = car?.carPrices ?? [{ daysCount: 1, price: 1 }]
+    //var prices = car?.carPrices ?? [{ daysCount: 1, price: 1 }]
 
-    /*
+  
     var prices = [
       { daysCount: 1, price: 70 },
       { daysCount: 4, price: 50 },
     ]
-    */
+    
 
-    console.log(prices[0].daysCount == 1)
+    //console.log(prices[0].daysCount == 1)
     let dayPrice
 
     if (prices[0].price == 1) {
       alert('Cant rean value about price per day from data base\n try later :)')
       dayPrice = 100
-      return
+      //return
     } else {
       dayPrice = prices[0]
 
@@ -158,26 +164,37 @@ function BookingCarPage() {
         }
       })
     }
-
-    rent.pricePerDay = dayPrice
-    rent.daysCount = days
+    var rentData = rent;
+    rentData.pricePerDay = dayPrice
+    rentData.daysCount = days
 
     if (days <= 0) days = 1
 
-    rent.price = days * dayPrice.price
+    rentData.price = days * dayPrice.price
 
-    if (isNaN(rent.price)) {
-      rent.price = rent.pricePerDay
+    if (isNaN(rentData.price)) {
+      rentData.price = rentData.pricePerDay
     }
     //alert(price)
     //price = rent.price
+    setRent(rentData);
     console.log(rent)
   }
 
-  const handleInputChange = (event) => {
+   const handleInputChange = (event) =>  {
     const { name, value } = event.target
-    setRent({ ...rent, [name]: value })
-    if (name == 'endDate') RecalculatePrice()
+    console.log(name + " "+ value);
+    var rentData = rent;
+    if(name == 'beginDate')
+      rentData.beginDate = value;
+    else rentData.endDate = value;
+    setRent(rentData);
+    RecalculatePrice();
+    // else rent.endDate = value;
+    //setRent({ ...rent, [name]: value });
+    //RecalculatePrice();
+    //setRent(rent);
+    //if (name == 'endDate') RecalculatePrice()
   }
 
   const saveRent = () => {
@@ -253,7 +270,8 @@ function BookingCarPage() {
                   name='beginDate'
                   value={rent.beginDate}
                   min={initialRentState.beginDate}
-                  onChange={handleInputChange}
+                  onChange={(e)=>{handleInputChange(e);
+                    }}
                 />
               </Col>
               <Col>
@@ -264,7 +282,8 @@ function BookingCarPage() {
                   name='beginTime'
                   value={rent.beginTime}
                   min={initialRentState.beginTime}
-                  onChange={handleInputChange}
+                  onChange={(e)=>{handleInputChange(e);
+                }}
                 />
               </Col>
             </Row>
@@ -278,7 +297,8 @@ function BookingCarPage() {
                   name='endDate'
                   value={rent.endDate}
                   min={initialRentState.endDate}
-                  onChange={handleInputChange}
+                  onChange={(e)=>{handleInputChange(e);
+                    }}
                 />
               </Col>
               <Col>
