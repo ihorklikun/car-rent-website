@@ -55,6 +55,6 @@ namespace CarRentWebsite.ViewModels.Car
         public CarClassViewModel CarClass { get; set; }
         [JsonIgnore]
         public ICollection<ReviewViewModel> Reviews { get; set; }
-        public LocationViewModel Location { get; set; }
+      
     }
 }

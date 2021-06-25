@@ -424,13 +424,12 @@ namespace CarRentWebsite.Data
             );
             #endregion
 
+            #region Cars
             modelBuilder.Entity<Car>().HasData(
                 new Car
                 {
                     Id = 1,
                     BrandId = 1,
-                    Model = "model1",
-                    KilometersDriven = 1111,
                     CarClassId = 2,
                     CarStatusId = 1,
                     CarTypeId = 1,
@@ -452,8 +451,6 @@ namespace CarRentWebsite.Data
                 {
                     Id = 2,
                     BrandId = 3,
-                    Model = "model2",
-                    KilometersDriven = 2222,
                     CarClassId = 4,
                     CarStatusId = 1,
                     Model = "X6",
@@ -480,8 +477,6 @@ namespace CarRentWebsite.Data
                     BrandId = 1,
                     CarClassId = 5,
                     CarStatusId = 1,
-                    Model = "Model name",
-                    KilometersDriven = 4500,
                     CarTypeId = 3,
                     EngineId = 4,
                     Description = "Car description3...",
@@ -499,8 +494,6 @@ namespace CarRentWebsite.Data
                 {
                     Id = 4,
                     BrandId = 1,
-                    Model = "model4",
-                    KilometersDriven = 4444,
                     CarClassId = 5,
                     CarStatusId = 1,
                     CarTypeId = 3,
