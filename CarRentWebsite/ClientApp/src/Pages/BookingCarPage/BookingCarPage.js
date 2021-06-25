@@ -66,9 +66,9 @@ function BookingCarPage() {
 
   const [rent, setRent] = useState(initialRentState)
 
-  console.log(rent)
+  //console.log(rent)
 
-  //let price = rent?.price ?? 'price'
+  let price = rent?.price ?? 'price'
   //console.log(carRes)
   //-----------------------------------
   const baseUrl = `http://localhost:25094/api`
@@ -111,7 +111,7 @@ function BookingCarPage() {
   }, [setOptions])
 
   const RecalculatePrice = () => {
-    alert('test')
+    //alert('RecalculatePrice')
     let start = new Date(rent.beginDate)
     console.log('first ' + start)
 
@@ -141,7 +141,7 @@ function BookingCarPage() {
     ]
     */
 
-    console.log(prices[0].daysCount == 1)
+    console.log(prices)
     let dayPrice
 
     if (prices[0].price == 1) {
@@ -169,8 +169,8 @@ function BookingCarPage() {
     if (isNaN(rent.price)) {
       rent.price = rent.pricePerDay
     }
-    //alert(price)
-    //price = rent.price
+    alert(rent.price)
+    price = rent.price
     console.log(rent)
   }
 
@@ -187,7 +187,7 @@ function BookingCarPage() {
       price: rent.price,
       rentStatusId: 1,
       customerId: rent.customerId,
-      carId: rent.carId,
+      carId: 1, //rent.carId,
       additionalOptions: rent.additionalOptions,
     }
 
@@ -212,7 +212,7 @@ function BookingCarPage() {
     //setTutorial(initialTutorialState)
     //console.log(rent)
     saveRent()
-    GoToUserPage()
+    //GoToUserPage()
   }
 
   function GoToUserPage() {
@@ -268,7 +268,7 @@ function BookingCarPage() {
                 />
               </Col>
             </Row>
-            <h5 className='headerText'>Place of return the car</h5>
+            <h5 className='headerText'>Car return date</h5>
             <Row>
               <Col>
                 <input
@@ -287,8 +287,8 @@ function BookingCarPage() {
                   type='time'
                   id='endTime'
                   name='endTime'
-                  value={rent.beginTime}
-                  min={initialRentState.beginTime}
+                  value={rent.endTime}
+                  min={initialRentState.endTime}
                   onChange={handleInputChange}
                 />
               </Col>
@@ -338,7 +338,7 @@ function BookingCarPage() {
               </Row>
               <h5 className='headerText'>
                 Total
-                {rent?.price ?? 'price'}
+                {price ?? 'price'}
               </h5>
             </Col>
           </Col>

@@ -28,7 +28,7 @@ const ModalContent = styled.div`
   }
 `
 
-function InProgressTemplate({ car }) {
+function InProgressTemplate({ rent }) {
   const [returnModal, setReturnModal] = useState(false)
   const [infoModal, setInfoModal] = useState(false)
   const [userInfoModal, setUserInfoModal] = useState(false)
@@ -42,18 +42,18 @@ function InProgressTemplate({ car }) {
       <Row>
         <Col md className='style1'>
           <h4 className='headerText'>
-            {car?.brand.name ?? 'brand'} {car?.model ?? 'model'}
+            {rent?.car?.brand?.name ?? 'brand'} {rent?.car?.model ?? 'model'}
           </h4>
           <img
             className='ImageStyle'
             variant='top'
-            src={car?.imageUrl ?? 'Car image'}
+            src={rent?.car?.imageUrl ?? 'Car image'}
           />
         </Col>
         <Col md className='style2'>
           <h5 className='headerText'>Car supply place</h5>
           <p className='dataText text-left'>
-            {car?.location.city.name ?? 'location'}
+            {rent?.car?.location?.city?.name ?? 'location'}
           </p>
           <h5 className='headerText'>Place of return of the car</h5>
           <p className='dataText text-left'>place will be here</p>
@@ -81,7 +81,7 @@ function InProgressTemplate({ car }) {
               <CarInfoModal
                 show={infoModal}
                 onHide={() => setInfoModal(false)}
-                car={car}
+                car={rent?.car}
               />
             </ModalContent>
             <ModalContent>

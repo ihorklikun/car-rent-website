@@ -20,18 +20,13 @@ export const CarInfoModal = (props) => {
             <h5 className='headerText'>Car model</h5>
 
             <h4 className='dataTextModal'>
-              {props.car?.brand.name ?? 'brand'} {props.car?.model ?? 'model'}
+              {props.car?.brand?.name ?? 'brand'} {props.car?.model ?? 'model'}
             </h4>
-          </Row>
-          <Row>
-            <h5 className='headerText'>Car Car Type</h5>
-
-            <h4 className='dataTextModal'>{props.car?.carType.name}</h4>
           </Row>
           <Row>
             <h5 className='headerText'>Car fiel</h5>
 
-            <h4 className='dataTextModal'>{props.car?.fuel.name}</h4>
+            <h4 className='dataTextModal'>{props.car?.fuel?.name}</h4>
           </Row>
           <Row>
             <h5 className='headerText'>Car driven kilomiters</h5>
