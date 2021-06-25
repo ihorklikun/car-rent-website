@@ -16,7 +16,7 @@ function UserCarsInfoTemplate(props){
             <Col md>
                 <h3 id = "carNameStyle">{data.car?.brand?.name +' '+ data.car?.model ?? "car name and brand"}</h3>
                 {/* <AiFillCar size = '100px'/> */}
-                <img size = "100px" src = {data.car?.imageUrl ?? ""}></img>
+                <img size = "100px"width="300px" src = {data.car?.imageUrl ?? ""}></img>
                 <h4 className = "headerText number">{data.car?.registerNumber ?? "rn"}</h4>
             </Col>
             <Col md>
