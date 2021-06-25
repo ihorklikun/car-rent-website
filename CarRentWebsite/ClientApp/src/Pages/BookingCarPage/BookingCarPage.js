@@ -61,7 +61,7 @@ function BookingCarPage() {
     customerId: UserData?.id,
     starsCount: 5,
     carId: document.URL.substring(document.URL.lastIndexOf('/') + 1),
-      additionalOptions: [],
+    additionalOptions: [],
   }
 
   const [rent, setRent] = useState(initialRentState)
@@ -111,7 +111,7 @@ function BookingCarPage() {
   }, [setOptions])
 
   const RecalculatePrice = () => {
-    alert('test')
+    //alert('test')
     let start = new Date(rent.beginDate)
     console.log('first ' + start)
 
@@ -169,7 +169,8 @@ function BookingCarPage() {
     if (isNaN(rent.price)) {
       rent.price = rent.pricePerDay
     }
-    //alert(price)
+
+    alert(rent.price)
     //price = rent.price
     console.log(rent)
   }
@@ -181,12 +182,12 @@ function BookingCarPage() {
   }
 
   const saveRent = () => {
-      var arr = [];
-      rent.additionalOptions.forEach(x => arr.push({ id: x }));
+    var arr = []
+    rent.additionalOptions.forEach((x) => arr.push({ id: x }))
 
     const rentJson = {
-      beginDate: rent.beginDate + 'T' + rent.beginTime + '.860Z',
-      endDate: rent.endDate + 'T' + rent.endTime + '.860Z',
+      beginDate: rent.beginDate + 'T' + rent.beginTime + 'Z',
+      endDate: rent.endDate + 'T' + rent.endTime + 'Z',
       price: rent.price,
       rentStatusId: 1,
       customerId: rent.customerId,
@@ -227,10 +228,10 @@ function BookingCarPage() {
 
   const handleIdChange = (e) => {
     let tempValue = e.target.value
-      if (!rent.additionalOptions.includes(parseInt(tempValue))) {
+    if (!rent.additionalOptions.includes(parseInt(tempValue))) {
       rent.additionalOptions.push(parseInt(tempValue))
     } else {
-        rent.additionalOptions.pop(parseInt(tempValue))
+      rent.additionalOptions.pop(parseInt(tempValue))
     }
   }
 
@@ -290,8 +291,8 @@ function BookingCarPage() {
                   type='time'
                   id='endTime'
                   name='endTime'
-                  value={rent.beginTime}
-                  min={initialRentState.beginTime}
+                  value={rent.endTime}
+                  min={initialRentState.endTime}
                   onChange={handleInputChange}
                 />
               </Col>
