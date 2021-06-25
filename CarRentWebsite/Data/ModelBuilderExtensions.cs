@@ -429,8 +429,6 @@ namespace CarRentWebsite.Data
                 {
                     Id = 1,
                     BrandId = 1,
-                    Model = "model1",
-                    KilometersDriven = 1111,
                     CarClassId = 2,
                     CarStatusId = 1,
                     CarTypeId = 1,

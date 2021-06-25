@@ -39,7 +39,6 @@ namespace CarRentWebsite.ViewModels.Car
             } 
         }
         public BrandViewModel Brand { get; set; }
-        public LocationViewModel Location{ get; set; }
         public FuelViewModel Fuel { get; set; }
         public EngineViewModel Engine { get; set; }
         public TransmissionViewModel Transmission { get; set; }

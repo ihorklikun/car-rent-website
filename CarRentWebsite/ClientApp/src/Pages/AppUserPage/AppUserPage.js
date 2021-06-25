@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './AppUserPageStyle.css';
 import { RiUserLine } from 'react-icons/ri';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import UserCarsInfoTemplate from '../../components/UserCarsInfoTemplate'
+import UserCarsInfoTemplate from './UserCarsInfoTemplate'
 import http from '../../http-common';
 import { useHistory, useLocation } from "react-router-dom";
 // var personInfo = {
