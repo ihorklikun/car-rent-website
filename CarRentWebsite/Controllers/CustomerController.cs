@@ -33,6 +33,7 @@ namespace CarRentWebsite.Controllers
         public async Task<ActionResult<RentViewModel>> GetRent(string id)
         {
             var rents = await _context.Rents.Include(x=>x.Car.Location.City)
+                .Include(x => x.Car.Brand)
                 .Include(x=>x.AdditionalOptions)
                 .Include(x=>x.RentStatus)
                 .Where(x=>x.CustomerId == id).ToListAsync();

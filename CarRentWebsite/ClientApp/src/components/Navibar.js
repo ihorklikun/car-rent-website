@@ -66,29 +66,29 @@ export default function NaviBar() {
         });
     }
     useEffect(()=>{
-        var personData = localStorage.getItem("person");
+        var personData = localStorage.getItem("currentUser");
         var data = JSON.parse(personData);
-        if( personData !== null){
+        if (personData !== null) {
             setPerson(data);
         }
     }, []);
     const getDropdown = ()=>{
         if(person !== null){
             return( 
-                <Nav>
-                    <DropdownButton id="dropdown-basic-button" title={person.name + ' ' + person.surname}>
-                    {/* <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item> */}
-                    <Dropdown.Item variant="primary" id="dd-but-profile" onClick = {handleProfileClick}>Profile</Dropdown.Item>
-                    <Dropdown.Item variant="primary" id="dd-but-sign-out" onClick={handleSignOut}>Sign out</Dropdown.Item>
-                </DropdownButton>
-            </Nav>)
-        }else {
-            return (
-                <Nav>
-                <DropdownButton id="dropdown-basic-button" title="Account">
-                    <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item>
-                </DropdownButton>
-            </Nav>
+                            <Nav>
+                                <DropdownButton id="dropdown-basic-button" title={person.name + ' ' + person.surname}>
+                                {/* <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item> */}
+                                <Dropdown.Item variant="primary" id="dd-but-profile" onClick = {handleProfileClick}>Profile</Dropdown.Item>
+                                <Dropdown.Item variant="primary" id="dd-but-sign-out" onClick={handleSignOut}>Sign out</Dropdown.Item>
+                            </DropdownButton>
+                        </Nav>)
+                    }else {
+                        return (
+                            <Nav>
+                            <DropdownButton id="dropdown-basic-button" title="Account">
+                                <Dropdown.Item variant="primary" id="dd-but-sign-in" onClick={handleShow}>Sign in</Dropdown.Item>
+                            </DropdownButton>
+                        </Nav>
             )
         }
     }
