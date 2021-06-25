@@ -61,7 +61,7 @@ function BookingCarPage() {
     customerId: UserData?.id,
     starsCount: 5,
     carId: document.URL.substring(document.URL.lastIndexOf('/') + 1),
-    additionalOptions: [],
+      additionalOptions: [],
   }
 
   const [rent, setRent] = useState(initialRentState)
@@ -181,14 +181,17 @@ function BookingCarPage() {
   }
 
   const saveRent = () => {
+      var arr = [];
+      rent.additionalOptions.forEach(x => arr.push({ id: x }));
+
     const rentJson = {
       beginDate: rent.beginDate + 'T' + rent.beginTime + '.860Z',
       endDate: rent.endDate + 'T' + rent.endTime + '.860Z',
       price: rent.price,
       rentStatusId: 1,
       customerId: rent.customerId,
-      carId: rent.carId,
-      additionalOptions: rent.additionalOptions,
+      carId: parseInt(rent.carId),
+      additionalOptions: arr,
     }
 
     console.log(rentJson)
@@ -224,10 +227,10 @@ function BookingCarPage() {
 
   const handleIdChange = (e) => {
     let tempValue = e.target.value
-    if (!rent.additionalOptions.includes(tempValue)) {
-      rent.additionalOptions.push(tempValue)
+      if (!rent.additionalOptions.includes(parseInt(tempValue))) {
+      rent.additionalOptions.push(parseInt(tempValue))
     } else {
-      rent.additionalOptions.pop(tempValue)
+        rent.additionalOptions.pop(parseInt(tempValue))
     }
   }
 
